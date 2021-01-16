@@ -342,13 +342,13 @@ Ein Struktogramm setzt sich aus Strukturblöcken zusammen. Diese können, wie wi
 
 Beispiel eines Struktogramms mit Sequenz-Symbolen: 
 
-![Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen](./pictures/NSD_01.png "Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen") 
+![Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen](./pictures/NSD_01.PNG "Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen") 
 
 **Aufgabe**: Lese eine Ganzzahl ein, erhöhe diese um eins und gib die Zahl aus. 
 
 Struktogramm: 
 
-![Nassi-Shneiderman-Diagramm Beispiel 1](./pictures/NSD_02.png "Nassi-Shneiderman-Diagramm Beispiel 1") 
+![Nassi-Shneiderman-Diagramm Beispiel 1](./pictures/NSD_02.PNG "Nassi-Shneiderman-Diagramm Beispiel 1") 
 
 Programm: 
 
