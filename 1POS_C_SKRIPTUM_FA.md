@@ -40,10 +40,17 @@ https://projecteuler.net/
     - [4.1.1. Variablentausch mit Hilfsvariable](#411-variablentausch-mit-hilfsvariable)
   - [4.2. Variablentausch ohne Hilfsvariable](#42-variablentausch-ohne-hilfsvariable)
   - [4.3. Arithmetische Operatoren](#43-arithmetische-operatoren)
-    - [4.3.1. Vorzeichenoperatoren](#431-vorzeichenoperatoren)
-    - [4.3.2. Binäre arithmetische  Operatoren](#432-binäre-arithmetische--operatoren)
+  - [4.4. Vorzeichenoperatoren](#44-vorzeichenoperatoren)
+    - [4.4.1. Binäre arithmetische  Operatoren](#441-binäre-arithmetische--operatoren)
 - [5. Datentypen](#5-datentypen)
 - [6. Zufallszahlen](#6-zufallszahlen)
+- [7. `printf()`-Befehl: Formatierte Ausgabe](#7-printf-befehl-formatierte-ausgabe)
+- [8. Mathematische Funktionen – `<math.h>`](#8-mathematische-funktionen--mathh)
+- [9. Kommentare](#9-kommentare)
+- [10. Character- und Stringliterale](#10-character--und-stringliterale)
+  - [10.1. Characterliterale](#101-characterliterale)
+  - [10.2. Stringliterale](#102-stringliterale)
+- [11. Operatoren – 2. Teil](#11-operatoren--2-teil)
 
 
 ## 1.4. Übersicht – Unterrichtsstoff POS, 1. Jahrgang 
@@ -408,7 +415,7 @@ a=a-b;
 
 ## 4.3. Arithmetische Operatoren 
 
-### 4.3.1. Vorzeichenoperatoren
+## 4.4. Vorzeichenoperatoren
 
 Zur Darstellung der mathematischen Vorzeichen 'plus' und 'minus' werden die unären Vorzeichenoperatoren `+` und `–` verwendet.
 
@@ -417,7 +424,7 @@ int z1, z2;
 z1 = +5;
 z2 = -9;
 ```
-### 4.3.2. Binäre arithmetische  Operatoren
+### 4.4.1. Binäre arithmetische  Operatoren
 
 | Operator | Bedeutung |
 | :---: | --- |
@@ -508,4 +515,238 @@ int main()
   zz = (double)rand()/RAND_MAX*(5.0-1.0) + 1.0; 
 }
 ```
+# 7. `printf()`-Befehl: Formatierte Ausgabe 
 
+Die formatierte Ausgabe auf der Konsole erfolgt mit dem `printf()`-Befehl, der in der Headerdatei `<stdio.h>` definiert ist: 
+
+```c
+int printf("Formatstring" [ , argument1, argument2 ...]); 
+```
+
+Der erste Parameter dient zur Übergabe eines Formatstrings. Die weiteren Parameter sind optional (eckige Klammern bedeuten optional) und sind die Argumente für den Formatstring. Die Formatierung erfolgt entsprechend den Angaben im Formatstring. Der Rückgabewert des `printf()`-Befehls ist die Anzahl der ausgegebenen Zeichen.
+
+Der Formatstring enthält sowohl normalen Text als auch Platzhalter mit den jeweiligen Formatangaben. Die Syntax für einen Platzhalter sieht wie folgt aus:
+
+``` 
+%[flag][width][.precision]conversion
+```
+
+Der wichtigste und einzige nicht optionale Teil ist dabei das Umwandlungszeichen (conversion), das den Datentyp für die Umwandlung bestimmt:
+
+| `conversion` | Datentyp | Bedeutung |
+| --- | --- | --- | 
+| `d`, `i` | int | Integer |
+| `f` | float | Gleitkommazahl float - Default von 6 Kommastellen |
+| `lf` | double	| Gleitkommazahl double - Default von 6 Kommastellen |
+| `%` | | Ausgabe des % Zeichens |
+
+
+Die Flags sind optional und werden unmittelbar nach dem `%`-Zeichen angegeben:
+
+
+| `flag` | Bedeutung | 
+| --- | --- |
+| `-` |	Ausgabe linksbündig |
+| `+` |	Ausgabe mit Vorzeichen |
+| `0` |	Leerzeichen werden mit Nullen gefüllt |
+
+Die Anzahl der auszugebenden Zeichen ist optional und wird durch die Breite (`width`) festgelegt. 
+
+Die Anzahl der Nachkommastellen ist optional und wird durch die Genauigkeit (`precision`) festgelegt. 
+
+Beispiele von Formatangaben für ganzzahlige Werte (Datentyp `int`): 
+
+```
+%d 		Ausgabe der Zahl ohne zusätzliche Vorgabe 
+%5d 	rechtsbündige Ausgabe der Zahl auf 5 Stellen 
+%-5d 	linksbündige Ausgabe der Zahl auf 5 Stellen 
+%05d 	Ausgabe der Zahl auf 5 Stellen mit führenden Nullen 
+%+5d 	rechtsbündige Ausgabe der Zahl auf 5 Stellen mit Vorzeichen 
+%+-5d   linksbündige Ausgabe der Zahl auf 5 Stellen mit Vorzeichen 
+```
+
+Beispiele von Formatangaben für Fließkommazahlen (Datentyp `float`):
+
+```
+%f 		    Ausgabe der Zahl ohne zusätzliche Vorgabe 
+%10f 		rechtsbündige Ausgabe der Zahl auf 10 Stellen
+%.2f 		rechtsbündige Ausgabe der Zahl mit 2 Nachkommastellen 
+%-10.2f 	linksbündige Ausgabe auf 10 Stellen, davon 2 Nachkommastellen 
+%010.2f 	Ausgabe der Zahl auf 10 Stellen mit führenden Nullen, davon 2       
+            Nachkommastellen
+%+10.2f 	rechtsbündige Ausgabe der Zahl auf 10 Stellen, davon mit Vorzeichen und 2 
+		    Nachkommastellen
+%+-.2f 	    linksbündige Ausgabe der Zahl mit Vorzeichen und 2 Nachkommastellen
+```
+# 8. Mathematische Funktionen – `<math.h>`
+
+In der Headerdatei `<math.h>` sind folgende nützliche mathematische Funktionen und Konstanten deklariert: 
+
+```
+double pow(double x, double y)	// x hoch y
+double sqrt(double x)	        // Wurzel aus x
+double fabs(double z)           // Absolutwert von x
+double sin(double x)	        // Sinus von x
+double cos(double x)	        // Cosinus von x
+double tan(double x)	        // Tangens von x
+double exp(double x)	        // Exponentialfunktion e hoch x
+double log(double x)	        // Nat. Logarithmus von x
+
+M_PI 	// symbolische Konstante für PI
+M_PI_2 	// symbolische Konstante für PI/2
+M_PI_4 	// symbolische Konstante für PI/4
+M_E 	// symbolische Konstante für e 
+```
+
+Fürs kaufmännisch Runden, Abschneiden, Abrunden und Aufrunden stehen folgende Funktionen zur Verfügung: 
+
+```
+double round(double x);  // Kaufmännisch Runden 
+double trunc(double x);  // Kommazahlen abschneiden
+double floor(double x);  // auf nächste Ganzzahl abrunden 
+double ceil(double x);	 // auf nächste Ganzzahl aufrunden 
+```
+
+Im folgenden Beispiel wird die Verwendung der Funktionen veranschaulicht: 
+
+```
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+{
+    double x1, x2, y1, y2; 
+    x1 = 5.23487392;
+    x2 = 5.89437524;
+    y1 = round(x1 * 1000)/1000;  // ergibt 5.235000
+    y2 = round(x2 * 1000)/1000;  // ergibt 5.894000
+    y1 = trunc(x1);              // ergibt 5.000000
+    y1 = floor(x1);              // ergibt 5.000000 
+    y1 = ceil(x1);               // ergibt 6.000000 
+} 
+```
+
+Kaufmännisch Runden und Abschneiden ist auch durch explizite Typumwandlung möglich: 
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    double x1, x2; 
+    int y1, y2; 
+    double y3, y4; 
+    x1 = 5.23487392;
+    x2 = 5.89437524;
+    // Kaufmännisch Runden:
+    y1 = (int)(x1 + 0.5);                // ergibt 5
+    y2 = (int)(x2 + 0.5);                 // ergibt 6
+    // auf z.B. 3 Kommastellen Runden:
+    y3 = (int)(x1 * 1000 + 0.5)/1000.0;  // ergibt 5.235000
+    y4 = (int)(x2 * 1000 + 0.5)/1000.0;  // ergibt 5.894000
+    // Kommastellen abschneiden:
+    y1 = (int)x1;                        // ergibt 5
+    // Zahl nach z.B. der 3. Kommastelle abschneiden:
+    y3 = (int)(x1 * 1000)/1000.0;        // ergibt 5.234000    
+} 
+```
+
+# 9. Kommentare 
+
+Regeln für Kommentare:
+
+* Mehrzeilige Kommentare werden mit `/*` eingeleitet und mit `*/` abgeschlossen.
+* Einzeilige Kommentare beginnen mit `//` und erstrecken sich bis zum Ende der Zeile.
+* Kommentare können an beliebiger Stelle stehen.
+
+# 10. Character- und Stringliterale 
+
+## 10.1. Characterliterale
+
+Die Zuweisung erfolgt durch genau ein Zeichen, das in einfachen Anführungszeichen eingeschlossen wird. Auf der char-Variablen wird der entsprechende ASCII-Wert des Zeichens gespeichert. 
+
+```c 
+char c1, c2, c3;
+
+c1 = 'A';     	// numerischer Wert 65
+c1 = 65;      	// identisch zur vorherigen Anweisung
+c2 = 'F';     	// numerischer Wert 70
+c3 = '1';     	// numerischer Wert 49
+c4 = '\n';      // Zeilenumbruch
+```
+
+Zu den Characterliteralen gehören auch die Sonder- und Steuerzeichen, die mit einem Backslash '`\`'  eingeleitet werden (Escape-Sequenz) und trotzdem als einzelne Zeichen gelten. 
+
+Das Umwandlungszeichen (conversion), um Characterliterale einzulesen bzw. auszugeben lautet „c“: 
+
+```c
+char zeichen; 
+scanf("%c", &zeichen);
+printf("%c", zeichen);
+```
+
+## 10.2. Stringliterale
+
+Für Strings gibt es in C keinen eigenen Datentyp, daher müssen Zeichenketten in Form von `char`-Arrays behandelt werden.
+
+Folgende Eigenschaften gelten für Zeichenketten:
+
+* Sie bestehen aus einer Folge von Einzelzeichen. 
+* Sie werden in doppelte Anführungszeichen eingeschlossen:	
+ "Das ist eine Zeichenkette". 
+* Am Ende muss ein NULL-Zeichen ('`\0`') zur Kennzeichnung des Endes angehängt werden.
+Es gelten die gleichen Escape-Sequenzen wie bei einzelnen Zeichen.
+* Zeichenketten können über Zeilengrenzen gehen, wenn unmittelbar vor dem Zeilentrenner ein Backslash '`\`' steht. 
+Sie können einem Charaterfeld (char-Array) zugewiesen werden.
+Sie dürfen nur bei der Initialisierung oder beim Einlesen zugewiesen werden, nicht aber zu einem späteren Zeitpunkt.
+
+```c 
+char str1[100] = "";
+char str2[] = { "Hallo" };
+char str3[] = { 'H', 'a', 'l', 'l', 'o', '\0' };
+char str4[] = { 72, 97, 108, 108, 111, 0 }; 
+char str2[20] = "Teil 1\
+                 Teil2";       // Der Zeilenumbruch ist auf dem String nicht sichtbar
+
+str1 = "ungültige Zuweisung";  // Compilerfehler!
+```
+
+Das Umwandlungszeichen (conversion), um Stringliterale auszugeben lautet „`%s`“: 
+
+```c 
+char str1[] = { "Hallo" };
+printf("%s", str1);
+```
+
+Fürs Einlesen von Stringliteralen von der Konsole stehen die beiden Befehle `gets(s, max)` und `scanf("%s, s)` zur Verfügung: 
+
+```c
+char str1[100] ="";
+gets(str1, 100); 
+scanf("%s", str1); 
+```
+
+Um die Länge eines Stringliterals feszustellen, steht der Befehl `strlen(s)` zur Verfügung: 
+
+```c 
+char str[] = { "Hallo" };
+int strLaenge; 
+strLaenge = strlen(str); 
+```
+
+Der Zugriff auf einzelne Zeichen eines Stringliterals erfolgt folgendermaßen: 
+
+```c 
+char str[] = { "Hallo" };
+char c; 
+c = str[0];    // Weist der Variablen c das Zeichen ‚‘H‘ zu 
+```
+
+Zur Umwandlung von Zeichenketten in numerische Werte stehen in der C-Standard Library `<stdlib.h>` unter anderem folgende Konvertierungsfunktionen zu Verfügung: 
+
+```c 
+int atoi(<String>)	    // Konvertierung von String in int
+double atof(<String>)	// Konvertierung von String in double
+```
+
+# 11. Operatoren – 2. Teil 

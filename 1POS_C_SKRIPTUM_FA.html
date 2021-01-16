@@ -126,16 +126,26 @@ PDF-Download:
 </ul>
 </li>
 <li><a href="#42-variablentausch-ohne-hilfsvariable">4.2. Variablentausch ohne Hilfsvariable</a></li>
-<li><a href="#43-arithmetische-operatoren">4.3. Arithmetische Operatoren</a>
+<li><a href="#43-arithmetische-operatoren">4.3. Arithmetische Operatoren</a></li>
+<li><a href="#44-vorzeichenoperatoren">4.4. Vorzeichenoperatoren</a>
 <ul>
-<li><a href="#431-vorzeichenoperatoren">4.3.1. Vorzeichenoperatoren</a></li>
-<li><a href="#432-bin%C3%A4re-arithmetische--operatoren">4.3.2. Binäre arithmetische  Operatoren</a></li>
+<li><a href="#441-bin%C3%A4re-arithmetische--operatoren">4.4.1. Binäre arithmetische  Operatoren</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#5-datentypen">5. Datentypen</a></li>
 <li><a href="#6-zufallszahlen">6. Zufallszahlen</a></li>
+<li><a href="#7-printf-befehl-formatierte-ausgabe">7. <code>printf()</code>-Befehl: Formatierte Ausgabe</a></li>
+<li><a href="#8-mathematische-funktionen--mathh">8. Mathematische Funktionen – <code>&lt;math.h&gt;</code></a></li>
+<li><a href="#9-kommentare">9. Kommentare</a></li>
+<li><a href="#10-character--und-stringliterale">10. Character- und Stringliterale</a>
+<ul>
+<li><a href="#101-characterliterale">10.1. Characterliterale</a></li>
+<li><a href="#102-stringliterale">10.2. Stringliterale</a></li>
+</ul>
+</li>
+<li><a href="#11-operatoren--2-teil">11. Operatoren – 2. Teil</a></li>
 </ul>
 <h2 id="14-übersicht--unterrichtsstoff-pos-1-jahrgang">1.4. Übersicht – Unterrichtsstoff POS, 1. Jahrgang</h2>
 <ul>
@@ -436,10 +446,10 @@ In der folgenden Tabelle sind die wichtigsten Escape-Sequenzen aufgelistet:</p>
 <p>Mit Struktogrammen, auch Nassi-Shneiderman-Diagramme genannt, werden Programme unabhängig von der Programmiersprache, mit der sie letztendlich umgesetzt werden, entworfen.<br>
 Ein Struktogramm setzt sich aus Strukturblöcken zusammen. Diese können, wie wir noch sehen werden, ineinander verschachtelt sein.</p>
 <p>Beispiel eines Struktogramms mit Sequenz-Symbolen:</p>
-<p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\NSD_01.png" alt="Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen" title="Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen"></p>
+<p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\NSD_01.PNG" alt="Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen" title="Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen"></p>
 <p><strong>Aufgabe</strong>: Lese eine Ganzzahl ein, erhöhe diese um eins und gib die Zahl aus.</p>
 <p>Struktogramm:</p>
-<p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\NSD_02.png" alt="Nassi-Shneiderman-Diagramm Beispiel 1" title="Nassi-Shneiderman-Diagramm Beispiel 1"></p>
+<p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\NSD_02.PNG" alt="Nassi-Shneiderman-Diagramm Beispiel 1" title="Nassi-Shneiderman-Diagramm Beispiel 1"></p>
 <p>Programm:</p>
 <pre><code class="language-c"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 
@@ -482,13 +492,13 @@ b=a-b;
 a=a-b;
 </div></code></pre>
 <h2 id="43-arithmetische-operatoren">4.3. Arithmetische Operatoren</h2>
-<h3 id="431-vorzeichenoperatoren">4.3.1. Vorzeichenoperatoren</h3>
+<h2 id="44-vorzeichenoperatoren">4.4. Vorzeichenoperatoren</h2>
 <p>Zur Darstellung der mathematischen Vorzeichen 'plus' und 'minus' werden die unären Vorzeichenoperatoren <code>+</code> und <code>–</code> verwendet.</p>
 <pre><code class="language-c"><div><span class="hljs-keyword">int</span> z1, z2;
 z1 = +<span class="hljs-number">5</span>;
 z2 = <span class="hljs-number">-9</span>;
 </div></code></pre>
-<h3 id="432-binäre-arithmetische--operatoren">4.3.2. Binäre arithmetische  Operatoren</h3>
+<h3 id="441-binäre-arithmetische--operatoren">4.4.1. Binäre arithmetische  Operatoren</h3>
 <table>
 <thead>
 <tr>
@@ -614,6 +624,220 @@ Die Funktion <code>rand()</code> gibt eine Zufallszahl im Bereich von <code>[0,R
   zz = (<span class="hljs-keyword">double</span>)rand()/RAND_MAX*(<span class="hljs-number">5.0</span><span class="hljs-number">-1.0</span>) + <span class="hljs-number">1.0</span>; 
 }
 </div></code></pre>
+<h1 id="7-printf-befehl-formatierte-ausgabe">7. <code>printf()</code>-Befehl: Formatierte Ausgabe</h1>
+<p>Die formatierte Ausgabe auf der Konsole erfolgt mit dem <code>printf()</code>-Befehl, der in der Headerdatei <code>&lt;stdio.h&gt;</code> definiert ist:</p>
+<pre><code class="language-c"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">printf</span><span class="hljs-params">(<span class="hljs-string">&quot;Formatstring&quot;</span> [ , argument1, argument2 ...])</span></span>; 
+</div></code></pre>
+<p>Der erste Parameter dient zur Übergabe eines Formatstrings. Die weiteren Parameter sind optional (eckige Klammern bedeuten optional) und sind die Argumente für den Formatstring. Die Formatierung erfolgt entsprechend den Angaben im Formatstring. Der Rückgabewert des <code>printf()</code>-Befehls ist die Anzahl der ausgegebenen Zeichen.</p>
+<p>Der Formatstring enthält sowohl normalen Text als auch Platzhalter mit den jeweiligen Formatangaben. Die Syntax für einen Platzhalter sieht wie folgt aus:</p>
+<pre><code><code><div>%[flag][width][.precision]conversion
+</div></code></code></pre>
+<p>Der wichtigste und einzige nicht optionale Teil ist dabei das Umwandlungszeichen (conversion), das den Datentyp für die Umwandlung bestimmt:</p>
+<table>
+<thead>
+<tr>
+<th><code>conversion</code></th>
+<th>Datentyp</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>d</code>, <code>i</code></td>
+<td>int</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>float</td>
+<td>Gleitkommazahl float - Default von 6 Kommastellen</td>
+</tr>
+<tr>
+<td><code>lf</code></td>
+<td>double</td>
+<td>Gleitkommazahl double - Default von 6 Kommastellen</td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td></td>
+<td>Ausgabe des % Zeichens</td>
+</tr>
+</tbody>
+</table>
+<p>Die Flags sind optional und werden unmittelbar nach dem <code>%</code>-Zeichen angegeben:</p>
+<table>
+<thead>
+<tr>
+<th><code>flag</code></th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-</code></td>
+<td>Ausgabe linksbündig</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>Ausgabe mit Vorzeichen</td>
+</tr>
+<tr>
+<td><code>0</code></td>
+<td>Leerzeichen werden mit Nullen gefüllt</td>
+</tr>
+</tbody>
+</table>
+<p>Die Anzahl der auszugebenden Zeichen ist optional und wird durch die Breite (<code>width</code>) festgelegt.</p>
+<p>Die Anzahl der Nachkommastellen ist optional und wird durch die Genauigkeit (<code>precision</code>) festgelegt.</p>
+<p>Beispiele von Formatangaben für ganzzahlige Werte (Datentyp <code>int</code>):</p>
+<pre><code><code><div>%d 		Ausgabe der Zahl ohne zusätzliche Vorgabe 
+%5d 	rechtsbündige Ausgabe der Zahl auf 5 Stellen 
+%-5d 	linksbündige Ausgabe der Zahl auf 5 Stellen 
+%05d 	Ausgabe der Zahl auf 5 Stellen mit führenden Nullen 
+%+5d 	rechtsbündige Ausgabe der Zahl auf 5 Stellen mit Vorzeichen 
+%+-5d   linksbündige Ausgabe der Zahl auf 5 Stellen mit Vorzeichen 
+</div></code></code></pre>
+<p>Beispiele von Formatangaben für Fließkommazahlen (Datentyp <code>float</code>):</p>
+<pre><code><code><div>%f 		    Ausgabe der Zahl ohne zusätzliche Vorgabe 
+%10f 		rechtsbündige Ausgabe der Zahl auf 10 Stellen
+%.2f 		rechtsbündige Ausgabe der Zahl mit 2 Nachkommastellen 
+%-10.2f 	linksbündige Ausgabe auf 10 Stellen, davon 2 Nachkommastellen 
+%010.2f 	Ausgabe der Zahl auf 10 Stellen mit führenden Nullen, davon 2       
+            Nachkommastellen
+%+10.2f 	rechtsbündige Ausgabe der Zahl auf 10 Stellen, davon mit Vorzeichen und 2 
+		    Nachkommastellen
+%+-.2f 	    linksbündige Ausgabe der Zahl mit Vorzeichen und 2 Nachkommastellen
+</div></code></code></pre>
+<h1 id="8-mathematische-funktionen--mathh">8. Mathematische Funktionen – <code>&lt;math.h&gt;</code></h1>
+<p>In der Headerdatei <code>&lt;math.h&gt;</code> sind folgende nützliche mathematische Funktionen und Konstanten deklariert:</p>
+<pre><code><code><div>double pow(double x, double y)	// x hoch y
+double sqrt(double x)	        // Wurzel aus x
+double fabs(double z)           // Absolutwert von x
+double sin(double x)	        // Sinus von x
+double cos(double x)	        // Cosinus von x
+double tan(double x)	        // Tangens von x
+double exp(double x)	        // Exponentialfunktion e hoch x
+double log(double x)	        // Nat. Logarithmus von x
+
+M_PI 	// symbolische Konstante für PI
+M_PI_2 	// symbolische Konstante für PI/2
+M_PI_4 	// symbolische Konstante für PI/4
+M_E 	// symbolische Konstante für e 
+</div></code></code></pre>
+<p>Fürs kaufmännisch Runden, Abschneiden, Abrunden und Aufrunden stehen folgende Funktionen zur Verfügung:</p>
+<pre><code><code><div>double round(double x);  // Kaufmännisch Runden 
+double trunc(double x);  // Kommazahlen abschneiden
+double floor(double x);  // auf nächste Ganzzahl abrunden 
+double ceil(double x);	 // auf nächste Ganzzahl aufrunden 
+</div></code></code></pre>
+<p>Im folgenden Beispiel wird die Verwendung der Funktionen veranschaulicht:</p>
+<pre><code><code><div>#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+
+int main()
+{
+    double x1, x2, y1, y2; 
+    x1 = 5.23487392;
+    x2 = 5.89437524;
+    y1 = round(x1 * 1000)/1000;  // ergibt 5.235000
+    y2 = round(x2 * 1000)/1000;  // ergibt 5.894000
+    y1 = trunc(x1);              // ergibt 5.000000
+    y1 = floor(x1);              // ergibt 5.000000 
+    y1 = ceil(x1);               // ergibt 6.000000 
+} 
+</div></code></code></pre>
+<p>Kaufmännisch Runden und Abschneiden ist auch durch explizite Typumwandlung möglich:</p>
+<pre><code class="language-c"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">double</span> x1, x2; 
+    <span class="hljs-keyword">int</span> y1, y2; 
+    <span class="hljs-keyword">double</span> y3, y4; 
+    x1 = <span class="hljs-number">5.23487392</span>;
+    x2 = <span class="hljs-number">5.89437524</span>;
+    <span class="hljs-comment">// Kaufmännisch Runden:</span>
+    y1 = (<span class="hljs-keyword">int</span>)(x1 + <span class="hljs-number">0.5</span>);                <span class="hljs-comment">// ergibt 5</span>
+    y2 = (<span class="hljs-keyword">int</span>)(x2 + <span class="hljs-number">0.5</span>);                 <span class="hljs-comment">// ergibt 6</span>
+    <span class="hljs-comment">// auf z.B. 3 Kommastellen Runden:</span>
+    y3 = (<span class="hljs-keyword">int</span>)(x1 * <span class="hljs-number">1000</span> + <span class="hljs-number">0.5</span>)/<span class="hljs-number">1000.0</span>;  <span class="hljs-comment">// ergibt 5.235000</span>
+    y4 = (<span class="hljs-keyword">int</span>)(x2 * <span class="hljs-number">1000</span> + <span class="hljs-number">0.5</span>)/<span class="hljs-number">1000.0</span>;  <span class="hljs-comment">// ergibt 5.894000</span>
+    <span class="hljs-comment">// Kommastellen abschneiden:</span>
+    y1 = (<span class="hljs-keyword">int</span>)x1;                        <span class="hljs-comment">// ergibt 5</span>
+    <span class="hljs-comment">// Zahl nach z.B. der 3. Kommastelle abschneiden:</span>
+    y3 = (<span class="hljs-keyword">int</span>)(x1 * <span class="hljs-number">1000</span>)/<span class="hljs-number">1000.0</span>;        <span class="hljs-comment">// ergibt 5.234000    </span>
+} 
+</div></code></pre>
+<h1 id="9-kommentare">9. Kommentare</h1>
+<p>Regeln für Kommentare:</p>
+<ul>
+<li>Mehrzeilige Kommentare werden mit <code>/*</code> eingeleitet und mit <code>*/</code> abgeschlossen.</li>
+<li>Einzeilige Kommentare beginnen mit <code>//</code> und erstrecken sich bis zum Ende der Zeile.</li>
+<li>Kommentare können an beliebiger Stelle stehen.</li>
+</ul>
+<h1 id="10-character--und-stringliterale">10. Character- und Stringliterale</h1>
+<h2 id="101-characterliterale">10.1. Characterliterale</h2>
+<p>Die Zuweisung erfolgt durch genau ein Zeichen, das in einfachen Anführungszeichen eingeschlossen wird. Auf der char-Variablen wird der entsprechende ASCII-Wert des Zeichens gespeichert.</p>
+<pre><code class="language-c"><div><span class="hljs-keyword">char</span> c1, c2, c3;
+
+c1 = <span class="hljs-string">&#x27;A&#x27;</span>;     	<span class="hljs-comment">// numerischer Wert 65</span>
+c1 = <span class="hljs-number">65</span>;      	<span class="hljs-comment">// identisch zur vorherigen Anweisung</span>
+c2 = <span class="hljs-string">&#x27;F&#x27;</span>;     	<span class="hljs-comment">// numerischer Wert 70</span>
+c3 = <span class="hljs-string">&#x27;1&#x27;</span>;     	<span class="hljs-comment">// numerischer Wert 49</span>
+c4 = <span class="hljs-string">&#x27;\n&#x27;</span>;      <span class="hljs-comment">// Zeilenumbruch</span>
+</div></code></pre>
+<p>Zu den Characterliteralen gehören auch die Sonder- und Steuerzeichen, die mit einem Backslash '<code>\</code>'  eingeleitet werden (Escape-Sequenz) und trotzdem als einzelne Zeichen gelten.</p>
+<p>Das Umwandlungszeichen (conversion), um Characterliterale einzulesen bzw. auszugeben lautet „c“:</p>
+<pre><code class="language-c"><div><span class="hljs-keyword">char</span> zeichen; 
+<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%c&quot;</span>, &amp;zeichen);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>, zeichen);
+</div></code></pre>
+<h2 id="102-stringliterale">10.2. Stringliterale</h2>
+<p>Für Strings gibt es in C keinen eigenen Datentyp, daher müssen Zeichenketten in Form von <code>char</code>-Arrays behandelt werden.</p>
+<p>Folgende Eigenschaften gelten für Zeichenketten:</p>
+<ul>
+<li>Sie bestehen aus einer Folge von Einzelzeichen.</li>
+<li>Sie werden in doppelte Anführungszeichen eingeschlossen:	
+&quot;Das ist eine Zeichenkette&quot;.</li>
+<li>Am Ende muss ein NULL-Zeichen ('<code>\0</code>') zur Kennzeichnung des Endes angehängt werden.
+Es gelten die gleichen Escape-Sequenzen wie bei einzelnen Zeichen.</li>
+<li>Zeichenketten können über Zeilengrenzen gehen, wenn unmittelbar vor dem Zeilentrenner ein Backslash '<code>\</code>' steht.
+Sie können einem Charaterfeld (char-Array) zugewiesen werden.
+Sie dürfen nur bei der Initialisierung oder beim Einlesen zugewiesen werden, nicht aber zu einem späteren Zeitpunkt.</li>
+</ul>
+<pre><code class="language-c"><div><span class="hljs-keyword">char</span> str1[<span class="hljs-number">100</span>] = <span class="hljs-string">&quot;&quot;</span>;
+<span class="hljs-keyword">char</span> str2[] = { <span class="hljs-string">&quot;Hallo&quot;</span> };
+<span class="hljs-keyword">char</span> str3[] = { <span class="hljs-string">&#x27;H&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;l&#x27;</span>, <span class="hljs-string">&#x27;l&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>, <span class="hljs-string">&#x27;\0&#x27;</span> };
+<span class="hljs-keyword">char</span> str4[] = { <span class="hljs-number">72</span>, <span class="hljs-number">97</span>, <span class="hljs-number">108</span>, <span class="hljs-number">108</span>, <span class="hljs-number">111</span>, <span class="hljs-number">0</span> }; 
+<span class="hljs-keyword">char</span> str2[<span class="hljs-number">20</span>] = <span class="hljs-string">&quot;Teil 1\
+                 Teil2&quot;</span>;       <span class="hljs-comment">// Der Zeilenumbruch ist auf dem String nicht sichtbar</span>
+
+str1 = <span class="hljs-string">&quot;ungültige Zuweisung&quot;</span>;  <span class="hljs-comment">// Compilerfehler!</span>
+</div></code></pre>
+<p>Das Umwandlungszeichen (conversion), um Stringliterale auszugeben lautet „<code>%s</code>“:</p>
+<pre><code class="language-c"><div><span class="hljs-keyword">char</span> str1[] = { <span class="hljs-string">&quot;Hallo&quot;</span> };
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, str1);
+</div></code></pre>
+<p>Fürs Einlesen von Stringliteralen von der Konsole stehen die beiden Befehle <code>gets(s, max)</code> und <code>scanf(&quot;%s, s)</code> zur Verfügung:</p>
+<pre><code class="language-c"><div><span class="hljs-keyword">char</span> str1[<span class="hljs-number">100</span>] =<span class="hljs-string">&quot;&quot;</span>;
+gets(str1, <span class="hljs-number">100</span>); 
+<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>, str1); 
+</div></code></pre>
+<p>Um die Länge eines Stringliterals feszustellen, steht der Befehl <code>strlen(s)</code> zur Verfügung:</p>
+<pre><code class="language-c"><div><span class="hljs-keyword">char</span> str[] = { <span class="hljs-string">&quot;Hallo&quot;</span> };
+<span class="hljs-keyword">int</span> strLaenge; 
+strLaenge = <span class="hljs-built_in">strlen</span>(str); 
+</div></code></pre>
+<p>Der Zugriff auf einzelne Zeichen eines Stringliterals erfolgt folgendermaßen:</p>
+<pre><code class="language-c"><div><span class="hljs-keyword">char</span> str[] = { <span class="hljs-string">&quot;Hallo&quot;</span> };
+<span class="hljs-keyword">char</span> c; 
+c = str[<span class="hljs-number">0</span>];    <span class="hljs-comment">// Weist der Variablen c das Zeichen ‚‘H‘ zu </span>
+</div></code></pre>
+<p>Zur Umwandlung von Zeichenketten in numerische Werte stehen in der C-Standard Library <code>&lt;stdlib.h&gt;</code> unter anderem folgende Konvertierungsfunktionen zu Verfügung:</p>
+<pre><code class="language-c"><div><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">atoi</span><span class="hljs-params">(&lt;String&gt;)</span>	    <span class="hljs-comment">// Konvertierung von String in int</span>
+<span class="hljs-keyword">double</span> <span class="hljs-title">atof</span><span class="hljs-params">(&lt;String&gt;)</span>	<span class="hljs-comment">// Konvertierung von String in double</span>
+</span></div></code></pre>
+<h1 id="11-operatoren--2-teil">11. Operatoren – 2. Teil</h1>
 
     </body>
     </html>
