@@ -280,10 +280,10 @@ code .
 </div></code></code></pre>
 <p>Quelldatei “helloworld.c” erstellen:</p>
 <p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_VSC_1.png" alt="Screenshot Visual Studio Code Command Erstes Programm - Schritt 1" title="Screenshot Visual Studio Code Command Erstes Programm - Schritt 1"></p>
-<pre><code class="language-c"><div> <span class="hljs-comment">// #include bewirkt das Einfügen von Quellcode aus einer anderen  </span>
- <span class="hljs-comment">// Datei. Die Header-Datei stdio.h wird in das Programm eingefügt.  </span>
- <span class="hljs-comment">// Sie beinhaltet die Funktionen, die wir zur </span>
- <span class="hljs-comment">// (Standard)-Ein/-Ausgabe benötigen </span>
+<pre><code class="language-c"><div><span class="hljs-comment">// #include bewirkt das Einfügen von Quellcode aus einer anderen  </span>
+<span class="hljs-comment">// Datei. Die Header-Datei stdio.h wird in das Programm eingefügt.  </span>
+<span class="hljs-comment">// Sie beinhaltet die Funktionen, die wir zur </span>
+<span class="hljs-comment">// (Standard)-Ein/-Ausgabe benötigen </span>
 <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;                          </span></span>
 
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>         <span class="hljs-comment">// Funktion main() definiert das Hauptprogramm</span>
@@ -731,21 +731,21 @@ double floor(double x);  // auf nächste Ganzzahl abrunden
 double ceil(double x);	 // auf nächste Ganzzahl aufrunden 
 </div></code></code></pre>
 <p>Im folgenden Beispiel wird die Verwendung der Funktionen veranschaulicht:</p>
-<pre><code><code><div>#include &lt;stdlib.h&gt;
-#include &lt;math.h&gt;
+<pre><code class="language-c"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;math.h&gt;</span></span>
 
-int main()
-{
-    double x1, x2, y1, y2; 
-    x1 = 5.23487392;
-    x2 = 5.89437524;
-    y1 = round(x1 * 1000)/1000;  // ergibt 5.235000
-    y2 = round(x2 * 1000)/1000;  // ergibt 5.894000
-    y1 = trunc(x1);              // ergibt 5.000000
-    y1 = floor(x1);              // ergibt 5.000000 
-    y1 = ceil(x1);               // ergibt 6.000000 
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">double</span> x1, x2, y1, y2; 
+    x1 = <span class="hljs-number">5.23487392</span>;
+    x2 = <span class="hljs-number">5.89437524</span>;
+    y1 = round(x1 * <span class="hljs-number">1000</span>)/<span class="hljs-number">1000</span>;  <span class="hljs-comment">// ergibt 5.235000</span>
+    y2 = round(x2 * <span class="hljs-number">1000</span>)/<span class="hljs-number">1000</span>;  <span class="hljs-comment">// ergibt 5.894000</span>
+    y1 = trunc(x1);              <span class="hljs-comment">// ergibt 5.000000</span>
+    y1 = <span class="hljs-built_in">floor</span>(x1);              <span class="hljs-comment">// ergibt 5.000000 </span>
+    y1 = <span class="hljs-built_in">ceil</span>(x1);               <span class="hljs-comment">// ergibt 6.000000 </span>
 } 
-</div></code></code></pre>
+</div></code></pre>
 <p>Kaufmännisch Runden und Abschneiden ist auch durch explizite Typumwandlung möglich:</p>
 <pre><code class="language-c"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 

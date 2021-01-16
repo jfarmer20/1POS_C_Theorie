@@ -187,10 +187,10 @@ Quelldatei “helloworld.c” erstellen:
 ![Screenshot Visual Studio Code Command Erstes Programm - Schritt 1](./pictures/Screenshot_VSC_1.png "Screenshot Visual Studio Code Command Erstes Programm - Schritt 1")
 
 ```c
- // #include bewirkt das Einfügen von Quellcode aus einer anderen  
- // Datei. Die Header-Datei stdio.h wird in das Programm eingefügt.  
- // Sie beinhaltet die Funktionen, die wir zur 
- // (Standard)-Ein/-Ausgabe benötigen 
+// #include bewirkt das Einfügen von Quellcode aus einer anderen  
+// Datei. Die Header-Datei stdio.h wird in das Programm eingefügt.  
+// Sie beinhaltet die Funktionen, die wir zur 
+// (Standard)-Ein/-Ausgabe benötigen 
 #include <stdio.h>                          
 
 int main()         // Funktion main() definiert das Hauptprogramm
@@ -609,7 +609,7 @@ double ceil(double x);	 // auf nächste Ganzzahl aufrunden
 
 Im folgenden Beispiel wird die Verwendung der Funktionen veranschaulicht: 
 
-```
+```c
 #include <stdlib.h>
 #include <math.h>
 
