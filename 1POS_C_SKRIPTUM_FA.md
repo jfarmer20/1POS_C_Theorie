@@ -1,9 +1,9 @@
 # 1. Einführung in die Programmiersprache C
 
 ## 1.1. Hinweise 
-Dieses Skriptum umfasst den Unterrichtsstoff für POS des ersten Jahrgangs der Abteilung Informatik an der HTBLA Kaindorf ab dem Schuljahr 2017/18. 
+Dieses Skriptum umfasst den Unterrichtsstoff für POS (Programmieren und Software Engineering) des ersten Jahrgangs der Abteilung Informatik an der HTBLA Kaindorf. 
 
-Falls aus dem Unterricht etwas unklar bleibt oder man sich vertiefen möchte steht ein frei verfügbares Lehrbuch zur Programmiersprache C unter dem Link: 
+Falls aus dem Unterricht etwas unklar bleibt oder man sich für Details interessiert, steht ein frei verfügbares Lehrbuch zur Programmiersprache C unter dem Link: 
 http://openbook.rheinwerk-verlag.de/c_von_a_bis_z/ 
 zur Verfügung. 
 
@@ -55,17 +55,15 @@ https://projecteuler.net/
 
 ## 1.4. Übersicht – Unterrichtsstoff POS, 1. Jahrgang 
 
-* MS-Windows Einführung (Menüleiste, …) erfolgt in DBI; Kurzeinführung in die command-Shell (cmd, mkdir, cd, del, …) allerdings erforderlich
+* Windows-Command-Shell (cmd): `dir`, `mkdir`, `ren`, `rmdir`, `cd`, `copy`, `del`, `help <command>`, … 
 
-* Die Verwendung der USB-Sticks mit Linux können POS1-Hauptlehrer für sich entscheiden (allerdings teilweise Probleme mit den USB-Buchsen der Schul-PCs) 
+* Development Environment Visual Studio Code  
 
-* Einheitliche IDE: Visual Studio Code mit Code Runner  
-
-* Programmiersprachenunabhängiger Programmentwurf mittels Struktogrammen (Minimalanforderung: Schüler*innen können Struktogramme lesen und als Programm umsetzen) 
+* Programmiersprachenunabhängiger Programmentwurf mittels Struktogrammen (Nassi-Shneiderman-Diagrammen), Structorizer 
 
 * Formatierte Ausgabe, `printf()`-Befehl
 
-* Eingabe mit `scanf()`-Befehl und Menüführung (erst wenn Schleife bekannt) 
+* Eingabe mit `scanf()`-Befehl und Menüführung, sobald Schleifen bekannt 
 
 * Datentypen für Ganzzahlen, Gleitkommazahlen, Characterliterale. 
 
@@ -77,28 +75,32 @@ https://projecteuler.net/
 
 * Entscheidung (if-else, switch-case) 
 
-* Zufallszahlengenerierung, ganzzahlig und als Gleitkommazahl  
+* Zufallszahlengenerierung, ganzzahlig und mit Gleitkommazahlen
 
 * Kaufmännisch Runden bzw. Abschneiden mit expliziter Typumwandlung (typecast) 
 
 * Schleifen: 
   * while
   * do-while 
-  * for (mit inkrementierender und dekrementierender Zählvariable und Inkrementen und Dekrementen ungleich Schrittweite 1) 
+  * for (mit inkrementierender und dekrementierender Zählvariable, Inkrement und Dekrement ungleich Schrittweite 1) 
   * `continue`, `break` im Schleifenkontext 
   * Schreibtischtest
 
-* Zahlensysteme: Binär, Dezimal, Hexadezimal; Umwandlung; 2er-Komplement, Horner-Schema in Form von Beispielen (kein Oktalsystem, keine Multiplikation, keine Division, keine Kommazahlen) 
+* Zahlensysteme: Binär, Dezimal, Hexadezimal; Umwandlung; 2er-Komplement, Horner-Schema in Form von Beispielen 
 
 * Stringliterale 
 
 * Programmstrukturierung mittels Funktionen und Vorwärtsdeklarationen, Call-by-Value, Call-by-Reference, Array-Übergabe 
 
-* ~~Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen)~~ zu anspruchsvoll für den ersten Jahrgang 
+**Optional**
 
-* 2-dimensionale Arrays (abhängig von der Klasse) 
+* Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen) 
 
-* Fehlersuche (mit printf()-Ausgaben, Debuggen) 
+* 2-dimensionale Arrays 
+
+* Fehlersuche (mit printf()-Ausgaben, Debugger) 
+
+**AB HIER MIT REVIEW FORTSETZEN**
 
 # 2. Quick Start 
 

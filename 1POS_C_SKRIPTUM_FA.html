@@ -80,8 +80,8 @@ figcaption {
     <body class="vscode-body vscode-light">
         <h1 id="1-einführung-in-die-programmiersprache-c">1. Einführung in die Programmiersprache C</h1>
 <h2 id="11-hinweise">1.1. Hinweise</h2>
-<p>Dieses Skriptum umfasst den Unterrichtsstoff für POS des ersten Jahrgangs der Abteilung Informatik an der HTBLA Kaindorf ab dem Schuljahr 2017/18.</p>
-<p>Falls aus dem Unterricht etwas unklar bleibt oder man sich vertiefen möchte steht ein frei verfügbares Lehrbuch zur Programmiersprache C unter dem Link:
+<p>Dieses Skriptum umfasst den Unterrichtsstoff für POS (Programmieren und Software Engineering) des ersten Jahrgangs der Abteilung Informatik an der HTBLA Kaindorf.</p>
+<p>Falls aus dem Unterricht etwas unklar bleibt oder man sich für Details interessiert, steht ein frei verfügbares Lehrbuch zur Programmiersprache C unter dem Link:
 <a href="http://openbook.rheinwerk-verlag.de/c_von_a_bis_z/">http://openbook.rheinwerk-verlag.de/c_von_a_bis_z/</a>
 zur Verfügung.</p>
 <h2 id="12-weitere-literatur">1.2. Weitere Literatur</h2>
@@ -150,22 +150,19 @@ PDF-Download:
 <h2 id="14-übersicht--unterrichtsstoff-pos-1-jahrgang">1.4. Übersicht – Unterrichtsstoff POS, 1. Jahrgang</h2>
 <ul>
 <li>
-<p>MS-Windows Einführung (Menüleiste, …) erfolgt in DBI; Kurzeinführung in die command-Shell (cmd, mkdir, cd, del, …) allerdings erforderlich</p>
+<p>Windows-Command-Shell (cmd): <code>dir</code>, <code>mkdir</code>, <code>ren</code>, <code>rmdir</code>, <code>cd</code>, <code>copy</code>, <code>del</code>, <code>help &lt;command&gt;</code>, …</p>
 </li>
 <li>
-<p>Die Verwendung der USB-Sticks mit Linux können POS1-Hauptlehrer für sich entscheiden (allerdings teilweise Probleme mit den USB-Buchsen der Schul-PCs)</p>
+<p>Development Environment Visual Studio Code</p>
 </li>
 <li>
-<p>Einheitliche IDE: Visual Studio Code mit Code Runner</p>
-</li>
-<li>
-<p>Programmiersprachenunabhängiger Programmentwurf mittels Struktogrammen (Minimalanforderung: Schüler*innen können Struktogramme lesen und als Programm umsetzen)</p>
+<p>Programmiersprachenunabhängiger Programmentwurf mittels Struktogrammen (Nassi-Shneiderman-Diagrammen), Structorizer</p>
 </li>
 <li>
 <p>Formatierte Ausgabe, <code>printf()</code>-Befehl</p>
 </li>
 <li>
-<p>Eingabe mit <code>scanf()</code>-Befehl und Menüführung (erst wenn Schleife bekannt)</p>
+<p>Eingabe mit <code>scanf()</code>-Befehl und Menüführung, sobald Schleifen bekannt</p>
 </li>
 <li>
 <p>Datentypen für Ganzzahlen, Gleitkommazahlen, Characterliterale.</p>
@@ -183,7 +180,7 @@ PDF-Download:
 <p>Entscheidung (if-else, switch-case)</p>
 </li>
 <li>
-<p>Zufallszahlengenerierung, ganzzahlig und als Gleitkommazahl</p>
+<p>Zufallszahlengenerierung, ganzzahlig und mit Gleitkommazahlen</p>
 </li>
 <li>
 <p>Kaufmännisch Runden bzw. Abschneiden mit expliziter Typumwandlung (typecast)</p>
@@ -193,13 +190,13 @@ PDF-Download:
 <ul>
 <li>while</li>
 <li>do-while</li>
-<li>for (mit inkrementierender und dekrementierender Zählvariable und Inkrementen und Dekrementen ungleich Schrittweite 1)</li>
+<li>for (mit inkrementierender und dekrementierender Zählvariable, Inkrement und Dekrement ungleich Schrittweite 1)</li>
 <li><code>continue</code>, <code>break</code> im Schleifenkontext</li>
 <li>Schreibtischtest</li>
 </ul>
 </li>
 <li>
-<p>Zahlensysteme: Binär, Dezimal, Hexadezimal; Umwandlung; 2er-Komplement, Horner-Schema in Form von Beispielen (kein Oktalsystem, keine Multiplikation, keine Division, keine Kommazahlen)</p>
+<p>Zahlensysteme: Binär, Dezimal, Hexadezimal; Umwandlung; 2er-Komplement, Horner-Schema in Form von Beispielen</p>
 </li>
 <li>
 <p>Stringliterale</p>
@@ -207,16 +204,20 @@ PDF-Download:
 <li>
 <p>Programmstrukturierung mittels Funktionen und Vorwärtsdeklarationen, Call-by-Value, Call-by-Reference, Array-Übergabe</p>
 </li>
+</ul>
+<p><strong>Optional</strong></p>
+<ul>
 <li>
-<p><s>Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen)</s> zu anspruchsvoll für den ersten Jahrgang</p>
+<p>Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen)</p>
 </li>
 <li>
-<p>2-dimensionale Arrays (abhängig von der Klasse)</p>
+<p>2-dimensionale Arrays</p>
 </li>
 <li>
-<p>Fehlersuche (mit printf()-Ausgaben, Debuggen)</p>
+<p>Fehlersuche (mit printf()-Ausgaben, Debugger)</p>
 </li>
 </ul>
+<p><strong>AB HIER MIT REVIEW FORTSETZEN</strong></p>
 <h1 id="2-quick-start">2. Quick Start</h1>
 <h2 id="21-wichtige-begriffe-für-programmierer">2.1. Wichtige Begriffe für Programmierer</h2>
 <p>Ein <strong>Programm</strong> ist eine Abfolge von Befehlen/Anweisungen und wird meist in einer höheren Programmiersprache geschrieben.</p>
@@ -258,7 +259,7 @@ PDF-Download:
 <a href="https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/mingw-w64-install.exe">https://sourceforge.net/projects/mingw-w64/files/Toolchains targetting Win32/Personal Builds/mingw-builds/installer/mingw-w64-install.exe</a></p>
 <p>Wie starte ich Visual Studio Code? Einfach in der Windows-Suche “code“ eingeben und App öffnen.<br>
 Wichtig ist noch: Menü „View“ und „Extensions“ öffnen. Im Suchfeld „c++“ eingeben und die <strong>C/C++ Extension</strong> von Microsoft installieren:</p>
-<p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_C_Cpp_Extension.png" alt="Screenshot Hello World without Persistency" title="Screenshot Hello World without Persistency"></p>
+<p><img src="file:///o:\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_C_Cpp_Extension.png" alt="Screenshot Hello World without Persistency" title="Screenshot Hello World without Persistency"></p>
 <p>Danach noch <strong>Umgebungsvariable</strong> konfigurieren (<a href="https://code.visualstudio.com/docs/cpp/config-mingw">https://code.visualstudio.com/docs/cpp/config-mingw</a>):   	
 Windows-Suche: “Einstellungen“<br>
 Suchfeld: „Umgebungsvariablen für dieses Konto bearbeiten“<br>
@@ -268,7 +269,7 @@ Drücke „Neu“ und füge den Pfad zum „\bin“-Verzeichnis deiner mingw-w64
 Visual Studio Code starten: Windows-Suche: „code“ eingeben.<br>
 Terminal (Konsole) öffnen: Menü „View -&gt; Terminal“<br>
 In der Kommando-Zeile „g++ --version“ eingeben:</p>
-<p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_VSC_CLI.png" alt="Screenshot Visual Studio Code Command Line Interface" title="Screenshot Visual Studio Code Command Line Interface"></p>
+<p><img src="file:///o:\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_VSC_CLI.png" alt="Screenshot Visual Studio Code Command Line Interface" title="Screenshot Visual Studio Code Command Line Interface"></p>
 <h2 id="24-erstes-programm-mit-visual-studio-code-vsc">2.4. Erstes Programm mit Visual Studio Code (VSC)</h2>
 <p>In Windows-Suche „cmd“ eingeben und Eingabeaufforderung öffnen.</p>
 <p>Projektverzeichnis erstellen und VSC starten:</p>
@@ -279,7 +280,7 @@ cd helloworld
 code .
 </div></code></code></pre>
 <p>Quelldatei “helloworld.c” erstellen:</p>
-<p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_VSC_1.png" alt="Screenshot Visual Studio Code Command Erstes Programm - Schritt 1" title="Screenshot Visual Studio Code Command Erstes Programm - Schritt 1"></p>
+<p><img src="file:///o:\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_VSC_1.png" alt="Screenshot Visual Studio Code Command Erstes Programm - Schritt 1" title="Screenshot Visual Studio Code Command Erstes Programm - Schritt 1"></p>
 <pre><code class="language-c"><div><span class="hljs-comment">// #include bewirkt das Einfügen von Quellcode aus einer anderen  </span>
 <span class="hljs-comment">// Datei. Die Header-Datei stdio.h wird in das Programm eingefügt.  </span>
 <span class="hljs-comment">// Sie beinhaltet die Funktionen, die wir zur </span>
@@ -300,17 +301,17 @@ code .
 <p>Um VSC zu sagen, wie die Quelldatei helloworld.c nun zu kompilieren ist, braucht es eine tasks.json Datei:</p>
 <p>Menü Terminal -&gt; Configure Default Build Task…, “C/C++:gcc.exe build active file” auswählen.</p>
 <p>Quelldatei helloworld.c auswählen</p>
-<p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_VSC_2.png" alt="Screenshot Visual Studio Code Command Erstes Programm - Schritt 2" title="Screenshot Visual Studio Code Command Erstes Programm - Schritt 2"></p>
+<p><img src="file:///o:\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_VSC_2.png" alt="Screenshot Visual Studio Code Command Erstes Programm - Schritt 2" title="Screenshot Visual Studio Code Command Erstes Programm - Schritt 2"></p>
 <p>und mit der Tastenkombination Strg+Shift+b kompilieren.</p>
 <h2 id="26-helloworldc-startendebuggen">2.6. <code>helloworld.c</code> starten/debuggen</h2>
 <p>Um helloworld.c starten oder debuggen zu können, braucht VSC die Datei launch.json:</p>
 <p>Menü Run -&gt; Add Configuration…, „C++ (GDB/LLDB)“ und “gcc.exe – Aktive Datei erstellen und debuggen“ auswählen.</p>
 <p>Das Programm wird anschließend gleich ausgeführt was man mit der Tastenkombination Shift+F5 stoppen kann.</p>
 <p>Quelldatei helloworld.c auswählen</p>
-<p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_VSC_3.png" alt="Screenshot Visual Studio Code Command Erstes Programm - Schritt 3" title="Screenshot Visual Studio Code Command Erstes Programm - Schritt 3"></p>
+<p><img src="file:///o:\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_VSC_3.png" alt="Screenshot Visual Studio Code Command Erstes Programm - Schritt 3" title="Screenshot Visual Studio Code Command Erstes Programm - Schritt 3"></p>
 <p>und mit der Tastenkombination Strg+F5 starten.</p>
 <p>Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und das Programm mit der Taste F5 starten:</p>
-<p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_VSC_4.png" alt="Screenshot Visual Studio Code Command Erstes Programm - Schritt 4" title="Screenshot Visual Studio Code Command Erstes Programm - Schritt 4"></p>
+<p><img src="file:///o:\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\Screenshot_VSC_4.png" alt="Screenshot Visual Studio Code Command Erstes Programm - Schritt 4" title="Screenshot Visual Studio Code Command Erstes Programm - Schritt 4"></p>
 <h2 id="27-einführungsbeispiel">2.7. Einführungsbeispiel</h2>
 <p>Lernt man eine neue Programmiersprache, dann ist meist ein „Hello World“ Programm, das erste Programm, das man schreibt. Und das machen wir im folgenden Einführungsbeispiel genauso.</p>
 <p>Das folgende „Hello World“ Programm zeigt die grundlegende Struktur eines C-Programms:</p>
@@ -446,10 +447,10 @@ In der folgenden Tabelle sind die wichtigsten Escape-Sequenzen aufgelistet:</p>
 <p>Mit Struktogrammen, auch Nassi-Shneiderman-Diagramme genannt, werden Programme unabhängig von der Programmiersprache, mit der sie letztendlich umgesetzt werden, entworfen.<br>
 Ein Struktogramm setzt sich aus Strukturblöcken zusammen. Diese können, wie wir noch sehen werden, ineinander verschachtelt sein.</p>
 <p>Beispiel eines Struktogramms mit Sequenz-Symbolen:</p>
-<p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\NSD_01.PNG" alt="Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen" title="Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen"></p>
+<p><img src="file:///o:\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\NSD_01.PNG" alt="Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen" title="Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen"></p>
 <p><strong>Aufgabe</strong>: Lese eine Ganzzahl ein, erhöhe diese um eins und gib die Zahl aus.</p>
 <p>Struktogramm:</p>
-<p><img src="file:///c:\Users\jfarm\Dropbox\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\NSD_02.PNG" alt="Nassi-Shneiderman-Diagramm Beispiel 1" title="Nassi-Shneiderman-Diagramm Beispiel 1"></p>
+<p><img src="file:///o:\S\0Unterricht\1POS_C\Skriptum_Theorie.md\pictures\NSD_02.PNG" alt="Nassi-Shneiderman-Diagramm Beispiel 1" title="Nassi-Shneiderman-Diagramm Beispiel 1"></p>
 <p>Programm:</p>
 <pre><code class="language-c"><div><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 
