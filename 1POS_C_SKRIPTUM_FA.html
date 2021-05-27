@@ -146,6 +146,11 @@ PDF-Download:
 </ul>
 </li>
 <li><a href="#11-operatoren--2-teil">11. Operatoren – 2. Teil</a></li>
+<li><a href="#12-mehrdimensionale-arrays">12. Mehrdimensionale Arrays</a>
+<ul>
+<li><a href="#121-%C3%BCbergabe-von-mehrdimensionalen-arrays-an-funktionen">12.1. Übergabe von mehrdimensionalen Arrays an Funktionen</a></li>
+</ul>
+</li>
 </ul>
 <h2 id="14-übersicht--unterrichtsstoff-pos-1-jahrgang">1.4. Übersicht – Unterrichtsstoff POS, 1. Jahrgang</h2>
 <ul>
@@ -171,7 +176,7 @@ PDF-Download:
 <p>Arithmetische Operatoren (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>++</code>, <code>--</code>) inklusive Ganzzahl-Division und Modulo</p>
 </li>
 <li>
-<p>Felder mit einfachen Datentypen (auch mit Characterliterale)</p>
+<p>Arrayer mit einfachen Datentypen (auch mit Characterliterale)</p>
 </li>
 <li>
 <p>Vergleichs- und logische Operatoren</p>
@@ -839,6 +844,75 @@ c = str[<span class="hljs-number">0</span>];    <span class="hljs-comment">// We
 <span class="hljs-keyword">double</span> <span class="hljs-title">atof</span><span class="hljs-params">(&lt;String&gt;)</span>	<span class="hljs-comment">// Konvertierung von String in double</span>
 </span></div></code></pre>
 <h1 id="11-operatoren--2-teil">11. Operatoren – 2. Teil</h1>
+<h1 id="12-mehrdimensionale-arrays">12. Mehrdimensionale Arrays</h1>
+<p>Jede Dimension des Arrays wird über einen eigenen Index angesprochen.</p>
+<p>Syntax der Arraydeklaration:</p>
+<pre><code><code><div>datentyp arrayName[anzahl_dim1][anzahl_dim2] . . . [anzahl_dimN];
+</div></code></code></pre>
+<p>Beispiele einer Arraydeklaration:</p>
+<pre><code class="language-c"><div> <span class="hljs-keyword">int</span> f1d[<span class="hljs-number">10</span>];                      <span class="hljs-comment">// 1-dimensionales Feld</span>
+ <span class="hljs-keyword">int</span> f2d[<span class="hljs-number">10</span>][<span class="hljs-number">5</span>];                   <span class="hljs-comment">// 2-dimensionales Feld: Entspricht einer </span>
+                                   <span class="hljs-comment">// Tabelle mit 10 Zeilen + 5 Spalten = 50 Elementen</span>
+</div></code></pre>
+<p>Initialisieren lassen sich mehrdimensionale Arrays wie folgt:</p>
+<pre><code class="language-c"><div><span class="hljs-keyword">int</span> f22[][<span class="hljs-number">3</span>] = {{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>},          <span class="hljs-comment">// 2-dimensionales Feld: Entspricht einer </span>
+                {<span class="hljs-number">4</span>,<span class="hljs-number">5</span>}};           <span class="hljs-comment">// Tabelle mit 2 Zeilen + 3 Spalten = 6 Elementen</span>
+<span class="hljs-keyword">int</span> f3d[<span class="hljs-number">100</span>][<span class="hljs-number">5</span>][<span class="hljs-number">2</span>] = {<span class="hljs-number">0</span>};         <span class="hljs-comment">// 3-dimensionales Array mit 100*5*2 = 1000 Elementen </span>
+</div></code></pre>
+<pre><code class="language-c"><div><span class="hljs-keyword">int</span> dim1, dim2, dim3, dim4;
+
+dim1 = <span class="hljs-keyword">sizeof</span>(f1d)/<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>);
+dim2 = <span class="hljs-keyword">sizeof</span>(f2d)/<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>);
+dim3 = <span class="hljs-keyword">sizeof</span>(f22)/<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>);
+dim4 = <span class="hljs-keyword">sizeof</span>(f3d)/<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>);
+
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Anzahl der Elemente von f1d: %4d\n&quot;</span>,dim1);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Anzahl der Elemente von f2d: %4d\n&quot;</span>,dim2);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Anzahl der Elemente von f22: %4d\n&quot;</span>,dim3);
+<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Anzahl der Elemente von f3d: %4d\n&quot;</span>,dim4);
+</div></code></pre>
+<p>Testlauf:</p>
+<pre><code><code><div>Anzahl der Elemente von f1d:   10
+Anzahl der Elemente von f2d:   50
+Anzahl der Elemente von f22:    6
+Anzahl der Elemente von f3d: 1000
+</div></code></code></pre>
+<p>Bei der Initialisierung kann die Größenangabe der ersten Dimension - und nur der ersten Dimension - weggelassen werden. Eventuell nicht initialisierte Elemente werden auf 0 gesetzt.  Die einzelnen Arrayelemente von <code>f22</code> werden daher folgendermaßen initialisiert:</p>
+<pre><code class="language-c"><div>f22[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>	f22[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">2</span>	f22[<span class="hljs-number">0</span>][<span class="hljs-number">2</span>] = <span class="hljs-number">3</span>
+f22[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">4</span>	f22[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">5</span>	f22[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>
+</div></code></pre>
+<pre><code class="language-c"><div><span class="hljs-keyword">int</span> f31d[][<span class="hljs-number">10</span>][<span class="hljs-number">5</span>] = {<span class="hljs-number">0</span>};            <span class="hljs-comment">// Array mit 1*10*5 = 50 Elementen</span>
+<span class="hljs-keyword">int</span> f32d[][<span class="hljs-number">10</span>][<span class="hljs-number">5</span>] = {{<span class="hljs-number">0</span>},           <span class="hljs-comment">// Array mit 3*10*5 = 150 Elementen</span>
+                     {<span class="hljs-number">0</span>},
+                     {<span class="hljs-number">0</span>}};  
+<span class="hljs-keyword">int</span> f33d[][][<span class="hljs-number">10</span>] = {<span class="hljs-number">0</span>};             <span class="hljs-comment">// Compilerfehler!</span>
+<span class="hljs-keyword">int</span> aTest[][] = {{<span class="hljs-number">1</span>,<span class="hljs-number">2</span>},             <span class="hljs-comment">// Compilerfehler! </span>
+                 {<span class="hljs-number">3</span>,<span class="hljs-number">4</span>}}; 
+</div></code></pre>
+<p>Die dritte Deklaration führt zu einem Compilerfehler, da mehr als nur die erste Dimension nicht angegeben sind und der Compiler daher die Arraygröße nicht bestimmen kann.</p>
+<h2 id="121-übergabe-von-mehrdimensionalen-arrays-an-funktionen">12.1. Übergabe von mehrdimensionalen Arrays an Funktionen</h2>
+<p>Gleich wie bei eindimensionalen Arrays, erfolgt auch bei mehrdimensionalen Arrays die Parameterübergabe nach dem <em>call-by-reference</em> Prinzip.</p>
+<p>In der formalen Parameterliste muss für jede Dimension ein Klammerpaar <code>[]</code> stehen. Die Anzahl der Elemente muss erst ab der zweiten Dimension definiert sein und die Anzahl der Werte jeder Dimension sind zusätzlich als Parameter mitzuübergeben.</p>
+<p>Beispiel:</p>
+<pre><code class="language-c"><div><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">initArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a2d[][<span class="hljs-number">10</span>], <span class="hljs-keyword">int</span> rows, <span class="hljs-keyword">int</span> columns)</span></span>;   <span class="hljs-comment">// Funktionsprototyp</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">int</span> a2d[<span class="hljs-number">10</span>][<span class="hljs-number">10</span>] = {<span class="hljs-number">0</span>};
+    initArray(a2d, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>);
+    . . .
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">initArray</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a2d[][<span class="hljs-number">10</span>], <span class="hljs-keyword">int</span> rows, <span class="hljs-keyword">int</span> columns)</span>
+</span>{
+    srand(time(<span class="hljs-literal">NULL</span>));
+    <span class="hljs-keyword">int</span> i, j;
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; rows; i++)
+        <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; columns; j++)
+            a2d[i][j] = rand() % <span class="hljs-number">100</span> + <span class="hljs-number">1</span>;
+}
+</div></code></pre>
 
     </body>
     </html>

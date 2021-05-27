@@ -51,6 +51,8 @@ https://projecteuler.net/
   - [10.1. Characterliterale](#101-characterliterale)
   - [10.2. Stringliterale](#102-stringliterale)
 - [11. Operatoren – 2. Teil](#11-operatoren--2-teil)
+- [12. Mehrdimensionale Arrays](#12-mehrdimensionale-arrays)
+  - [12.1. Übergabe von mehrdimensionalen Arrays an Funktionen](#121-übergabe-von-mehrdimensionalen-arrays-an-funktionen)
 
 
 ## 1.4. Übersicht – Unterrichtsstoff POS, 1. Jahrgang 
@@ -69,7 +71,7 @@ https://projecteuler.net/
 
 * Arithmetische Operatoren (`+`, `-`, `*`, `/`, `%`, `++`, `--`) inklusive Ganzzahl-Division und Modulo
 
-* Felder mit einfachen Datentypen (auch mit Characterliterale) 
+* Arrayer mit einfachen Datentypen (auch mit Characterliterale) 
 
 * Vergleichs- und logische Operatoren 
 
@@ -752,3 +754,103 @@ double atof(<String>)	// Konvertierung von String in double
 ```
 
 # 11. Operatoren – 2. Teil 
+
+# 12. Mehrdimensionale Arrays 
+
+Jede Dimension des Arrays wird über einen eigenen Index angesprochen. 
+
+Syntax der Arraydeklaration: 
+
+```
+datentyp arrayName[anzahl_dim1][anzahl_dim2] . . . [anzahl_dimN];
+```
+
+Beispiele einer Arraydeklaration: 
+
+```c 
+ int f1d[10];                      // 1-dimensionales Feld
+ int f2d[10][5];                   // 2-dimensionales Feld: Entspricht einer 
+                                   // Tabelle mit 10 Zeilen + 5 Spalten = 50 Elementen
+ ```
+ 
+Initialisieren lassen sich mehrdimensionale Arrays wie folgt: 
+
+ ```c
+ int f22[][3] = {{1,2,3},          // 2-dimensionales Feld: Entspricht einer 
+                 {4,5}};           // Tabelle mit 2 Zeilen + 3 Spalten = 6 Elementen
+ int f3d[100][5][2] = {0};         // 3-dimensionales Array mit 100*5*2 = 1000 Elementen 
+ ```
+ 
+ ```c 
+ int dim1, dim2, dim3, dim4;
+
+ dim1 = sizeof(f1d)/sizeof(int);
+ dim2 = sizeof(f2d)/sizeof(int);
+ dim3 = sizeof(f22)/sizeof(int);
+ dim4 = sizeof(f3d)/sizeof(int);
+
+ printf("Anzahl der Elemente von f1d: %4d\n",dim1);
+ printf("Anzahl der Elemente von f2d: %4d\n",dim2);
+ printf("Anzahl der Elemente von f22: %4d\n",dim3);
+ printf("Anzahl der Elemente von f3d: %4d\n",dim4);
+ ```
+
+Testlauf:
+
+```
+Anzahl der Elemente von f1d:   10
+Anzahl der Elemente von f2d:   50
+Anzahl der Elemente von f22:    6
+Anzahl der Elemente von f3d: 1000
+```
+
+Bei der Initialisierung kann die Größenangabe der ersten Dimension - und nur der ersten Dimension - weggelassen werden. Eventuell nicht initialisierte Elemente werden auf 0 gesetzt.  Die einzelnen Arrayelemente von `f22` werden daher folgendermaßen initialisiert:
+
+```c
+f22[0][0] = 1	f22[0][1] = 2	f22[0][2] = 3
+f22[1][0] = 4	f22[1][1] = 5	f22[1][2] = 0
+````
+
+```c
+int f31d[][10][5] = {0};            // Array mit 1*10*5 = 50 Elementen
+int f32d[][10][5] = {{0},           // Array mit 3*10*5 = 150 Elementen
+                     {0},
+                     {0}};  
+int f33d[][][10] = {0};             // Compilerfehler!
+int aTest[][] = {{1,2},             // Compilerfehler! 
+                 {3,4}}; 
+```
+
+Die dritte Deklaration führt zu einem Compilerfehler, da mehr als nur die erste Dimension nicht angegeben sind und der Compiler daher die Arraygröße nicht bestimmen kann. 
+
+## 12.1. Übergabe von mehrdimensionalen Arrays an Funktionen 
+
+Gleich wie bei eindimensionalen Arrays, erfolgt auch bei mehrdimensionalen Arrays die Parameterübergabe nach dem *call-by-reference* Prinzip. 
+
+In der formalen Parameterliste muss für jede Dimension ein Klammerpaar `[]` stehen. Die Anzahl der Elemente muss erst ab der zweiten Dimension definiert sein und die Anzahl der Werte jeder Dimension sind zusätzlich als Parameter mitzuübergeben. 
+
+Beispiel: 
+
+```c 
+void initArray(int a2d[][10], int rows, int columns);   // Funktionsprototyp
+
+int main()
+{
+    int a2d[10][10] = {0};
+    initArray(a2d, 10, 10);
+    . . .
+    return 0;
+}
+
+void initArray(int a2d[][10], int rows, int columns)
+{
+    srand(time(NULL));
+    int i, j;
+    for (i = 0; i < rows; i++)
+        for (j = 0; j < columns; j++)
+            a2d[i][j] = rand() % 100 + 1;
+}
+```
+
+
+

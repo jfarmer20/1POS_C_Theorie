@@ -12,5 +12,12 @@ http://htmlpreview.github.io/?https://github.com/jfarmer20/1POS_C_Theorie/blob/m
 
 If you want a full functioning version, download repository and use Visual Studio Code with the following extensions installed:
 
-* yzhang.markdown-all-in-one
-* goessner.mdmath
+yzhang.markdown-all-in-one:  
+
+https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
+
+goessner.mdmath:  
+
+https://marketplace.visualstudio.com/items?itemName=goessner.mdmath
+
+
