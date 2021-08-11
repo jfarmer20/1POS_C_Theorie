@@ -1,127 +1,71 @@
-# 1. Einführung in die Programmiersprache C
+# Allgemeines <!-- omit in toc -->
 
-## 1.1. Hinweise 
-Dieses Skriptum umfasst den Unterrichtsstoff für POS (Programmieren und Software Engineering) des ersten Jahrgangs der Abteilung Informatik an der HTBLA Kaindorf. 
+Dieses Skriptum umfasst den Unterrichtsstoff für POS (Programmieren und Software Engineering) des ersten Jahrgangs der Abteilung Informatik an der Höheren Technischen Bundeslehranstalt Kaindorf, Österreich. 
 
-Falls aus dem Unterricht etwas unklar bleibt oder man sich für Details interessiert, steht ein frei verfügbares Lehrbuch zur Programmiersprache C unter dem Link: 
-http://openbook.rheinwerk-verlag.de/c_von_a_bis_z/ 
-zur Verfügung. 
+Als Erweiterung dieses Skriptums steht das frei verfügbares Lehrbuch zur Programmiersprache C des Rheinwerk Verlags zur Verfügung:  
+[Wolf, Jürgen: C von A bis Z](https://openbook.rheinwerk-verlag.de/c_von_a_bis_z/)
 
-## 1.2. Weitere Literatur
+Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgenden Seiten perfektioniert werden: 
 
-Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Addison-Wesley Professional 2011: Homepage:  
-https://algs4.cs.princeton.edu/home/  
-PDF-Download: 
-https://github.com/Mcdonoughd/CS2223/raw/master/Books/Algorithhms%204th%20Edition%20by%20Robert%20Sedgewick%2C%20Kevin%20Wayne.pdf 
+[Project Euler](https://projecteuler.net/)  
+[CodinGame](https://www.codingame.com/start)  
 
-Für Rätselfüchse: Projekt Euler:  
-https://projecteuler.net/ 
+# Inhaltsverzeichnis <!-- omit in toc -->
 
-## 1.3. Inhaltsverzeichnis 
+- [1. Einführung](#1-einführung)
+  - [1.1. Wichtige Begriffe](#11-wichtige-begriffe)
+  - [1.2. Geschichte von C](#12-geschichte-von-c)
+  - [1.3. Installation von Visual Studio Code](#13-installation-von-visual-studio-code)
+  - [1.4. Erstes Programm mit Visual Studio Code (VSC)](#14-erstes-programm-mit-visual-studio-code-vsc)
+  - [1.5. `helloworld.c` kompilieren](#15-helloworldc-kompilieren)
+  - [1.6. `helloworld.c` starten/debuggen](#16-helloworldc-startendebuggen)
+  - [1.7. Einführungsbeispiel](#17-einführungsbeispiel)
+- [2. Mein erstes Programm mit Eingabe, Zuweisung und Ausgabe](#2-mein-erstes-programm-mit-eingabe-zuweisung-und-ausgabe)
+  - [2.1. `printf()`-Befehl: Steuerzeichen und Sonderzeichen](#21-printf-befehl-steuerzeichen-und-sonderzeichen)
+  - [2.2. Struktogramm](#22-struktogramm)
+- [3. Operatoren – 1. Teil](#3-operatoren--1-teil)
+  - [3.1. Zuweisungsoperator](#31-zuweisungsoperator)
+    - [3.1.1. Variablentausch mit Hilfsvariable](#311-variablentausch-mit-hilfsvariable)
+  - [3.2. Variablentausch ohne Hilfsvariable](#32-variablentausch-ohne-hilfsvariable)
+  - [3.3. Arithmetische Operatoren](#33-arithmetische-operatoren)
+  - [3.4. Vorzeichenoperatoren](#34-vorzeichenoperatoren)
+    - [3.4.1. Binäre arithmetische  Operatoren](#341-binäre-arithmetische--operatoren)
+- [4. Datentypen](#4-datentypen)
+- [5. Zufallszahlen](#5-zufallszahlen)
+- [6. `printf()`-Befehl: Formatierte Ausgabe](#6-printf-befehl-formatierte-ausgabe)
+- [7. Mathematische Funktionen – `<math.h>`](#7-mathematische-funktionen--mathh)
+- [8. Kommentare](#8-kommentare)
+- [9. Character- und Stringliterale](#9-character--und-stringliterale)
+  - [9.1. Characterliterale](#91-characterliterale)
+  - [9.2. Stringliterale](#92-stringliterale)
+- [10. Operatoren – 2. Teil](#10-operatoren--2-teil)
+- [11. Arrays (Felder)](#11-arrays-felder)
+  - [11.1. Eindimensionale Arrays](#111-eindimensionale-arrays)
+  - [11.2. Eindimensionale Arrays dynamisch erzeugen](#112-eindimensionale-arrays-dynamisch-erzeugen)
+  - [11.3. Mehrdimensionale Arrays](#113-mehrdimensionale-arrays)
+  - [11.4. Übergabe von mehrdimensionalen Arrays an Funktionen](#114-übergabe-von-mehrdimensionalen-arrays-an-funktionen)
+  - [11.5. Mehrdimensionale Arrays dynamisch erzeugen](#115-mehrdimensionale-arrays-dynamisch-erzeugen)
+- [12. Anhang](#12-anhang)
+  - [12.1. Weitere Literatur](#121-weitere-literatur)
+  - [12.2. Übersicht des Unterrichtsstoffs](#122-übersicht-des-unterrichtsstoffs)
 
-- [1. Einführung in die Programmiersprache C](#1-einführung-in-die-programmiersprache-c)
-  - [1.1. Hinweise](#11-hinweise)
-  - [1.2. Weitere Literatur](#12-weitere-literatur)
-  - [1.3. Inhaltsverzeichnis](#13-inhaltsverzeichnis)
-  - [1.4. Übersicht – Unterrichtsstoff POS, 1. Jahrgang](#14-übersicht--unterrichtsstoff-pos-1-jahrgang)
-- [2. Quick Start](#2-quick-start)
-  - [2.1. Wichtige Begriffe für Programmierer](#21-wichtige-begriffe-für-programmierer)
-  - [2.2. Geschichte von C](#22-geschichte-von-c)
-  - [2.3. Installation von Visual Studio Code](#23-installation-von-visual-studio-code)
-  - [2.4. Erstes Programm mit Visual Studio Code (VSC)](#24-erstes-programm-mit-visual-studio-code-vsc)
-  - [2.5. `helloworld.c` kompilieren](#25-helloworldc-kompilieren)
-  - [2.6. `helloworld.c` starten/debuggen](#26-helloworldc-startendebuggen)
-  - [2.7. Einführungsbeispiel](#27-einführungsbeispiel)
-- [3. Mein erstes Programm mit Eingabe, Zuweisung und Ausgabe](#3-mein-erstes-programm-mit-eingabe-zuweisung-und-ausgabe)
-  - [3.1. `printf()`-Befehl: Steuerzeichen und Sonderzeichen](#31-printf-befehl-steuerzeichen-und-sonderzeichen)
-  - [3.2. Struktogramm](#32-struktogramm)
-- [4. Operatoren – 1. Teil](#4-operatoren--1-teil)
-  - [4.1. Zuweisungsoperator](#41-zuweisungsoperator)
-    - [4.1.1. Variablentausch mit Hilfsvariable](#411-variablentausch-mit-hilfsvariable)
-  - [4.2. Variablentausch ohne Hilfsvariable](#42-variablentausch-ohne-hilfsvariable)
-  - [4.3. Arithmetische Operatoren](#43-arithmetische-operatoren)
-  - [4.4. Vorzeichenoperatoren](#44-vorzeichenoperatoren)
-    - [4.4.1. Binäre arithmetische  Operatoren](#441-binäre-arithmetische--operatoren)
-- [5. Datentypen](#5-datentypen)
-- [6. Zufallszahlen](#6-zufallszahlen)
-- [7. `printf()`-Befehl: Formatierte Ausgabe](#7-printf-befehl-formatierte-ausgabe)
-- [8. Mathematische Funktionen – `<math.h>`](#8-mathematische-funktionen--mathh)
-- [9. Kommentare](#9-kommentare)
-- [10. Character- und Stringliterale](#10-character--und-stringliterale)
-  - [10.1. Characterliterale](#101-characterliterale)
-  - [10.2. Stringliterale](#102-stringliterale)
-- [11. Operatoren – 2. Teil](#11-operatoren--2-teil)
-- [Arrays (Felder)](#arrays-felder)
-  - [Eindimensionale Arrays](#eindimensionale-arrays)
-  - [Eindimensionale Arrays dynamisch erzeugen](#eindimensionale-arrays-dynamisch-erzeugen)
-  - [Mehrdimensionale Arrays](#mehrdimensionale-arrays)
-  - [12.1. Übergabe von mehrdimensionalen Arrays an Funktionen](#121-übergabe-von-mehrdimensionalen-arrays-an-funktionen)
-  - [Mehrdimensionale Arrays dynamisch erzeugen](#mehrdimensionale-arrays-dynamisch-erzeugen)
+# 1. Einführung
 
+## 1.1. Wichtige Begriffe 
 
-## 1.4. Übersicht – Unterrichtsstoff POS, 1. Jahrgang 
+Ein **Programm** ist eine Abfolge von Befehlen/Anweisungen in einer bestimmten Programmiersprache. 
 
-* Windows-Command-Shell (cmd): `dir`, `mkdir`, `ren`, `rmdir`, `cd`, `copy`, `del`, `help <command>`, … 
-
-* Development Environment Visual Studio Code  
-
-* Programmiersprachenunabhängiger Programmentwurf mittels Struktogrammen (Nassi-Shneiderman-Diagrammen), Structorizer 
-
-* Formatierte Ausgabe, `printf()`-Befehl
-
-* Eingabe mit `scanf()`-Befehl und Menüführung, sobald Schleifen bekannt 
-
-* Datentypen für Ganzzahlen, Gleitkommazahlen, Characterliterale. 
-
-* Arithmetische Operatoren (`+`, `-`, `*`, `/`, `%`, `++`, `--`) inklusive Ganzzahl-Division und Modulo
-
-* Arrayer mit einfachen Datentypen (auch mit Characterliterale) 
-
-* Vergleichs- und logische Operatoren 
-
-* Entscheidung (if-else, switch-case) 
-
-* Zufallszahlengenerierung, ganzzahlig und mit Gleitkommazahlen
-
-* Kaufmännisch Runden bzw. Abschneiden mit expliziter Typumwandlung (typecast) 
-
-* Schleifen: 
-  * while
-  * do-while 
-  * for (mit inkrementierender und dekrementierender Zählvariable, Inkrement und Dekrement ungleich Schrittweite 1) 
-  * `continue`, `break` im Schleifenkontext 
-  * Schreibtischtest
-
-* Zahlensysteme: Binär, Dezimal, Hexadezimal; Umwandlung; 2er-Komplement, Horner-Schema in Form von Beispielen 
-
-* Stringliterale 
-
-* Programmstrukturierung mittels Funktionen und Vorwärtsdeklarationen, Call-by-Value, Call-by-Reference, Array-Übergabe 
-
-**Optional**
-
-* Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen) 
-
-* 2-dimensionale Arrays 
-
-* Fehlersuche (mit printf()-Ausgaben, Debugger) 
-
-**AB HIER MIT REVIEW FORTSETZEN**
-
-# 2. Quick Start 
-
-## 2.1. Wichtige Begriffe für Programmierer
-
-Ein **Programm** ist eine Abfolge von Befehlen/Anweisungen und wird meist in einer höheren Programmiersprache geschrieben. 
-
-Ein **Compiler** übersetzt ein Programm, geschrieben in einer höheren Programmiersprache (z.B. C, Java, Python) in Maschinensprache (01100010001…). 
+Ein **Compiler** übersetzt ein Programm, geschrieben in einer  Programmiersprache (z.B. C, Java, Python) in Maschinensprache (`01100010001`…). 
 
 Ein **Debugger** dient zur Fehlersuche in Programmen. 
 
-Eine **Entwicklungsumgebung** (IDE … Integrated Development Environment) wie z.B. QtCreator unterstützt Programmierer beim 
-* Schreiben von Programmen
-* Debuggen von Programmen 
-* Compilieren und Ausführen von Programmen
+Eine **Entwicklungsumgebung** oder **IDE** (*Integrated Development Environment*) wie z.B. Visual Studio Code oder IntelliJ unterstützt Programmierer beim 
+* Schreiben, 
+* Debuggen,  
+* Compilieren und 
+* Ausführen 
+
+von Programmen. 
 
 Jede Programmiersprache stellt **Befehle** für: 
 1.	Eingabe
@@ -136,17 +80,17 @@ Zudem stellt jede Programmiersprache **Datentypen** für
 * Ganze Zahlen
 * Gleitkommazahlen
 * Einen logischen Datentyp
-* Literale (Zeichen und Zeichenketten)
+* Zeichen und Zeichenketten (String)
 
 bereit. 
 
-## 2.2. Geschichte von C 
-C ist eine imperative und prozedurale Programmiersprache. C wurde 1972 „erfunden“ und seit damals stets in Varianten weiterentwickelt. Das American National Standards Institute (ANSI) vereinheitlichte diese C-Varianten und veröffentlichte 1989 ein standardisiertes C. Dieser C-Standard wird im Sprachgebrauch als C89 bzw. ANSI-C bezeichnet. Er wurde von der International Organization for Standardization (ISO) übernommen und wird im Sprachgebrauch auch als C90 bezeichnet. 
+## 1.2. Geschichte von C 
+C ist eine imperative und prozedurale Programmiersprache. C wurde 1972 „erfunden“ und seit damals in Varianten weiterentwickelt. Das *American National Standards Institute* (ANSI) vereinheitlichte die C-Varianten und veröffentlichte 1989 ein standardisiertes C. Dieser C-Standard wird im Sprachgebrauch als C89 bzw. ANSI-C bezeichnet. Dieser C-Standard wurde auch von der *International Organization for Standardization* (ISO) übernommen und im Sprachgebrauch mit C90 bezeichnet. 
 
-Im Jahr 1999 erschien C99 mit Elementen der Programmiersprache C++. 
+Im Jahr 1999 erschien C99 mit Elementen der objekt-orientierten Programmiersprache C++. 
 
-## 2.3. Installation von Visual Studio Code 
-**Achtung**: Der Open-Source-Code-Editor Microsoft **Visual Studio Code** darf nicht verwechselt werden mit der viel umfangreicheren integrierten Entwicklungsumgebung (IDE) „Visual Studio 2019“. 
+## 1.3. Installation von Visual Studio Code 
+**Achtung**: Den Open-Source-Code-Editor Microsoft **Visual Studio Code** nicht mit der viel umfangreicheren integrierten Entwicklungsumgebung (IDE) „Visual Studio 2019“ verwechseln. 
 
 Hier der Download-Link:  
 https://code.visualstudio.com/ 
@@ -176,7 +120,7 @@ In der Kommando-Zeile „g++ --version“ eingeben:
 
 ![Screenshot Visual Studio Code Command Line Interface](./pictures/Screenshot_VSC_CLI.png "Screenshot Visual Studio Code Command Line Interface")
 
-## 2.4. Erstes Programm mit Visual Studio Code (VSC)
+## 1.4. Erstes Programm mit Visual Studio Code (VSC)
 
 In Windows-Suche „cmd“ eingeben und Eingabeaufforderung öffnen. 
 
@@ -213,7 +157,7 @@ int main()         // Funktion main() definiert das Hauptprogramm
 
 Datei speichern: Menü File -> Save 
 
-## 2.5. `helloworld.c` kompilieren 
+## 1.5. `helloworld.c` kompilieren 
 Um VSC zu sagen, wie die Quelldatei helloworld.c nun zu kompilieren ist, braucht es eine tasks.json Datei: 	
 
 Menü Terminal -> Configure Default Build Task…, “C/C++:gcc.exe build active file” auswählen. 
@@ -224,7 +168,7 @@ Quelldatei helloworld.c auswählen
 
 und mit der Tastenkombination Strg+Shift+b kompilieren. 
 
-## 2.6. `helloworld.c` starten/debuggen 
+## 1.6. `helloworld.c` starten/debuggen 
 
 Um helloworld.c starten oder debuggen zu können, braucht VSC die Datei launch.json: 
 
@@ -242,7 +186,7 @@ Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und
 
 ![Screenshot Visual Studio Code Command Erstes Programm - Schritt 4](./pictures/Screenshot_VSC_4.png "Screenshot Visual Studio Code Command Erstes Programm - Schritt 4") 
 
-## 2.7. Einführungsbeispiel 
+## 1.7. Einführungsbeispiel 
 
 Lernt man eine neue Programmiersprache, dann ist meist ein „Hello World“ Programm, das erste Programm, das man schreibt. Und das machen wir im folgenden Einführungsbeispiel genauso. 
 
@@ -287,7 +231,7 @@ int main()
 }
 ```
 
-# 3. Mein erstes Programm mit Eingabe, Zuweisung und Ausgabe 
+# 2. Mein erstes Programm mit Eingabe, Zuweisung und Ausgabe 
 
 Im folgenden Listing werden zuerst 
 
@@ -332,7 +276,7 @@ Erklärungen:
 * Die Platzhalter für die Ausgabe der Variablen `a`, `x` und `y` mit dem `printf()`-Befehl sind gleich wie beim `scanf()`-Befehl. 
 * Das `&`-Zeichen im scanf()-Befehl wird zu einem späteren Zeitpunkt erklärt. 
 
-## 3.1. `printf()`-Befehl: Steuerzeichen und Sonderzeichen 
+## 2.1. `printf()`-Befehl: Steuerzeichen und Sonderzeichen 
 
 Sogenannte Escape-Sequenzen ermöglichen Steuerzeichen und Sonderzeichen auszugeben. Eine Escape-Sequenz wird durch einen Backslash `\`  eingeleitet, dem ein weiteres Zeichen folgt. Eine Escape-Sequenz gilt trotzdem als einzelnes Zeichen.
 In der folgenden Tabelle sind die wichtigsten Escape-Sequenzen aufgelistet: 
@@ -350,7 +294,7 @@ In der folgenden Tabelle sind die wichtigsten Escape-Sequenzen aufgelistet:
 | `\f` | Formfeed - Seitenumbruch |
 | `\a` | Piepston |
 
-## 3.2. Struktogramm 
+## 2.2. Struktogramm 
 
 Mit Struktogrammen, auch Nassi-Shneiderman-Diagramme genannt, werden Programme unabhängig von der Programmiersprache, mit der sie letztendlich umgesetzt werden, entworfen.   
 Ein Struktogramm setzt sich aus Strukturblöcken zusammen. Diese können, wie wir noch sehen werden, ineinander verschachtelt sein. 
@@ -384,7 +328,7 @@ int main()
 **Vorteil von Struktogrammen**:  
 Man braucht sich beim Entwurf des Programms noch nicht mit Befehls- und Datentypdetails einer Programmiersprache auseinandersetzen. 
 
-# 4. Operatoren – 1. Teil  
+# 3. Operatoren – 1. Teil  
 
 Es gibt in C drei Arten von Operatoren:
 * Unäre Operatoren: benötigen nur einen Operanden, wie z.B. die Vorzeichenoperatoren `+` und `-`.
@@ -393,11 +337,11 @@ Es gibt in C drei Arten von Operatoren:
 
 Im folgenden Abschnitt werden die wichtigsten Operatoren beschrieben:
 
-## 4.1. Zuweisungsoperator 
+## 3.1. Zuweisungsoperator 
 
 Der Zuweisungsoperator `=` weist der Variablen auf der linken Seite den Wert des Ausdrucks der rechten Seite zu. 
 
-### 4.1.1. Variablentausch mit Hilfsvariable 
+### 3.1.1. Variablentausch mit Hilfsvariable 
 
 Oft müssen die Inhalte zweier Variablen (z.B. a, b) vertauscht werden. Am einfachsten macht man das mit einer Hilfsvariablen h: 
 
@@ -409,7 +353,7 @@ a=b;
 b=h;
 ```
 
-## 4.2. Variablentausch ohne Hilfsvariable 
+## 3.2. Variablentausch ohne Hilfsvariable 
 
 Mathematikfüchse kommen ohne Hilfsvariable aus: 
 
@@ -421,9 +365,9 @@ b=a-b;
 a=a-b;
 ```
 
-## 4.3. Arithmetische Operatoren 
+## 3.3. Arithmetische Operatoren 
 
-## 4.4. Vorzeichenoperatoren
+## 3.4. Vorzeichenoperatoren
 
 Zur Darstellung der mathematischen Vorzeichen 'plus' und 'minus' werden die unären Vorzeichenoperatoren `+` und `–` verwendet.
 
@@ -432,7 +376,7 @@ int z1, z2;
 z1 = +5;
 z2 = -9;
 ```
-### 4.4.1. Binäre arithmetische  Operatoren
+### 3.4.1. Binäre arithmetische  Operatoren
 
 | Operator | Bedeutung |
 | :---: | --- |
@@ -454,7 +398,7 @@ Sind die Operanden von unterschiedlichen Datentypen so ist das Ergebnis vom grö
 * Der Modulooperator ist nur für ganzzahlige Operanden zulässig. Das Ergebnis ist der ganzzahlige Rest der Division: `17 % 5 = 2`.
 Bei den Divisionsoperatoren (`/` und `%`) führt eine Divison durch `0` zu einem Laufzeitfehler.
 
-# 5. Datentypen
+# 4. Datentypen
 
 In C gibt es 4 Grunddatentypen. Deren Größe und Wertebereich sind nicht normiert. Bei den meisten Systemen gelten aber folgende Werte: 
 
@@ -472,7 +416,7 @@ Variablenwert ungleich 0 -> `TRUE`
 
 Alle Variablen müssen vor ihrer Verwendung deklariert werden. Die Deklaration legt den Namen und den Typ fest. Deklarationen müssen immer am Anfang eines Programms stehen. 
 
-# 6. Zufallszahlen 
+# 5. Zufallszahlen 
 
 Zum Erzeugen von ganzzahligen Zufallszahlen stehen in der C Standard Library `<stdlib.h>` folgende Funktionen zu Verfügung:
 
@@ -523,7 +467,7 @@ int main()
   zz = (double)rand()/RAND_MAX*(5.0-1.0) + 1.0; 
 }
 ```
-# 7. `printf()`-Befehl: Formatierte Ausgabe 
+# 6. `printf()`-Befehl: Formatierte Ausgabe 
 
 Die formatierte Ausgabe auf der Konsole erfolgt mit dem `printf()`-Befehl, der in der Headerdatei `<stdio.h>` definiert ist: 
 
@@ -586,7 +530,7 @@ Beispiele von Formatangaben für Fließkommazahlen (Datentyp `float`):
 		    Nachkommastellen
 %+-.2f 	    linksbündige Ausgabe der Zahl mit Vorzeichen und 2 Nachkommastellen
 ```
-# 8. Mathematische Funktionen – `<math.h>`
+# 7. Mathematische Funktionen – `<math.h>`
 
 In der Headerdatei `<math.h>` sind folgende nützliche mathematische Funktionen und Konstanten deklariert: 
 
@@ -659,7 +603,7 @@ int main()
 } 
 ```
 
-# 9. Kommentare 
+# 8. Kommentare 
 
 Regeln für Kommentare:
 
@@ -667,9 +611,9 @@ Regeln für Kommentare:
 * Einzeilige Kommentare beginnen mit `//` und erstrecken sich bis zum Ende der Zeile.
 * Kommentare können an beliebiger Stelle stehen.
 
-# 10. Character- und Stringliterale 
+# 9. Character- und Stringliterale 
 
-## 10.1. Characterliterale
+## 9.1. Characterliterale
 
 Die Zuweisung erfolgt durch genau ein Zeichen, das in einfachen Anführungszeichen eingeschlossen wird. Auf der char-Variablen wird der entsprechende ASCII-Wert des Zeichens gespeichert. 
 
@@ -693,7 +637,7 @@ scanf("%c", &zeichen);
 printf("%c", zeichen);
 ```
 
-## 10.2. Stringliterale
+## 9.2. Stringliterale
 
 Für Strings gibt es in C keinen eigenen Datentyp, daher müssen Zeichenketten in Form von `char`-Arrays behandelt werden.
 
@@ -757,13 +701,13 @@ int atoi(<String>)	    // Konvertierung von String in int
 double atof(<String>)	// Konvertierung von String in double
 ```
 
-# 11. Operatoren – 2. Teil 
+# 10. Operatoren – 2. Teil 
 
-# Arrays (Felder)
+# 11. Arrays (Felder)
 
-## Eindimensionale Arrays
+## 11.1. Eindimensionale Arrays
 
-## Eindimensionale Arrays dynamisch erzeugen 
+## 11.2. Eindimensionale Arrays dynamisch erzeugen 
 
 Mit der Funktion `malloc()` lässt sich für ein Array ein zusammenhängender Speicherbereich zur Laufzeit reservieren.  
 **Wichtig:** Sobald das Array im Programm nicht mehr benötigt wird, ist der Speicherbereich verlässliche mit der Funktion `free()` wieder freizugeben. 
@@ -809,7 +753,7 @@ int main()
 }
 ```
 
-## Mehrdimensionale Arrays 
+## 11.3. Mehrdimensionale Arrays 
 
 Jede Dimension des Arrays wird über einen eigenen Index angesprochen. 
 
@@ -877,7 +821,7 @@ int aTest[][] = {{1,2},             // Compilerfehler!
 
 Die dritte Deklaration führt zu einem Compilerfehler, da mehr als nur die erste Dimension nicht angegeben sind und der Compiler daher die Arraygröße nicht bestimmen kann. 
 
-## 12.1. Übergabe von mehrdimensionalen Arrays an Funktionen 
+## 11.4. Übergabe von mehrdimensionalen Arrays an Funktionen 
 
 Gleich wie bei eindimensionalen Arrays, erfolgt auch bei mehrdimensionalen Arrays die Parameterübergabe nach dem *call-by-reference* Prinzip. 
 
@@ -906,7 +850,7 @@ void initArray(int a2d[][10], int rows, int columns)
 }
 ```
 
-## Mehrdimensionale Arrays dynamisch erzeugen 
+## 11.5. Mehrdimensionale Arrays dynamisch erzeugen 
 
 ```c 
 /* 2D_dyn_array.c */
@@ -959,3 +903,59 @@ int main(void)
 }
 ```
 
+# 12. Anhang 
+
+## 12.1. Weitere Literatur
+
+[Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, HTML-Version](https://algs4.cs.princeton.edu/home/)  
+
+[Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, PDF-Version](https://github.com/Mcdonoughd/CS2223/raw/master/Books/Algorithhms%204th%20Edition%20by%20Robert%20Sedgewick%2C%20Kevin%20Wayne.pdf) 
+
+## 12.2. Übersicht des Unterrichtsstoffs
+
+* Windows-Command-Shell (cmd): `dir`, `mkdir`, `ren`, `rmdir`, `cd`, `copy`, `del`, `help <command>`, … 
+
+* Entwicklungsumgebung [Visual Studio Code](https://code.visualstudio.com/)  
+
+* Programmiersprachenunabhängiger Programmentwurf mittels Struktogrammen (Nassi-Shneiderman-Diagrammen) [Structorizer](https://structorizer.fisch.lu/) 
+
+* Formatierte Ausgabe, `printf()`-Befehl
+
+* Eingabe mit `scanf()`-Befehl und Menüführung, sobald Schleifen bekannt 
+
+* Datentypen für Ganzzahlen, Gleitkommazahlen, Characterliterale. 
+
+* Arithmetische Operatoren (`+`, `-`, `*`, `/`, `%`, `++`, `--`) inklusive Ganzzahl-Division und Modulo
+
+* Arrays mit einfachen Datentypen (auch mit Characterliterale) 
+
+* Vergleichs- und logische Operatoren 
+
+* Entscheidung (if-else, switch-case) 
+
+* Zufallszahlengenerierung, ganzzahlig und mit Gleitkommazahlen
+
+* Kaufmännisch Runden bzw. Abschneiden mit expliziter Typumwandlung (typecast) 
+
+* Schleifen: 
+  * while
+  * do-while 
+  * for (mit inkrementierender und dekrementierender Zählvariable, Inkrement und Dekrement ungleich Schrittweite 1) 
+  * `continue`, `break` im Schleifenkontext 
+  * Schreibtischtest
+
+* Zahlensysteme: Binär, Dezimal, Hexadezimal; Umwandlung; 2er-Komplement, Horner-Schema in Form von Beispielen 
+
+* Stringliterale 
+
+* Programmstrukturierung mittels Funktionen und Vorwärtsdeklarationen, *call-by-value*, *call-by-reference*, Array-Übergabe 
+
+  **Optional**
+
+* 2-dimensionale Arrays 
+
+* Fehlersuche (mit printf()-Ausgaben, Debugger) 
+
+* Strukturen
+
+* Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen) 
