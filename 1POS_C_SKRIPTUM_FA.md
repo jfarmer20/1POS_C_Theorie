@@ -51,8 +51,12 @@ https://projecteuler.net/
   - [10.1. Characterliterale](#101-characterliterale)
   - [10.2. Stringliterale](#102-stringliterale)
 - [11. Operatoren – 2. Teil](#11-operatoren--2-teil)
-- [12. Mehrdimensionale Arrays](#12-mehrdimensionale-arrays)
+- [Arrays (Felder)](#arrays-felder)
+  - [Eindimensionale Arrays](#eindimensionale-arrays)
+  - [Eindimensionale Arrays dynamisch erzeugen](#eindimensionale-arrays-dynamisch-erzeugen)
+  - [Mehrdimensionale Arrays](#mehrdimensionale-arrays)
   - [12.1. Übergabe von mehrdimensionalen Arrays an Funktionen](#121-übergabe-von-mehrdimensionalen-arrays-an-funktionen)
+  - [Mehrdimensionale Arrays dynamisch erzeugen](#mehrdimensionale-arrays-dynamisch-erzeugen)
 
 
 ## 1.4. Übersicht – Unterrichtsstoff POS, 1. Jahrgang 
@@ -755,7 +759,57 @@ double atof(<String>)	// Konvertierung von String in double
 
 # 11. Operatoren – 2. Teil 
 
-# 12. Mehrdimensionale Arrays 
+# Arrays (Felder)
+
+## Eindimensionale Arrays
+
+## Eindimensionale Arrays dynamisch erzeugen 
+
+Mit der Funktion `malloc()` lässt sich für ein Array ein zusammenhängender Speicherbereich zur Laufzeit reservieren.  
+**Wichtig:** Sobald das Array im Programm nicht mehr benötigt wird, ist der Speicherbereich verlässliche mit der Funktion `free()` wieder freizugeben. 
+
+Im folgende Programm wird ein Array dynamisch erzeugt, initialisiert, am Bildschirm ausgegeben und dessen Speicherbereich am Ende wieder freigegeben. 
+
+
+Ein dynamisch erzeugtes Feld kann gleich wie statisch erzeugte Felder verwendet werden (z.B. bei Funktionsübergabe, Zugriff auf die einzelnen Elemente). 
+
+```c 
+#include <stdio.h>
+#include <stdlib.h>
+
+void printArray(int a[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        printf("%4d", a[i]);
+        if (i % 10 == 9)
+            printf("\n");
+    }
+}
+
+int main()
+{
+    int *a1;
+    int s1 = 100;
+
+    // Array dynamisch erzeugen 
+    a1 = (int *)malloc(sizeof(int) * s1);
+
+    // Array initialisieren 
+    for (int i = 0; i < s1; i++)
+        a1[i] = i;
+
+    // Array ausgeben
+    printArray(a1, s1);
+
+    // Reservierten Speicher freigeben 
+    free(a1);
+
+    return 0;
+}
+```
+
+## Mehrdimensionale Arrays 
 
 Jede Dimension des Arrays wird über einen eigenen Index angesprochen. 
 
@@ -852,5 +906,56 @@ void initArray(int a2d[][10], int rows, int columns)
 }
 ```
 
+## Mehrdimensionale Arrays dynamisch erzeugen 
 
+```c 
+/* 2D_dyn_array.c */
+#include <stdio.h>
+#include <stdlib.h>
+#define BUF 255
+
+int main(void)
+{
+    int i, j, zeilen, spalten;
+    /* Matrix ist Zeiger auf int-Zeiger. */
+    int **matrix;
+
+    printf("Anzahl Zeilen : ");
+    scanf("%d", &zeilen);
+    printf("Anzahl Spalten: ");
+    scanf("%d", &spalten);
+
+    /* Speicher reservieren für die Zeiger auf die einzelnen Zeilen */
+    matrix = malloc(zeilen * sizeof(int *));
+
+    /* Speicher für die Zeilen reservieren */
+    for (i = 0; i < zeilen; i++)
+    {
+        matrix[i] = malloc(spalten * sizeof(int));
+    }
+
+    /* Array initialisieren */
+    for (i = 0; i < zeilen; i++)
+        for (j = 0; j < spalten; j++)
+            matrix[i][j] = (i * spalten) + j; /* matrix[zeilen][spalten] */
+
+    /* Matrix ausgeben */
+    for (i = 0; i < zeilen; i++)
+    {
+        for (j = 0; j < spalten; j++)
+            printf("%4d ", matrix[i][j]);
+        printf("\n");
+    }
+
+    /* Speicherplatz (in umgekehrter Reihenfolge!) wieder freigeben. */
+
+    /* Zeilen freigeben */
+    for (i = 0; i < zeilen; i++)
+        free(matrix[i]);
+    /* Speicher der Zeiger auf die Zeilen freigeben */
+    free(matrix);
+
+    return EXIT_SUCCESS;
+}
+```
 
