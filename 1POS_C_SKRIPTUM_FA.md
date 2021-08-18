@@ -91,7 +91,7 @@ Im Jahr 1999 erschien C99 mit Elementen der objekt-orientierten Programmiersprac
 
 ## 1.3. Installation von Visual Studio Code 
 
-**#TO-BE-UPDATED**  
+**#TO-BE-UPDATED SOON**  
 
 **Achtung**: Den Open-Source-Code-Editor Microsoft **Visual Studio Code** nicht mit der viel umfangreicheren integrierten Entwicklungsumgebung (IDE) „Visual Studio 2019“ verwechseln. 
 
