@@ -22,7 +22,7 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [2.2. Erstes Programm mit Visual Studio Code (VS Code)](#22-erstes-programm-mit-visual-studio-code-vs-code)
   - [2.3. `helloworld.c` kompilieren](#23-helloworldc-kompilieren)
   - [2.4. `helloworld.c` starten/debuggen](#24-helloworldc-startendebuggen)
-    - [2.4.1. Wichtige Tastenkombinationen:](#241-wichtige-tastenkombinationen)
+    - [2.4.1. Wichtige Tastenkombinationen](#241-wichtige-tastenkombinationen)
   - [2.5. Einführungsbeispiel](#25-einführungsbeispiel)
 
 # 1. Einführung
@@ -159,7 +159,7 @@ Menü `Terminal` > `Configure Default Build Task…` > `C/C++:gcc build active f
 
 Quelldatei `helloworld.c` auswählen  
 
-![Screenshot Visual Studio Code Command Erstes Programm - Schritt 2](./pictures/Screenshot_VSC_2.png "Screenshot Visual Studio Code Command Erstes Programm - Schritt 2")
+![Screenshot Visual Studio Code Command Erstes Programm - Schritt 2](./pictures/Screenshot_VSC_2.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 2")
 
 und mit der Tastenkombination Strg+Shift+b kompilieren. 
 
@@ -173,15 +173,15 @@ Das Programm wird anschließend gleich ausgeführt, was man mit der Tastenkombin
 
 Quelldatei helloworld.c auswählen 
 
-![Screenshot Visual Studio Code Command Erstes Programm - Schritt 3](./pictures/Screenshot_VSC_3.png "Screenshot Visual Studio Code Command Erstes Programm - Schritt 3") 
+![Screenshot Visual Studio Code Command Erstes Programm - Schritt 3](./pictures/Screenshot_VSC_3.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 3") 
 
 und mit der Tastenkombination Strg+F5 starten. 
 
 Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und das Programm mit der Taste F5 starten: 
 
-![Screenshot Visual Studio Code Command Erstes Programm - Schritt 4](./pictures/Screenshot_VSC_4.png "Screenshot Visual Studio Code Command Erstes Programm - Schritt 4") 
+![Screenshot Visual Studio Code Command Erstes Programm - Schritt 4](./pictures/Screenshot_VSC_4.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 4") 
 
-### 2.4.1. Wichtige Tastenkombinationen: 
+### 2.4.1. Wichtige Tastenkombinationen 
 
 - Strg + Shift + B: Programm kompilieren 
 - Strg + F5 / F5: Programm starten / debuggen  
