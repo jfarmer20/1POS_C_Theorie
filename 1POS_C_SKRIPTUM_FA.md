@@ -23,6 +23,7 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [2.3. `helloworld.c` kompilieren](#23-helloworldc-kompilieren)
   - [2.4. `helloworld.c` starten/debuggen](#24-helloworldc-startendebuggen)
     - [2.4.1. Wichtige Tastenkombinationen](#241-wichtige-tastenkombinationen)
+    - [2.4.2. Zugriff Dateisystem Windows <-> WSL](#242-zugriff-dateisystem-windows---wsl)
   - [2.5. Einführungsbeispiel](#25-einführungsbeispiel)
 
 # 1. Einführung
@@ -192,6 +193,14 @@ Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und
 - Speichern / Speichern als: Strg + S / Strg + Shift + S
 - Drucken: F1 > 'PrintCode'
 - Schrift größer/kleiner: Strg + '+'/'-'
+
+### 2.4.2. Zugriff Dateisystem Windows <-> WSL
+
+Linux Shell: Zugriff aufs Benutzerverzeichnis in Windows:  
+`/mnt/c/Users/<USERNAME>`
+
+Windows-File-Explorer: Zugriffs aufs WSL home-Verzeichnis:  
+`\\wsl$\Ubuntu\home\<USERNAME>`
 
 ## 2.5. Einführungsbeispiel 
 
