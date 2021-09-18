@@ -4,7 +4,7 @@
 
 Dieses Skriptum umfasst den Unterrichtsstoff für POS (Programmieren und Software Engineering) des ersten Jahrgangs der Abteilung Informatik an der Höheren Technischen Bundeslehranstalt Kaindorf, Österreich. 
 
-Als Erweiterung dieses Skriptums steht das frei verfügbares Lehrbuch zur Programmiersprache C des Rheinwerk Verlags zur Verfügung:  
+Als Erweiterung dieses Skriptums steht das frei verfügbare Lehrbuch zur Programmiersprache C des Rheinwerk Verlags zur Verfügung:  
 [Wolf, Jürgen: C von A bis Z](https://openbook.rheinwerk-verlag.de/c_von_a_bis_z/)
 
 Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgenden Seiten perfektioniert werden: 
@@ -28,13 +28,13 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
 
 # 1. Einführung
 
-## 1.1. Wichtige Begriffe 
+## 1.1. Begriffe 
 
 Ein **Programm** ist eine Abfolge von Befehlen/Anweisungen in einer bestimmten Programmiersprache. 
 
 Ein **Compiler** übersetzt ein Programm, geschrieben in einer  Programmiersprache (z.B. C, Java, Python) in Maschinensprache (`01100010001`…). 
 
-Ein **Debugger** dient zur Fehlersuche in Programmen. 
+Ein **Debugger** dient zur Fehlersuche in Programmen. Damit lassen sich Programme Schritt für Schritt ausführen und Variableninhalte anzeigen.  
 
 Eine **Entwicklungsumgebung** oder **IDE** (*Integrated Development Environment*) wie z.B. Visual Studio Code oder IntelliJ unterstützt Programmierer beim 
 * Schreiben, 
@@ -42,7 +42,7 @@ Eine **Entwicklungsumgebung** oder **IDE** (*Integrated Development Environment*
 * Compilieren und 
 * Ausführen 
 
-von Programmen. 
+von Programmen.  
 
 Jede Programmiersprache stellt **Befehle** für: 
 1.	Eingabe
@@ -51,7 +51,7 @@ Jede Programmiersprache stellt **Befehle** für:
 4.	Entscheidungen
 5.	Schleifen  
 
-zur Verfügung. 
+zur Verfügung.  
 
 Zudem stellt jede Programmiersprache **Datentypen** für 
 * Ganze Zahlen
@@ -59,14 +59,16 @@ Zudem stellt jede Programmiersprache **Datentypen** für
 * Einen logischen Datentyp
 * Zeichen und Zeichenketten (String)
 
-bereit. 
+bereit.  
 
-## 1.2. Geschichte von C 
+## 1.2. Geschichtliches der Programmiersprache C 
 C ist eine imperative und prozedurale Programmiersprache. C wurde 1972 „erfunden“ und seit damals in Varianten weiterentwickelt. Das *American National Standards Institute* (ANSI) vereinheitlichte die C-Varianten und veröffentlichte 1989 ein standardisiertes C. Dieser C-Standard wird im Sprachgebrauch als C89 bzw. ANSI-C bezeichnet. Dieser C-Standard wurde auch von der *International Organization for Standardization* (ISO) übernommen und im Sprachgebrauch mit C90 bezeichnet. 
+
+[ANSI-C Reference Card](http://users.ece.utexas.edu/~adnan/c-refcard.pdf)  
 
 Im Jahr 1999 erschien C99 mit Elementen der objekt-orientierten Programmiersprache C++. 
 
-# 2. Installation 
+# 2. Installation der Programmierumgebung auf Windows 10 
 
 ## 2.1. Installationsanleitung für **Visual Studio Code (VS Code)** auf **Windows 10** und **Windows Subsystem for Linux (WSL)**  
 
@@ -87,8 +89,8 @@ Im Jahr 1999 erschien C99 mit Elementen der objekt-orientierten Programmiersprac
    ![Screenshot_Setup3.PNG](./pictures/Screenshot_Setup3.PNG "Screenshot Windows Subsystem for Linux Installation") 
 
 
-    Wenn fertig installiert / Nach Auffordung: Rechner neu starten.  
-    Danach installiert sich Ubuntu Linux automatisch 
+    Nach fertiger Installation muss der Rechner neu gestartet werden. 
+    Ubuntu Linux installiert sich danach automatisch.  
 
     ![Screenshot_Setup4.PNG](./pictures/Screenshot_Setup4.PNG "Screenshot Ubuntu Linux Installation") 
 
