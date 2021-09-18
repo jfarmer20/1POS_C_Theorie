@@ -15,9 +15,9 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
 # Inhaltsverzeichnis <!-- omit in toc -->
 
 - [1. Einführung](#1-einführung)
-  - [1.1. Wichtige Begriffe](#11-wichtige-begriffe)
-  - [1.2. Geschichte von C](#12-geschichte-von-c)
-- [2. Installation](#2-installation)
+  - [1.1. Begriffe](#11-begriffe)
+  - [1.2. Geschichtliches der Programmiersprache C](#12-geschichtliches-der-programmiersprache-c)
+- [2. Installation der Programmierumgebung auf Windows 10](#2-installation-der-programmierumgebung-auf-windows-10)
   - [2.1. Installationsanleitung für **Visual Studio Code (VS Code)** auf **Windows 10** und **Windows Subsystem for Linux (WSL)**](#21-installationsanleitung-für-visual-studio-code-vs-code-auf-windows-10-und-windows-subsystem-for-linux-wsl)
   - [2.2. Erstes Programm mit Visual Studio Code (VS Code)](#22-erstes-programm-mit-visual-studio-code-vs-code)
   - [2.3. `helloworld.c` kompilieren](#23-helloworldc-kompilieren)
@@ -25,6 +25,16 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
     - [2.4.1. Wichtige Tastenkombinationen](#241-wichtige-tastenkombinationen)
     - [2.4.2. Zugriff Dateisystem Windows <-> WSL](#242-zugriff-dateisystem-windows---wsl)
   - [2.5. Einführungsbeispiel](#25-einführungsbeispiel)
+- [3. Mein erstes Programm mit Eingabe, Zuweisung und Ausgabe](#3-mein-erstes-programm-mit-eingabe-zuweisung-und-ausgabe)
+  - [3.1. `printf()`-Befehl: Steuerzeichen und Sonderzeichen](#31-printf-befehl-steuerzeichen-und-sonderzeichen)
+  - [3.2. Struktogramm](#32-struktogramm)
+- [4. Operatoren – 1. Teil](#4-operatoren--1-teil)
+  - [4.1. Zuweisungsoperator](#41-zuweisungsoperator)
+    - [4.1.1. Variablentausch mit Hilfsvariable](#411-variablentausch-mit-hilfsvariable)
+    - [4.1.2. Variablentausch ohne Hilfsvariable](#412-variablentausch-ohne-hilfsvariable)
+  - [4.2. Arithmetische Operatoren](#42-arithmetische-operatoren)
+  - [4.3. Vorzeichenoperatoren](#43-vorzeichenoperatoren)
+    - [4.3.1. Binäre arithmetische  Operatoren](#431-binäre-arithmetische--operatoren)
 
 # 1. Einführung
 
@@ -248,3 +258,159 @@ int main()
   return 0;
 }
 ```
+
+# 3. Mein erstes Programm mit Eingabe, Zuweisung und Ausgabe 
+
+Im folgenden Listing werden  
+
+* Die Variable a und b vom Datentyp `int` (Integer … Ganzzahl) eingelesen. 
+* Aus den beiden Summanden `a` und `b` die Summe `s` gebildet. 
+* Die Rechnung formatiert ausgegeben.  
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    int a = 0;
+    int b = 0;
+    int s = 0;
+    printf("Bitte Summanden 1 eingeben: ");
+    scanf("%d", &a);
+    printf("Bitte Summanden 2 eingeben: ");
+    scanf("%d", &b);
+    s = a + b; 
+    printf("-------------------------------\n");
+    printf("Die Summe von %d und %d ergibt %d\n\n", a, b, s); 
+    return 0;
+}
+```
+
+Erklärungen: 
+
+* Beim `scanf()`-Befehl, dient `%d` als Platzhalter, um den vom Anwender eingegebenen Wert einzulesen und der Variable `a` bzw. `b` zuzuweisen. 
+* `%d` ist ein Platzhalter für eine Ganzzahl (d … decimal) 
+* Die Platzhalter für die Ausgabe der Variablen `a`, `b` und `s` mit dem `printf()`-Befehl sind gleich wie beim `scanf()`-Befehl. 
+* Das `&`-Zeichen im scanf()-Befehl wird zu einem späteren Zeitpunkt erklärt. 
+
+## 3.1. `printf()`-Befehl: Steuerzeichen und Sonderzeichen 
+
+Sogenannte Escape-Sequenzen ermöglichen Steuerzeichen und Sonderzeichen auszugeben. Eine Escape-Sequenz wird durch einen Backslash `\` (Tastenkombination `alt gr` und `ß`) eingeleitet, dem ein weiteres Zeichen folgt. Eine Escape-Sequenz gilt trotzdem als einzelnes Zeichen.
+In der folgenden Tabelle sind die wichtigsten Escape-Sequenzen aufgelistet: 
+
+| Escape-Sequenz | Bedeutung |
+| --- | --- |
+| `\n` | Zeilenumbruch |
+| `\t` | Tabulator |
+| `\'` | Einfaches Hochkomma |
+| `\"` | Doppeltes Hochkomma |
+| `\?` | Fragezeichen |
+| `\\` | Backslash |
+| `\0` | NULL zum Terminieren von Strings |
+| `\b` | Backspace - Zurücksetzen um ein Zeichen |
+| `\f` | Formfeed - Seitenumbruch |
+| `\a` | Piepston |
+
+## 3.2. Struktogramm 
+
+Mit Struktogrammen, auch Nassi-Shneiderman-Diagramme genannt, werden Programme unabhängig von der Programmiersprache, mit der sie letztendlich umgesetzt werden, entworfen.   
+Ein Struktogramm setzt sich aus Strukturblöcken zusammen. Diese können, wie wir noch sehen werden, ineinander verschachtelt sein. 
+
+Beispiel eines Struktogramms mit Sequenz-Symbolen: 
+
+![Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen](./pictures/NSD_01.PNG "Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen") 
+
+**Aufgabe**: Lese eine Ganzzahl ein, erhöhe diese um eins und gib die Zahl aus. 
+
+Struktogramm: 
+
+![Nassi-Shneiderman-Diagramm Beispiel 1](./pictures/NSD_02.PNG "Nassi-Shneiderman-Diagramm Beispiel 1") 
+
+Programm: 
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    int zahl;                        // ROT  
+    printf("Ganze Zahl: ");          // ROT
+    scanf("%d", &zahl);              // ROT
+    zahl = zahl + 1;                 // GRÜN
+    printf("Ergebnis: %d\n", zahl);  // BLAU
+    return 0;
+}
+```
+
+**Vorteil von Struktogrammen**:  
+Man braucht sich beim Entwurf des Programms noch nicht mit Befehls- und Datentypdetails einer Programmiersprache auseinandersetzen. 
+
+# 4. Operatoren – 1. Teil  
+
+Es gibt in C drei Arten von Operatoren:
+* Unäre Operatoren: benötigen nur einen Operanden, wie z.B. die Vorzeichenoperatoren `+` und `-`.
+* Binäre Operatoren: benötigen zwei Operanden
+* Ternäre Operatoren: benötigen drei Operanden
+
+Im folgenden Abschnitt werden die wichtigsten Operatoren beschrieben:
+
+## 4.1. Zuweisungsoperator 
+
+Der Zuweisungsoperator `=` weist der Variablen auf der linken Seite den Wert des Ausdrucks der rechten Seite zu. 
+
+### 4.1.1. Variablentausch mit Hilfsvariable 
+
+Oft müssen die Inhalte zweier Variablen (z.B. a, b) vertauscht werden. Am einfachsten macht man das mit einer Hilfsvariablen h: 
+
+```c
+int a, b, h; 
+...
+h=a;
+a=b;
+b=h;
+```
+
+### 4.1.2. Variablentausch ohne Hilfsvariable 
+
+Mathematikfüchse kommen ohne Hilfsvariable aus: 
+
+```c 
+int a, b; 
+...
+a=a+b;
+b=a-b;
+a=a-b;
+```
+
+## 4.2. Arithmetische Operatoren 
+
+## 4.3. Vorzeichenoperatoren
+
+Zur Darstellung der mathematischen Vorzeichen 'plus' und 'minus' werden die unären Vorzeichenoperatoren `+` und `–` verwendet.
+
+```c
+int z1, z2;
+z1 = +5;
+z2 = -9;
+```
+### 4.3.1. Binäre arithmetische  Operatoren
+
+| Operator | Bedeutung |
+| :---: | --- |
+| `+` |	Addition |
+| `-` |	Subtraktion |
+| `*` |	Multiplikation |
+| `/` |	Division |
+| `%` |	Modulo-Division |
+
+Regeln für die arithmetischen Operatoren: 
+
+Wie in der Mathematik gilt Punkt- vor Strichrechnung, wobei der Modulooperator ein Punktoperator ist.
+
+Gleichrangige Operatoren werden von links nach rechts ausgewertet.
+
+* Sind beide Operanden vom selben Datentyp so ist auch das Ergebnis der Berechnung von diesem Datentyp, mindestens jedoch vom Typ `int`.
+  
+Sind die Operanden von unterschiedlichen Datentypen, so ist das Ergebnis vom größeren der beiden Datentypen.
+* Der Modulooperator ist nur für ganzzahlige Operanden zulässig. Das Ergebnis ist der ganzzahlige Rest der Division: `17 % 5 = 2`.
+Bei den Divisionsoperatoren (`/` und `%`) führt eine Divison durch `0` zu einem Laufzeitfehler.  
