@@ -164,7 +164,7 @@ Quelldatei `helloworld.c` auswählen
 
 ![Screenshot Visual Studio Code Command Erstes Programm - Schritt 2](./pictures/Screenshot_VSC_2.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 2")
 
-und mit der Tastenkombination Strg+Shift+b kompilieren. 
+und mit der Tastenkombination `Strg` + `Shift` + `B` kompilieren. 
 
 ## 2.4. `helloworld.c` starten/debuggen 
 
