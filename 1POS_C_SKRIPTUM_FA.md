@@ -33,8 +33,10 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
     - [4.1.1. Variablentausch mit Hilfsvariable](#411-variablentausch-mit-hilfsvariable)
     - [4.1.2. Variablentausch ohne Hilfsvariable](#412-variablentausch-ohne-hilfsvariable)
   - [4.2. Arithmetische Operatoren](#42-arithmetische-operatoren)
-  - [4.3. Vorzeichenoperatoren](#43-vorzeichenoperatoren)
-    - [4.3.1. Binäre arithmetische  Operatoren](#431-binäre-arithmetische--operatoren)
+    - [4.2.1. Vorzeichenoperatoren](#421-vorzeichenoperatoren)
+    - [4.2.2. Binäre arithmetische  Operatoren](#422-binäre-arithmetische--operatoren)
+- [5. Datentypen](#5-datentypen)
+- [6. Zufallszahlen](#6-zufallszahlen)
 
 # 1. Einführung
 
@@ -384,7 +386,7 @@ a=a-b;
 
 ## 4.2. Arithmetische Operatoren 
 
-## 4.3. Vorzeichenoperatoren
+### 4.2.1. Vorzeichenoperatoren
 
 Zur Darstellung der mathematischen Vorzeichen 'plus' und 'minus' werden die unären Vorzeichenoperatoren `+` und `–` verwendet.
 
@@ -393,7 +395,7 @@ int z1, z2;
 z1 = +5;
 z2 = -9;
 ```
-### 4.3.1. Binäre arithmetische  Operatoren
+### 4.2.2. Binäre arithmetische  Operatoren
 
 | Operator | Bedeutung |
 | :---: | --- |
@@ -414,3 +416,73 @@ Gleichrangige Operatoren werden von links nach rechts ausgewertet.
 Sind die Operanden von unterschiedlichen Datentypen, so ist das Ergebnis vom größeren der beiden Datentypen.
 * Der Modulooperator ist nur für ganzzahlige Operanden zulässig. Das Ergebnis ist der ganzzahlige Rest der Division: `17 % 5 = 2`.
 Bei den Divisionsoperatoren (`/` und `%`) führt eine Divison durch `0` zu einem Laufzeitfehler.  
+
+# 5. Datentypen
+
+In C gibt es 4 Grunddatentypen. Deren Größe und Wertebereich sind nicht normiert. Bei den meisten Systemen gelten aber folgende Werte: 
+
+| Name | Datentyp | Bytes |	Minimalwert | Maximalwert
+| --- | --- | :---: | --- | --- |
+| `int` | Ganze Zahl | 4 | -2.147.483.648 (![-2^{31}](./pictures/CodeCogsEqn-31.gif)) | 2.147.483.647 (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif)) | 
+| `char` | Ein Zeichen | 1 | -128 (![2^{31}-1](./pictures/CodeCogsEqn-7.gif)) | 127 (![2^{31}-1](./pictures/CodeCogsEqn_7-1.gif)) |
+| `float` |	Fließkommazahl, 6-stellige Genauigkeit | 4 | 1.175494E-038 | 3.402813E+038 | 
+| `double` | Fließkommazahl, 15-stellige Genauigkeit | 8 | 2.225074E-308 | 1.797693E+308 |
+
+In C existiert kein logischer Datentyp (Datentyp `boolean`)! Stattdessen werden Variablen vom Datentyp `int` für Bedingungen verwendet werden, wobei folgende Regeln gelten:
+
+Variablenwert gleich 0 -> `FALSE`  
+Variablenwert ungleich 0 -> `TRUE`
+
+Alle Variablen müssen vor ihrer Verwendung **deklariert** werden. Die Deklaration legt den Namen und den Typ fest. Deklarationen müssen immer am Anfang eines Programms stehen. 
+
+# 6. Zufallszahlen 
+
+Zum Erzeugen von ganzzahligen Zufallszahlen stehen in der C Standard Library `<stdlib.h>` folgende Funktionen zu Verfügung:
+
+```c 
+srand(<seed>)       // Anweisung zum Erzeugen eines Zufallszahlen-Seeds
+srand(time(NULL))   // Erzeugen eines Zufallszahlen-Seeds,  
+                    // initialisiert mit der aktuellen Systemzeit   
+rand()              // Erzeugen einer ganzzahligen Zufallszahl
+```
+
+Für die Funktion `time()` muss zusätzlich die Datei `<time.h>` inkludiert werden. Die Funktion `srand()` definiert den Startwert (Seed) zum Erzeugen der Zufallszahlen. Durch die Übergabe der Funktion `time()` an `srand()` wird sichergestellt, dass bei jedem Programmstart neue Zufallszahlen erzeugt werden. 
+Die Funktion `rand()` gibt eine Zufallszahl im Bereich von `[0,RAND_MAX]` zurück. Wobei die symbolische Konstante `RAND_MAX` dem Wert 32.767 entspricht. Durch Verwendung des Modulo-Operators (`%`) kann der Wertebereich eingeschränkt werden. 
+
+Benötigt man eine Zufallszahl im Intervall `[Untergrenze, Obergrenze]` gilt folgende Formel: 
+```c 
+rand()%(Obergrenze + 1 – Untergrenze) + Untergrenze
+```
+Im folgenden Beispiel wird eine Zufallszahl zwischen `[1, 100]` erzeugt:
+
+```c
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+  int zz;
+  srand(time(NULL));
+  zz = rand()%100 + 1; 
+}
+```
+
+Wird eine Zufallszahl vom Datentyp `double` benötigt, so lässt sich folgende Formel anwenden: 
+
+```c 
+(double)rand()/RAND_MAX*(Obergrenze – Untergrenze) + Untergrenze
+```
+
+Im folgenden Beispiel wird eine Zufallszahl zwischen `[1.0, 5.0]` erzeugt:
+
+```c 
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+  double zz;
+  srand(time(NULL));
+  zz = (double)rand()/RAND_MAX*(5.0-1.0) + 1.0; 
+}
+```  
