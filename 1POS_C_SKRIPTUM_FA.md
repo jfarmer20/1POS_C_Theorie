@@ -419,21 +419,27 @@ Bei den Divisionsoperatoren (`/` und `%`) führt eine Divison durch `0` zu einem
 
 # 5. Datentypen
 
-In C gibt es 4 Grunddatentypen. Deren Größe und Wertebereich sind nicht normiert. Bei den meisten Systemen gelten aber folgende Werte: 
+In C gibt es eine Menge Datentypen, wobei die fett markierten für unseren weiteren Unterricht ausreichend sein werden. Die Größe und Wertebereiche der Datentypen sind nicht normiert. Bei den meisten Systemen gelten aber folgende Werte: 
 
-| Name | Datentyp | Bytes |	Minimalwert | Maximalwert
-| --- | --- | :---: | --- | --- |
-| `int` | Ganze Zahl | 4 | -2.147.483.648 (![-2^{31}](./pictures/CodeCogsEqn-31.gif)) | 2.147.483.647 (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif)) | 
-| `char` | Ein Zeichen | 1 | -128 (![2^{31}-1](./pictures/CodeCogsEqn-7.gif)) | 127 (![2^{31}-1](./pictures/CodeCogsEqn_7-1.gif)) |
-| `float` |	Fließkommazahl, 6-stellige Genauigkeit | 4 | 1.175494E-038 | 3.402813E+038 | 
-| `double` | Fließkommazahl, 15-stellige Genauigkeit | 8 | 2.225074E-308 | 1.797693E+308 |
+| Name | Datentyp | Bytes |	Minimalwert | Maximalwert | Formatzeichen |  
+| --- | --- | :---: | --- | --- | --- |  
+| **`char`** | Ein Zeichen | 1 | -128 (![2^{31}-1](./pictures/CodeCogsEqn-7.gif)) | 127 (![2^{31}-1](./pictures/CodeCogsEqn_7-1.gif)) | `%c`  
+| **`int`** | Ganze Zahl | 4 | (![-2^{31}](./pictures/CodeCogsEqn-31.gif)) | (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif)) | `%d`  
+| `float` |	Fließkommazahl, 6-stellige Genauigkeit | 4 | 1.2E-38 | 3.4E+38 | `%f` 
+| **`double`** | Fließkommazahl, 15-stellige Genauigkeit | 8 | 2.3E-308 | 1.7E+308 | `%lf`
+| `short`| Ganze Zahl | 2 | –32.768 | +32.767 | `%d`  
+| `long`|  Ganze Zahl | 4 | (![-2^{31}](./pictures/CodeCogsEqn-31.gif)) | (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif)) | `%ld` 
 
-In C existiert kein logischer Datentyp (Datentyp `boolean`)! Stattdessen werden Variablen vom Datentyp `int` für Bedingungen verwendet werden, wobei folgende Regeln gelten:
+
+In C existiert kein logischer Datentyp (Datentyp `boolean`). Stattdessen werden Variablen vom Datentyp `int` für Bedingungen verwendet werden, wobei folgende Regeln gelten:
 
 Variablenwert gleich 0 -> `FALSE`  
 Variablenwert ungleich 0 -> `TRUE`
 
 Alle Variablen müssen vor ihrer Verwendung **deklariert** werden. Die Deklaration legt den Namen und den Typ fest. Deklarationen müssen immer am Anfang eines Programms stehen. 
+
+Für ganzzahlige Datentypen als auch `char` können die Prefixe `signed` und `unsigned` verwendet werden. Insbesondere bei Bitoperationen ist das letztere Prefix von Bedeutung.  
+Abhängig vom Betriebssystem (16-, 32- oder 64-bit) belegen die einzelnen Datentypen unterschiedlich viel Speicher. Wieviel Speicher sie nun tatsächlich verwenden lässt sich mit dem `sizeof(`*type name*`)`-Operator feststellen.  
 
 # 6. Zufallszahlen 
 
