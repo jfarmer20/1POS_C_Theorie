@@ -425,6 +425,7 @@ In C gibt es eine Menge Datentypen, wobei die fett markierten für unseren weite
 | Name | Datentyp | Bytes |	Minimalwert | Maximalwert | Formatzeichen |  
 | --- | --- | :---: | --- | --- | --- |  
 | **`char`** | Ein Zeichen | 1 | -128 (![2^{31}-1](./pictures/CodeCogsEqn-7.gif)) | 127 (![2^{31}-1](./pictures/CodeCogsEqn_7-1.gif)) | `%c`  
+| **`char[]`** | Eine Zeichenkette (String) | - | - | - | `%s` |  
 | **`int`** | Ganze Zahl | 4 | (![-2^{31}](./pictures/CodeCogsEqn-31.gif)) | (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif)) | `%d`  
 | `float` |	Fließkommazahl, 6-stellige Genauigkeit | 4 | 1.2E-38 | 3.4E+38 | `%f` 
 | **`double`** | Fließkommazahl, 15-stellige Genauigkeit | 8 | 2.3E-308 | 1.7E+308 | `%lf`
