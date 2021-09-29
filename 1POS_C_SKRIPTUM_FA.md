@@ -18,7 +18,7 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [1.1. Begriffe](#11-begriffe)
   - [1.2. Geschichtliches der Programmiersprache C](#12-geschichtliches-der-programmiersprache-c)
 - [2. Installation der Programmierumgebung auf Windows 10](#2-installation-der-programmierumgebung-auf-windows-10)
-  - [2.1. Installationsanleitung für **Visual Studio Code (VS Code)** auf **Windows 10** und **Windows Subsystem for Linux (WSL)**](#21-installationsanleitung-für-visual-studio-code-vs-code-auf-windows-10-und-windows-subsystem-for-linux-wsl)
+  - [2.1. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *Windows Subsystem for Linux (WSL)*](#21-installationsanleitung-für-visual-studio-code-vs-code-auf-windows-10-mit-windows-subsystem-for-linux-wsl)
   - [2.2. Erstes Programm mit Visual Studio Code (VS Code)](#22-erstes-programm-mit-visual-studio-code-vs-code)
   - [2.3. `helloworld.c` kompilieren](#23-helloworldc-kompilieren)
   - [2.4. `helloworld.c` starten/debuggen](#24-helloworldc-startendebuggen)
@@ -36,7 +36,8 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
     - [4.2.1. Vorzeichenoperatoren](#421-vorzeichenoperatoren)
     - [4.2.2. Binäre arithmetische  Operatoren](#422-binäre-arithmetische--operatoren)
 - [5. Datentypen](#5-datentypen)
-- [6. Zufallszahlen](#6-zufallszahlen)
+- [6. `printf()`-Befehl: Formatierte Ausgabe](#6-printf-befehl-formatierte-ausgabe)
+- [7. Zufallszahlen](#7-zufallszahlen)
 
 # 1. Einführung
 
@@ -82,7 +83,7 @@ Im Jahr 1999 erschien C99 mit Elementen der objekt-orientierten Programmiersprac
 
 # 2. Installation der Programmierumgebung auf Windows 10 
 
-## 2.1. Installationsanleitung für **Visual Studio Code (VS Code)** auf **Windows 10** und **Windows Subsystem for Linux (WSL)**  
+## 2.1. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *Windows Subsystem for Linux (WSL)*  
 
 1. Windows auf die neueste Version aktualisieren: 
 
@@ -441,7 +442,71 @@ Alle Variablen müssen vor ihrer Verwendung **deklariert** werden. Die Deklarati
 Für ganzzahlige Datentypen als auch `char` können die Prefixe `signed` und `unsigned` verwendet werden. Insbesondere bei Bitoperationen ist das letztere Prefix von Bedeutung.  
 Abhängig vom Betriebssystem (16-, 32- oder 64-bit) belegen die einzelnen Datentypen unterschiedlich viel Speicher. Wieviel Speicher sie nun tatsächlich verwenden lässt sich mit dem `sizeof(`*type name*`)`-Operator feststellen.  
 
-# 6. Zufallszahlen 
+# 6. `printf()`-Befehl: Formatierte Ausgabe 
+
+Die formatierte Ausgabe auf der Konsole erfolgt mit dem `printf()`-Befehl, der in der Headerdatei `<stdio.h>` definiert ist: 
+
+```c
+int printf("Formatstring" [ , argument1, argument2 ...]); 
+```
+
+Der erste Parameter dient zur Übergabe eines Formatstrings. Die weiteren Parameter sind optional (eckige Klammern bedeuten optional) und sind die Argumente für den Formatstring. Die Formatierung erfolgt entsprechend den Angaben im Formatstring. Der Rückgabewert des `printf()`-Befehls ist die Anzahl der ausgegebenen Zeichen.
+
+Der Formatstring enthält sowohl normalen Text als auch Platzhalter mit den jeweiligen Formatangaben. Die Syntax für einen Platzhalter sieht wie folgt aus:
+
+``` 
+%[flag][width][.precision]conversion
+```
+
+Der wichtigste und einzige nicht optionale Teil ist dabei das Umwandlungszeichen (conversion), das den Datentyp für die Umwandlung bestimmt:
+
+| `conversion` | Datentyp | Bedeutung |
+| --- | --- | --- | 
+| `d`, `i` | int | Integer |
+| `f` | float | Gleitkommazahl float - Default von 6 Kommastellen |
+| `lf` | double	| Gleitkommazahl double - Default von 6 Kommastellen |
+| `%` | | Ausgabe des % Zeichens |
+
+
+Die Flags sind optional und werden unmittelbar nach dem `%`-Zeichen angegeben:
+
+
+| `flag` | Bedeutung | 
+| --- | --- |
+| `-` |	Ausgabe linksbündig |
+| `+` |	Ausgabe mit Vorzeichen |
+| `0` |	Leerstellen werden mit Nullen gefüllt |
+
+Die Anzahl der auszugebenden Zeichen ist optional und wird durch die Breite (`width`) festgelegt. 
+
+Die Anzahl der Nachkommastellen ist optional und wird durch die Genauigkeit (`precision`) festgelegt. 
+
+Beispiele von Formatangaben für ganzzahlige Werte (Datentyp `int`): 
+
+```
+%d 		Ausgabe der Zahl ohne zusätzliche Vorgabe 
+%5d 	rechtsbündige Ausgabe der Zahl auf 5 Stellen 
+%-5d 	linksbündige Ausgabe der Zahl auf 5 Stellen 
+%05d 	Ausgabe der Zahl auf 5 Stellen mit führenden Nullen 
+%+5d 	rechtsbündige Ausgabe der Zahl auf 5 Stellen mit Vorzeichen 
+%+-5d   linksbündige Ausgabe der Zahl auf 5 Stellen mit Vorzeichen 
+```
+
+Beispiele von Formatangaben für Fließkommazahlen (Datentyp `float`):
+
+```
+%f 		    Ausgabe der Zahl ohne zusätzliche Vorgabe 
+%10f 		rechtsbündige Ausgabe der Zahl auf 10 Stellen
+%.2f 		rechtsbündige Ausgabe der Zahl mit 2 Nachkommastellen 
+%-10.2f 	linksbündige Ausgabe auf 10 Stellen, davon 2 Nachkommastellen 
+%010.2f 	Ausgabe der Zahl auf 10 Stellen mit führenden Nullen, davon 2       
+            Nachkommastellen
+%+10.2f 	rechtsbündige Ausgabe der Zahl auf 10 Stellen und Vorzeichen,  
+            davon 2 Nachkommastellen  
+%+-.2f 	    linksbündige Ausgabe der Zahl mit Vorzeichen und 2 Nachkommastellen
+```  
+
+# 7. Zufallszahlen 
 
 Zum Erzeugen von ganzzahligen Zufallszahlen stehen in der C Standard Library `<stdlib.h>` folgende Funktionen zu Verfügung:
 
@@ -452,8 +517,8 @@ srand(time(NULL))   // Erzeugen eines Zufallszahlen-Seeds,
 rand()              // Erzeugen einer ganzzahligen Zufallszahl
 ```
 
-Für die Funktion `time()` muss zusätzlich die Datei `<time.h>` inkludiert werden. Die Funktion `srand()` definiert den Startwert (Seed) zum Erzeugen der Zufallszahlen. Durch die Übergabe der Funktion `time()` an `srand()` wird sichergestellt, dass bei jedem Programmstart neue Zufallszahlen erzeugt werden. 
-Die Funktion `rand()` gibt eine Zufallszahl im Bereich von `[0,RAND_MAX]` zurück. Wobei die symbolische Konstante `RAND_MAX` dem Wert 32.767 entspricht. Durch Verwendung des Modulo-Operators (`%`) kann der Wertebereich eingeschränkt werden. 
+Für die Funktion `time()` muss zusätzlich die Header-Datei `<time.h>` inkludiert werden. Die Funktion `srand()` definiert den Startwert (Seed) zum Erzeugen der Zufallszahlen. Durch die Übergabe der Funktion `time()` an `srand()` wird sichergestellt, dass bei jedem Programmstart neue Zufallszahlen erzeugt werden. 
+Die Funktion `rand()` gibt eine Zufallszahl im Bereich von `[0,RAND_MAX]` zurück. Durch Verwendung des Modulo-Operators (`%`) kann der Wertebereich eingeschränkt werden. 
 
 Benötigt man eine Zufallszahl im Intervall `[Untergrenze, Obergrenze]` gilt folgende Formel: 
 ```c 
