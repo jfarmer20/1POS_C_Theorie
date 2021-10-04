@@ -38,6 +38,17 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
 - [5. Datentypen](#5-datentypen)
 - [6. `printf()`-Befehl: Formatierte Ausgabe](#6-printf-befehl-formatierte-ausgabe)
 - [7. Zufallszahlen](#7-zufallszahlen)
+- [8. Mathematische Funktionen – `<math.h>`](#8-mathematische-funktionen--mathh)
+- [9. Kommentare](#9-kommentare)
+- [10. Character- und Stringliterale](#10-character--und-stringliterale)
+  - [10.1. Characterliterale](#101-characterliterale)
+  - [10.2. Stringliterale](#102-stringliterale)
+- [11. Operatoren – 2. Teil](#11-operatoren--2-teil)
+  - [11.1. Arithmetische  Zuweisungsoperatoren](#111-arithmetische--zuweisungsoperatoren)
+  - [11.2. Inkrement- und Dekrementoperatoren `++` und `--`](#112-inkrement--und-dekrementoperatoren--und---)
+  - [11.3. Vergleichsoperatoren](#113-vergleichsoperatoren)
+  - [11.4. Logische Operatoren](#114-logische-operatoren)
+  - [11.5. Die Operatorenrangfolge](#115-die-operatorenrangfolge)
 
 # 1. Einführung
 
@@ -558,3 +569,340 @@ int main()
   zz = (double)rand()/RAND_MAX*(5.0-1.0) + 1.0; 
 }
 ```  
+
+# 8. Mathematische Funktionen – `<math.h>`
+
+In der Headerdatei `<math.h>` sind folgende nützliche mathematische Funktionen und Konstanten deklariert: 
+
+```
+double pow(double x, double y)	// x hoch y
+double sqrt(double x)	        // Wurzel aus x
+double fabs(double z)           // Absolutwert von x
+double sin(double x)	        // Sinus von x
+double cos(double x)	        // Cosinus von x
+double tan(double x)	        // Tangens von x
+double exp(double x)	        // Exponentialfunktion e hoch x
+double log(double x)	        // Natuerlicher Logarithmus von x
+
+M_PI 	// symbolische Konstante für PI
+M_PI_2 	// symbolische Konstante für PI/2
+M_PI_4 	// symbolische Konstante für PI/4
+M_E 	// symbolische Konstante für e 
+```
+
+Fürs kaufmännisch Runden, Abschneiden, Abrunden und Aufrunden stehen folgende Funktionen zur Verfügung: 
+
+```
+double round(double x);  // Kaufmännisch Runden 
+double trunc(double x);  // Kommazahlen abschneiden
+double floor(double x);  // auf nächste Ganzzahl abrunden 
+double ceil(double x);	 // auf nächste Ganzzahl aufrunden 
+```
+
+Im folgenden Beispiel wird die Verwendung der Funktionen veranschaulicht: 
+
+```c
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+{
+    double x1, x2, y1, y2; 
+    x1 = 5.23487392;
+    x2 = 5.89437524;
+    y1 = round(x1 * 1000)/1000;  // ergibt 5.235000
+    y2 = round(x2 * 1000)/1000;  // ergibt 5.894000
+    y1 = trunc(x1);              // ergibt 5.000000
+    y1 = floor(x1);              // ergibt 5.000000 
+    y1 = ceil(x1);               // ergibt 6.000000 
+} 
+```
+
+Kaufmännisch Runden und Abschneiden ist auch durch explizite Typumwandlung möglich: 
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    double x1, x2; 
+    int y1, y2; 
+    double y3, y4; 
+    x1 = 5.23487392;
+    x2 = 5.89437524;
+    // Kaufmännisch Runden:
+    y1 = (int)(x1 + 0.5);                // ergibt 5
+    y2 = (int)(x2 + 0.5);                 // ergibt 6
+    // auf z.B. 3 Kommastellen Runden:
+    y3 = (int)(x1 * 1000 + 0.5)/1000.0;  // ergibt 5.235000
+    y4 = (int)(x2 * 1000 + 0.5)/1000.0;  // ergibt 5.894000
+    // Kommastellen abschneiden:
+    y1 = (int)x1;                        // ergibt 5
+    // Zahl nach z.B. der 3. Kommastelle abschneiden:
+    y3 = (int)(x1 * 1000)/1000.0;        // ergibt 5.234000    
+} 
+```
+
+# 9. Kommentare 
+
+Regeln für Kommentare:
+
+* Mehrzeilige Kommentare werden mit `/*` eingeleitet und mit `*/` abgeschlossen.
+* Einzeilige Kommentare beginnen mit `//` und erstrecken sich bis zum Ende der Zeile.
+* Kommentare können an beliebiger Stelle stehen.
+
+# 10. Character- und Stringliterale 
+
+## 10.1. Characterliterale
+
+Die Zuweisung erfolgt durch genau ein Zeichen, das in einfachen Anführungszeichen eingeschlossen wird. Auf der char-Variablen wird der entsprechende ASCII-Wert des Zeichens gespeichert. 
+
+[ASCII-Tabelle](http://www.asciichars.com/)
+
+```c 
+char c1, c2, c3;
+
+c1 = 'A';     	// numerischer Wert 65
+c1 = 65;      	// identisch zur vorherigen Anweisung
+c2 = 'F';     	// numerischer Wert 70
+c3 = '1';     	// numerischer Wert 49
+c4 = '\n';      // Zeilenumbruch
+```
+
+Zu den Characterliteralen gehören auch die Sonder- und Steuerzeichen, die mit einem Backslash '`\`'  eingeleitet werden (Escape-Sequenz) und trotzdem als einzelne Zeichen gelten. 
+
+Das Umwandlungszeichen (conversion), um Characterliterale einzulesen bzw. auszugeben lautet „c“: 
+
+```c
+char zeichen; 
+scanf("%c", &zeichen);
+printf("%c", zeichen);
+```
+
+## 10.2. Stringliterale
+
+Für Strings gibt es in C keinen eigenen Datentyp, daher müssen Zeichenketten in Form von `char`-Arrays behandelt werden.
+
+Folgende Eigenschaften gelten für Zeichenketten:
+
+* Sie bestehen aus einer Folge von Einzelzeichen. 
+* Sie werden in doppelte Anführungszeichen eingeschlossen:	
+ "Das ist eine Zeichenkette". 
+* Am Ende muss ein NULL-Zeichen ('`\0`') zur Kennzeichnung des Endes angehängt werden.
+Es gelten die gleichen Escape-Sequenzen wie bei einzelnen Zeichen.
+* Zeichenketten können über Zeilengrenzen gehen, wenn unmittelbar vor dem Zeilentrenner ein Backslash '`\`' steht. 
+Sie können einem Charaterfeld (char-Array) zugewiesen werden.
+Sie dürfen nur bei der Initialisierung oder beim Einlesen zugewiesen werden, nicht aber zu einem späteren Zeitpunkt.
+
+```c 
+char str1[100] = "";
+char str2[] = "Hallo";
+char str3[100] = "Hallo"; 
+char str4[] = {'H', 'a', 'l', 'l', 'o', '\0'};
+char str5[] = {72, 97, 108, 108, 111, 0};
+char str6[20] = "Teil 1\
+Teil2"; // Der Zeilenumbruch ist auf dem String nicht sichtbar
+
+str1 = "ungueltige Zuweisung";  // Compilerfehler!
+```
+
+Das Umwandlungszeichen (conversion), um Stringliterale auszugeben lautet „`%s`“: 
+
+```c 
+char str1[] = { "Hallo" };
+printf("%s", str1);
+```
+
+Fürs Einlesen von Stringliteralen von der Konsole stehen die beiden Befehle `gets(s, max)` und `scanf("%s, s)` zur Verfügung: 
+
+```c
+char str1[100] ="";
+gets(str1, 100); 
+scanf("%s", str1); 
+```
+
+Um die Länge eines Stringliterals feszustellen, steht der Befehl `strlen(s)` zur Verfügung: 
+
+```c 
+char str[] = { "Hallo" };
+int strLaenge; 
+strLaenge = strlen(str); // Laenge ist 6 ("Hallo" + '\0')
+```
+
+Der Zugriff auf einzelne Zeichen eines Stringliterals erfolgt folgendermaßen: 
+
+```c 
+char str[] = { "Hallo" };
+char c; 
+c = str[0];    // Weist der Variablen c das Zeichen ‚‘H‘ zu 
+```
+
+Zur Umwandlung von Zeichenketten in numerische Werte stehen in der C-Standard Library `<stdlib.h>` unter anderem folgende Konvertierungsfunktionen zu Verfügung: 
+
+```c 
+int atoi(<String>)	    // Konvertierung von String in int
+double atof(<String>)	// Konvertierung von String in double
+```  
+
+# 11. Operatoren – 2. Teil 
+
+## 11.1. Arithmetische  Zuweisungsoperatoren
+
+| Operator | Beispiel |	Bedeutung |
+|:----:|:----:|:----:|
+| += | a += 2; | a = a+2; | 
+| -= | a -= 2; | a = a-2;
+| *= | a *= 2; | a = a*2;
+| /= | a /= 2; | a = a/2;
+| %= | a %= 2; | a = a%2;
+
+Achtung: Die Zuweisung:  
+`z1 *= z2 +1;`  
+entspricht der Anweisung:  
+`z1 = z1 * (z2 +1);`           
+und nicht:  
+`z1 = z1*z2 +1;`  
+
+Die verkürzte Schreibweise mit den arithmetischen Zuweisungsoperatoren ist dann sinnvoll, wenn dadurch komplexe Ausdrücke leichter lesbar werden:
+
+`feld[2*i+j-4] = feld[2*i+j-4] + 2;` // normale Schreibweise  
+`feld[2*i+j-4] += 2;`                // verkürzte Schreibweise  
+
+## 11.2. Inkrement- und Dekrementoperatoren `++` und `--`  
+
+Diese beiden unären Operatoren werden verwendet um das Ergebnis des Operanden um 1 zu erhöhen oder um 1 zu vermindern. Sie sind für alle Datentypen zulässig.
+Sie können in Präfix- (vor dem Operanden) oder Postfixnotation (nach dem Operanden) verwendet werden.  
+
+Präfixnotation: Der Wert des Operanden ändert sich **vor** seiner weiteren Verwendung.  
+`++x`  
+`--x`  
+
+Postfixnotation: Der Wert des Operanden ändert sich **nach** seiner weiteren Verwendung.  
+`x++`  
+`x--`  
+
+Die folgende Tabelle zeigt die unterschiedliche Bedeutung der Operatoren:
+
+| a vorher | Ausdruck | a nachher | b nachher |  
+|:----:|:----:|:----:|:----:|
+| 10 | b = a++; | 11 | 10 |  
+| 10 | b = ++a; | 11 | 11 |  
+| 10 | b = a--; | 9 | 10 |  
+| 10 | b = --a; | 9 | 9 |  
+
+Die Inkrement- und Dekrementoperatoren können für einzelne Variablen, nicht aber für Zahlen oder Ausdrücke verwendet werden.
+
+Beispiel:
+```c  
+    int i = 2, j, k = 3;
+    j = i++ + k; // = i++ + k
+    printf("%d %d %d\n", i, j, k);
+    j = i++ + k--; // = i++ + k--
+    printf("%d %d %d\n", i, j, k);
+    j = i++ + ++k;
+    printf("%d %d %d\n", i, j, k);
+    j = i++ + ++i;
+    printf("%d %d\n", i, j);
+    j = (i + k)++; // Compilerfehler!!
+
+    float z = 3.1;
+    z++;
+    printf("%f\n", z);
+```  
+
+Ausgabe:
+```  
+3 5 3
+4 6 2
+5 7 3
+7 12
+4.100000
+```
+
+## 11.3. Vergleichsoperatoren  
+
+In C gibt es 6 Operatoren zum Vergleichen von numerischen Datentypen. Das Ergebnis eines Vergleichs ist immer vom Typ `int`, wobei 0 dem Wert falsch und 1 dem Wert wahr entspricht.
+
+| Operator | Bedeutung |  
+|:----:|:----:|  
+| == | gleich |  
+| != | ungleich |  
+| < | kleiner |  
+| <= | kleiner gleich |  
+| > | größer |  
+| >= | größer gleich |  
+
+Beispiel:  
+
+```c  
+int a = 2, b = 3;
+printf("%d == %d ist %d\n", a, b, a == b);
+printf("%d != %d ist %d\n", a, b, a != b);
+printf("%d == %d ist %d\n", ++a, b, a == b); // Achtung: Call by Value!
+```  
+
+Ausgabe:  
+
+```
+2 == 3 ist 0
+2 != 3 ist 1
+3 == 3 ist 0
+```
+
+## 11.4. Logische Operatoren  
+
+Logische Operatoren verknüpfen Wahrheitswerte. Da in C die Wahrheitswerte durch ganzzahlige Werte beschrieben werden, können logische Operatoren für alle Datentypen verwendet werden.  
+
+| Operator | Bedeutung |  
+|:----|:----|  
+| ! | logisches nicht - dreht den Wahrheitswert um |  
+| && | logisches und - wahr wenn beide Operanden wahr sind |  
+| \|\| | logisches oder - wahr wenn zumindest einer der beiden Operanden wahr ist |  
+
+Die folgende Wertetabelle zeigt alle möglichen Kombinationen der Wahrheitswerte:  
+
+| a | b | !a | a && b | a \|\| b |  
+|:----:|:----:|:----:|:----:|:----:|  
+| 0 | 0 | 1 | 0 | 0 |  
+| 0 | 1 | 1 | 0 | 1 |  
+| 1 | 0 | 0 | 0 | 1 |  
+| 1 | 1 | 0 | 1 | 1 |  
+
+Die logischen Operatoren `&&` und `||` arbeiten mit der sog. short-circuit-evaluation, d.h. der rechte Operand wird nur dann ausgewertet, wenn das zur Bestimmung eines Ergebnisses notwendig ist.  
+Bei  `a && b` wird daher b nur ausgewertet, wenn a=1 ist.  
+Bei  `a || b` dagegen wird b nur ausgewertet wenn a=0 ist. 
+
+Der `&&` Operator hat Vorrang vor dem `||` Operator.  
+Der Ausdruck  
+`a || b && c`  
+ist gleichbedeutet mit  
+`a || (b && c)`  
+
+Durch die short-circuit-evaluation kann es zu unerwünschten Nebeneffekten kommen, wenn im rechten Teil eines logischen Ausdrucks Variablenänderungen stehen, die durch die verkürzte Auswertung nicht ausgeführt werden.
+
+Beispiel:
+
+```c  
+if (a < b && d++) { ... }	// Bedingung mit Nebeneffekt
+if (d++ && a < b) { ... }	// Bedingung ohne Nebeneffekt
+``` 
+
+Bei der ersten if-Anweisung wird d nur dann erhöht wenn `a < b` wahr ist. Bei der zweiten if-Anweisung wird d in jedem Fall erhöht.  
+
+## 11.5. Die Operatorenrangfolge
+
+Die Rangfolge der Operatoren ist von oben nach unten angeordnet. Operatoren innerhalb derselben Zeilen sind gleichwertig und werden von links nach rechts abgearbeitet.
+Durch Verwendung von runden Klammern kann der Vorrag der Operatoren geändert werden.
+
+| Operator-Typ | Operator |  
+|:----|:----|  
+| unär Postfix | () [] ++ -- |  
+| unär Präfix | ++ -- (cast) sizeof |  
+| binär Arithmetisch | * / % |  
+| binär Arithmetisch | + - |  
+| Vergleich | < <= > >= |  
+| Vergleich | == != |  
+| logisch und | && |  
+| logisch oder | \|\| |  
+| Zuweisung | += -= *= /= %=  |  
+| Komma | , |  

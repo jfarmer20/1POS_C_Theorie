@@ -1,181 +1,10 @@
-# 7. Mathematische Funktionen – `<math.h>`
 
-In der Headerdatei `<math.h>` sind folgende nützliche mathematische Funktionen und Konstanten deklariert: 
 
-```
-double pow(double x, double y)	// x hoch y
-double sqrt(double x)	        // Wurzel aus x
-double fabs(double z)           // Absolutwert von x
-double sin(double x)	        // Sinus von x
-double cos(double x)	        // Cosinus von x
-double tan(double x)	        // Tangens von x
-double exp(double x)	        // Exponentialfunktion e hoch x
-double log(double x)	        // Nat. Logarithmus von x
+# 2. Arrays (Felder)
 
-M_PI 	// symbolische Konstante für PI
-M_PI_2 	// symbolische Konstante für PI/2
-M_PI_4 	// symbolische Konstante für PI/4
-M_E 	// symbolische Konstante für e 
-```
+## 2.1. Eindimensionale Arrays
 
-Fürs kaufmännisch Runden, Abschneiden, Abrunden und Aufrunden stehen folgende Funktionen zur Verfügung: 
-
-```
-double round(double x);  // Kaufmännisch Runden 
-double trunc(double x);  // Kommazahlen abschneiden
-double floor(double x);  // auf nächste Ganzzahl abrunden 
-double ceil(double x);	 // auf nächste Ganzzahl aufrunden 
-```
-
-Im folgenden Beispiel wird die Verwendung der Funktionen veranschaulicht: 
-
-```c
-#include <stdlib.h>
-#include <math.h>
-
-int main()
-{
-    double x1, x2, y1, y2; 
-    x1 = 5.23487392;
-    x2 = 5.89437524;
-    y1 = round(x1 * 1000)/1000;  // ergibt 5.235000
-    y2 = round(x2 * 1000)/1000;  // ergibt 5.894000
-    y1 = trunc(x1);              // ergibt 5.000000
-    y1 = floor(x1);              // ergibt 5.000000 
-    y1 = ceil(x1);               // ergibt 6.000000 
-} 
-```
-
-Kaufmännisch Runden und Abschneiden ist auch durch explizite Typumwandlung möglich: 
-
-```c
-#include <stdio.h>
-
-int main()
-{
-    double x1, x2; 
-    int y1, y2; 
-    double y3, y4; 
-    x1 = 5.23487392;
-    x2 = 5.89437524;
-    // Kaufmännisch Runden:
-    y1 = (int)(x1 + 0.5);                // ergibt 5
-    y2 = (int)(x2 + 0.5);                 // ergibt 6
-    // auf z.B. 3 Kommastellen Runden:
-    y3 = (int)(x1 * 1000 + 0.5)/1000.0;  // ergibt 5.235000
-    y4 = (int)(x2 * 1000 + 0.5)/1000.0;  // ergibt 5.894000
-    // Kommastellen abschneiden:
-    y1 = (int)x1;                        // ergibt 5
-    // Zahl nach z.B. der 3. Kommastelle abschneiden:
-    y3 = (int)(x1 * 1000)/1000.0;        // ergibt 5.234000    
-} 
-```
-
-# 8. Kommentare 
-
-Regeln für Kommentare:
-
-* Mehrzeilige Kommentare werden mit `/*` eingeleitet und mit `*/` abgeschlossen.
-* Einzeilige Kommentare beginnen mit `//` und erstrecken sich bis zum Ende der Zeile.
-* Kommentare können an beliebiger Stelle stehen.
-
-# 9. Character- und Stringliterale 
-
-## 9.1. Characterliterale
-
-Die Zuweisung erfolgt durch genau ein Zeichen, das in einfachen Anführungszeichen eingeschlossen wird. Auf der char-Variablen wird der entsprechende ASCII-Wert des Zeichens gespeichert. 
-
-```c 
-char c1, c2, c3;
-
-c1 = 'A';     	// numerischer Wert 65
-c1 = 65;      	// identisch zur vorherigen Anweisung
-c2 = 'F';     	// numerischer Wert 70
-c3 = '1';     	// numerischer Wert 49
-c4 = '\n';      // Zeilenumbruch
-```
-
-Zu den Characterliteralen gehören auch die Sonder- und Steuerzeichen, die mit einem Backslash '`\`'  eingeleitet werden (Escape-Sequenz) und trotzdem als einzelne Zeichen gelten. 
-
-Das Umwandlungszeichen (conversion), um Characterliterale einzulesen bzw. auszugeben lautet „c“: 
-
-```c
-char zeichen; 
-scanf("%c", &zeichen);
-printf("%c", zeichen);
-```
-
-## 9.2. Stringliterale
-
-Für Strings gibt es in C keinen eigenen Datentyp, daher müssen Zeichenketten in Form von `char`-Arrays behandelt werden.
-
-Folgende Eigenschaften gelten für Zeichenketten:
-
-* Sie bestehen aus einer Folge von Einzelzeichen. 
-* Sie werden in doppelte Anführungszeichen eingeschlossen:	
- "Das ist eine Zeichenkette". 
-* Am Ende muss ein NULL-Zeichen ('`\0`') zur Kennzeichnung des Endes angehängt werden.
-Es gelten die gleichen Escape-Sequenzen wie bei einzelnen Zeichen.
-* Zeichenketten können über Zeilengrenzen gehen, wenn unmittelbar vor dem Zeilentrenner ein Backslash '`\`' steht. 
-Sie können einem Charaterfeld (char-Array) zugewiesen werden.
-Sie dürfen nur bei der Initialisierung oder beim Einlesen zugewiesen werden, nicht aber zu einem späteren Zeitpunkt.
-
-```c 
-char str1[100] = "";
-char str2[] = { "Hallo" };
-char str3[] = { 'H', 'a', 'l', 'l', 'o', '\0' };
-char str4[] = { 72, 97, 108, 108, 111, 0 }; 
-char str2[20] = "Teil 1\
-                 Teil2";       // Der Zeilenumbruch ist auf dem String nicht sichtbar
-
-str1 = "ungültige Zuweisung";  // Compilerfehler!
-```
-
-Das Umwandlungszeichen (conversion), um Stringliterale auszugeben lautet „`%s`“: 
-
-```c 
-char str1[] = { "Hallo" };
-printf("%s", str1);
-```
-
-Fürs Einlesen von Stringliteralen von der Konsole stehen die beiden Befehle `gets(s, max)` und `scanf("%s, s)` zur Verfügung: 
-
-```c
-char str1[100] ="";
-gets(str1, 100); 
-scanf("%s", str1); 
-```
-
-Um die Länge eines Stringliterals feszustellen, steht der Befehl `strlen(s)` zur Verfügung: 
-
-```c 
-char str[] = { "Hallo" };
-int strLaenge; 
-strLaenge = strlen(str); 
-```
-
-Der Zugriff auf einzelne Zeichen eines Stringliterals erfolgt folgendermaßen: 
-
-```c 
-char str[] = { "Hallo" };
-char c; 
-c = str[0];    // Weist der Variablen c das Zeichen ‚‘H‘ zu 
-```
-
-Zur Umwandlung von Zeichenketten in numerische Werte stehen in der C-Standard Library `<stdlib.h>` unter anderem folgende Konvertierungsfunktionen zu Verfügung: 
-
-```c 
-int atoi(<String>)	    // Konvertierung von String in int
-double atof(<String>)	// Konvertierung von String in double
-```
-
-# 10. Operatoren – 2. Teil 
-
-# 11. Arrays (Felder)
-
-## 11.1. Eindimensionale Arrays
-
-## 11.2. Eindimensionale Arrays dynamisch erzeugen 
+## 2.2. Eindimensionale Arrays dynamisch erzeugen 
 
 Mit der Funktion `malloc()` lässt sich für ein Array ein zusammenhängender Speicherbereich zur Laufzeit reservieren.  
 **Wichtig:** Sobald das Array im Programm nicht mehr benötigt wird, ist der Speicherbereich verlässliche mit der Funktion `free()` wieder freizugeben. 
@@ -221,7 +50,7 @@ int main()
 }
 ```
 
-## 11.3. Mehrdimensionale Arrays 
+## 2.3. Mehrdimensionale Arrays 
 
 Jede Dimension des Arrays wird über einen eigenen Index angesprochen. 
 
@@ -289,7 +118,7 @@ int aTest[][] = {{1,2},             // Compilerfehler!
 
 Die dritte Deklaration führt zu einem Compilerfehler, da mehr als nur die erste Dimension nicht angegeben sind und der Compiler daher die Arraygröße nicht bestimmen kann. 
 
-## 11.4. Übergabe von mehrdimensionalen Arrays an Funktionen 
+## 2.4. Übergabe von mehrdimensionalen Arrays an Funktionen 
 
 Gleich wie bei eindimensionalen Arrays, erfolgt auch bei mehrdimensionalen Arrays die Parameterübergabe nach dem *call-by-reference* Prinzip. 
 
@@ -318,7 +147,7 @@ void initArray(int a2d[][10], int rows, int columns)
 }
 ```
 
-## 11.5. Mehrdimensionale Arrays dynamisch erzeugen 
+## 2.5. Mehrdimensionale Arrays dynamisch erzeugen 
 
 ```c 
 /* 2D_dyn_array.c */
@@ -371,15 +200,15 @@ int main(void)
 }
 ```
 
-# 12. Anhang 
+# 3. Anhang 
 
-## 12.1. Weitere Literatur
+## 3.1. Weitere Literatur
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, HTML-Version](https://algs4.cs.princeton.edu/home/)  
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, PDF-Version](https://github.com/Mcdonoughd/CS2223/raw/master/Books/Algorithhms%204th%20Edition%20by%20Robert%20Sedgewick%2C%20Kevin%20Wayne.pdf) 
 
-## 12.2. Übersicht des Unterrichtsstoffs
+## 3.2. Übersicht des Unterrichtsstoffs
 
 * Windows-Command-Shell (cmd): `dir`, `mkdir`, `ren`, `rmdir`, `cd`, `copy`, `del`, `help <command>`, … 
 
