@@ -219,13 +219,17 @@ Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und
 - Speichern / Speichern als: Strg + S / Strg + Shift + S
 - Drucken: F1 > 'PrintCode'
 - Schrift größer/kleiner: Strg + '+'/'-'
+- Light-/Dark-Modus umschalten: Strg+K + Str+T
+- Alles Auswählen: Strg + A
+- In Zwischenablage kopieren: Strg + C
+- Aus Zwischenablage einfügen: Strg + V  
 
 ### 2.4.2. Zugriff Dateisystem Windows <-> WSL
 
 Linux Shell: Zugriff aufs Benutzerverzeichnis in Windows:  
 `/mnt/c/Users/<USERNAME>`
 
-Windows-File-Explorer: Zugriffs aufs WSL home-Verzeichnis:  
+Windows-File-Explorer: Zugriff aufs WSL home-Verzeichnis:  
 `\\wsl$\Ubuntu\home\<USERNAME>`
 
 ## 2.5. Einführungsbeispiel 
