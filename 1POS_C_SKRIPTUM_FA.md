@@ -224,6 +224,9 @@ Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und
 - In Zwischenablage kopieren: Strg + C
 - Aus Zwischenablage einfügen: Strg + V  
 
+Drucken erfordert in VS Code die Extension [Print, PD Consulting](https://marketplace.visualstudio.com/items?itemName=pdconsec.vscode-print). Wird *remote* unter WSL entwickelt, erfordert die Ubuntu-Installation das Paket `xdg-utils`. Nachzuinstallieren mit folgendem Kommando:  
+`sudo apt-get install xdg-utils` 
+
 ### 2.4.2. Zugriff Dateisystem Windows <-> WSL
 
 Linux Shell: Zugriff aufs Benutzerverzeichnis in Windows:  
