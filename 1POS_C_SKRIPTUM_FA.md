@@ -101,11 +101,11 @@ Will man `C` auf Windows entwickeln, so ist die Konfiguration der Entwicklungsum
 
 ## 2.1. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *MinGW*  
 
-MinGW (*Minimalist GNU for Windows*) ist eine Portierung der Entwicklerwerkzeuge GNU Compiler Collection (GCC) und GNU Debugger (GDB) für Windows.  
+MinGW (*Minimalist GNU for Windows*) ist eine Portierung der Entwicklerwerkzeuge GNU Compiler Collection (GCC) und GNU Debugger (GDB) auf Windows.  
 
-1. MinGW-w64 ist auf Sourceforge unter folgendem Link verfügbar:  
+1. MinGW-w64 ist auf Sourceforge unter folgendem Link verfügbar: [Mingw-w64 builds](https://www.mingw-w64.org/downloads/#mingw-builds)  
 
-    [Mingw-w64 builds](https://www.mingw-w64.org/downloads/#mingw-builds)  
+    Starte die Setup-Datei:  
 
     ![MinGW64_Installer_Screenshot1](./pictures/MinGW64_Installer_Screenshot1.PNG "MinGW64_Installer_Screenshot1") 
 
