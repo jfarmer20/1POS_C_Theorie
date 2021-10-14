@@ -18,13 +18,14 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [1.1. Begriffe](#11-begriffe)
   - [1.2. Geschichtliches der Programmiersprache C](#12-geschichtliches-der-programmiersprache-c)
 - [2. Installation der Programmierumgebung auf Windows 10](#2-installation-der-programmierumgebung-auf-windows-10)
-  - [2.1. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *Windows Subsystem for Linux (WSL)*](#21-installationsanleitung-für-visual-studio-code-vs-code-auf-windows-10-mit-windows-subsystem-for-linux-wsl)
-  - [2.2. Erstes Programm mit Visual Studio Code (VS Code)](#22-erstes-programm-mit-visual-studio-code-vs-code)
-  - [2.3. `helloworld.c` kompilieren](#23-helloworldc-kompilieren)
-  - [2.4. `helloworld.c` starten/debuggen](#24-helloworldc-startendebuggen)
-    - [2.4.1. Wichtige Tastenkombinationen](#241-wichtige-tastenkombinationen)
-    - [2.4.2. Zugriff Dateisystem Windows <-> WSL](#242-zugriff-dateisystem-windows---wsl)
-  - [2.5. Einführungsbeispiel](#25-einführungsbeispiel)
+  - [2.1. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *MinGW*](#21-installationsanleitung-für-visual-studio-code-vs-code-auf-windows-10-mit-mingw)
+  - [2.2. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *Windows Subsystem for Linux (WSL)*](#22-installationsanleitung-für-visual-studio-code-vs-code-auf-windows-10-mit-windows-subsystem-for-linux-wsl)
+  - [2.3. Erstes Programm mit Visual Studio Code (VS Code)](#23-erstes-programm-mit-visual-studio-code-vs-code)
+  - [2.4. `helloworld.c` kompilieren](#24-helloworldc-kompilieren)
+  - [2.5. `helloworld.c` starten/debuggen](#25-helloworldc-startendebuggen)
+    - [2.5.1. Wichtige Tastenkombinationen](#251-wichtige-tastenkombinationen)
+    - [2.5.2. Zugriff Dateisystem Windows <-> WSL](#252-zugriff-dateisystem-windows---wsl)
+  - [2.6. Einführungsbeispiel](#26-einführungsbeispiel)
 - [3. Mein erstes Programm mit Eingabe, Zuweisung und Ausgabe](#3-mein-erstes-programm-mit-eingabe-zuweisung-und-ausgabe)
   - [3.1. `printf()`-Befehl: Steuerzeichen und Sonderzeichen](#31-printf-befehl-steuerzeichen-und-sonderzeichen)
   - [3.2. Struktogramm](#32-struktogramm)
@@ -94,7 +95,38 @@ Im Jahr 1999 erschien C99 mit Elementen der objekt-orientierten Programmiersprac
 
 # 2. Installation der Programmierumgebung auf Windows 10 
 
-## 2.1. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *Windows Subsystem for Linux (WSL)*  
+Der Compiler `gcc` und der Debugger `gdb`  sind ein wesentlicher Bestandteil des Betriebssystems Linux. Es macht somit Sinn, `C` auf dem Windows Subsystem for Linux (WSL) zu programmieren. Die Installation dafür ist im übernächsten Abschnitt beschrieben.  
+
+Will man `C` auf Windows entwickeln, so ist die Konfiguration der Entwicklungsumgebung einfacher und nachfolgend beschrieben. 
+
+## 2.1. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *MinGW*  
+
+MinGW (*Minimalist GNU for Windows*) ist eine Portierung der Entwicklerwerkzeuge GNU Compiler Collection (GCC) und GNU Debugger (GDB) für Windows.  
+
+1. MinGW-w64 ist auf Sourceforge unter folgendem Link verfügbar:  
+
+    [Mingw-w64 builds](https://www.mingw-w64.org/downloads/#mingw-builds)  
+
+    ![MinGW64_Installer_Screenshot1](./pictures/MinGW64_Installer_Screenshot1.PNG "MinGW64_Installer_Screenshot1") 
+
+    ![MinGW64_Installer_Screenshot2](./pictures/MinGW64_Installer_Screenshot2.PNG "MinGW64_Installer_Screenshot2")     
+
+2. Installiere [Visual Studio Code](https://code.visualstudio.com/Download).
+
+1. Installiere die [C/C++ extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).  
+
+    You can install the C/C++ extension by searching for 'c++' in the Extensions view  
+    ![C/C++ extension](./pictures/cpp-extension.png)
+
+
+4. Um zu prüfen, ob die Mingw-w64 Tools richtig installiert sind, offne ein Command Prompt und führe folgendes aus:
+
+    ```
+     gcc --version
+     gdb --version
+     ```  
+
+## 2.2. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *Windows Subsystem for Linux (WSL)*  
 
 1. Windows auf die neueste Version aktualisieren: 
 
@@ -144,7 +176,7 @@ Im Jahr 1999 erschien C99 mit Elementen der objekt-orientierten Programmiersprac
 
     ![Screenshot_Setup9a.PNG](./pictures/Screenshot_Setup9a.PNG)  
 
-## 2.2. Erstes Programm mit Visual Studio Code (VS Code)
+## 2.3. Erstes Programm mit Visual Studio Code (VS Code)
 
 Ubuntu starten und in der Shell Projektverzeichnis erstellen und VS Code starten: 
 
@@ -179,7 +211,7 @@ int main()         // Funktion main() definiert das Hauptprogramm
 
 Datei speichern: Menü File -> Save 
 
-## 2.3. `helloworld.c` kompilieren 
+## 2.4. `helloworld.c` kompilieren 
 Um VS Code zu sagen, wie die Quelldatei `helloworld.c` nun zu kompilieren ist, braucht es eine `tasks.json` Datei: 	
 
 Menü `Terminal` > `Configure Default Build Task…` > `C/C++:gcc build active file` auswählen. 
@@ -190,7 +222,7 @@ Quelldatei `helloworld.c` auswählen
 
 und mit der Tastenkombination `Strg` + `Shift` + `B` kompilieren. 
 
-## 2.4. `helloworld.c` starten/debuggen 
+## 2.5. `helloworld.c` starten/debuggen 
 
 Um `helloworld.c` starten oder debuggen zu können, braucht VS Code die Datei `launch.json`: 
 
@@ -208,7 +240,7 @@ Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und
 
 ![Screenshot Visual Studio Code Command Erstes Programm - Schritt 4](./pictures/Screenshot_VSC_4.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 4") 
 
-### 2.4.1. Wichtige Tastenkombinationen 
+### 2.5.1. Wichtige Tastenkombinationen 
 
 - Strg + Shift + B: Programm kompilieren 
 - Strg + F5 / F5: Programm starten / debuggen  
@@ -227,7 +259,7 @@ Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und
 Drucken erfordert in VS Code die Extension [Print, PD Consulting](https://marketplace.visualstudio.com/items?itemName=pdconsec.vscode-print). Wird *remote* unter WSL entwickelt, erfordert die Ubuntu-Installation das Paket `xdg-utils`. Nachzuinstallieren mit folgendem Kommando:  
 `sudo apt-get install xdg-utils` 
 
-### 2.4.2. Zugriff Dateisystem Windows <-> WSL
+### 2.5.2. Zugriff Dateisystem Windows <-> WSL
 
 Linux Shell: Zugriff aufs Benutzerverzeichnis in Windows:  
 `/mnt/c/Users/<USERNAME>`
@@ -235,7 +267,7 @@ Linux Shell: Zugriff aufs Benutzerverzeichnis in Windows:
 Windows-File-Explorer: Zugriff aufs WSL home-Verzeichnis:  
 `\\wsl$\Ubuntu\home\<USERNAME>`
 
-## 2.5. Einführungsbeispiel 
+## 2.6. Einführungsbeispiel 
 
 Lernt man eine neue Programmiersprache, dann ist meist ein „Hello World“ Programm, das erste Programm, das man schreibt. Und das machen wir im folgenden Einführungsbeispiel genauso. 
 
