@@ -50,6 +50,16 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [11.3. Vergleichsoperatoren](#113-vergleichsoperatoren)
   - [11.4. Logische Operatoren](#114-logische-operatoren)
   - [11.5. Die Operatorenrangfolge](#115-die-operatorenrangfolge)
+- [12. Kontrollstrukturen – Entscheidung](#12-kontrollstrukturen--entscheidung)
+  - [12.1. Die bedingte Verzweigung `if-else`](#121-die-bedingte-verzweigung-if-else)
+  - [12.2. Die `switch-case` Anweisung](#122-die-switch-case-anweisung)
+- [13. Kontrollstrukturen – Schleifen](#13-kontrollstrukturen--schleifen)
+  - [13.1. Die `while`-Schleife](#131-die-while-schleife)
+  - [13.2. Die `do-while`-Schleife](#132-die-do-while-schleife)
+  - [13.3. Die `for`-Schleife](#133-die-for-schleife)
+  - [13.4. Gegenüberstellung `for`-, `while`- und `do-while`-Schleife](#134-gegenüberstellung-for--while--und-do-while-schleife)
+  - [13.5. Abbruch einer Schleife mit `break` oder `continue`](#135-abbruch-einer-schleife-mit-break-oder-continue)
+  - [13.6. Die `exit()`-Funktion](#136-die-exit-funktion)
 
 # 1. Einführung
 
@@ -945,3 +955,563 @@ Durch Verwendung von runden Klammern kann der Vorrag der Operatoren geändert we
 | logisch oder | \|\| |  
 | Zuweisung | += -= *= /= %=  |  
 | Komma | , |  
+
+# 12. Kontrollstrukturen – Entscheidung 
+
+C stellt für die Entscheidung folgende zwei Kontrollstrukturen zur Verfügung:  
+- Die bedingte Verzweigung: `if-else`  
+- Die Fallunterscheidung: `switch-case`  
+
+## 12.1. Die bedingte Verzweigung `if-else`   
+
+Die `if`-Anweisung hat folgende Syntax:
+
+```c  
+    if (bedingung)
+        anweisung-1;
+    else
+        anweisung-2;
+```  
+
+Die `if`-Anweisung dient zur Auswahl zwischen zwei Möglichkeiten:  
+- *bedingung* muss einen Wahrheitswert liefern. Ist *bedingung* wahr, wird *anweisung-1* ausgeführt sonst *anweisung2*  
+- Der `else`-Zweig ist optional  
+- Anstelle einer einzelnen Anweisung kann auch ein Anweisungsblock, der in `{` `}` eingeschlossen wird, stehen  
+
+Das folgende Beispiel zeigt eine einfache `if`-Anweisungen:  
+
+```c  
+    if (stunde < 12)
+        printf("Vormittag\n");
+    else
+        printf("Nachmittag\n");
+```  
+
+Bei der Schachtelung von mehreren `if-else`-Anweisungen gehört das `else` zum letzten `if`, das keinen `else`-Zweig hat:
+
+```c  
+    int a = 1, b = 2;
+
+    if (a < b)
+    {
+        printf("a kleiner b\n");
+    }
+    else if (a > b)
+    {
+        printf("a groesser b\n");
+    }
+    else
+    {
+        printf("a gleich b\n");
+    }
+``` 
+
+Folgende if-Anweisungen sind äquivalent. Bei der Entscheidung, welche man verwendet, soll man auf Lesbarkeit achten: 
+
+```c
+    if (i % k)
+        printf("Division mit Rest\n");
+        
+    if (i % k != 0)
+        printf("Division mit Rest\n");
+```
+
+```c
+    if (x)  
+        ...
+
+    if (x != 0)  
+        ...
+```
+
+Zwei häufige Fehler beim Verwenden der `if`-Aweisung sind das Verwechseln der Bedingung mit einer Zuweisung sowie das Setzen eines Strichpunkts hinter der Bedingung:
+
+```c 
+    // Fehler 1:
+    if (x = 0)                      // Zuweisung statt Bedingung
+        printf("%d\n", x);          // Die printf()-Anweisung wird nie ausgeführt
+
+    // Fehler 2:
+    if (a == b);                    // der ; ist eine leere Anweisung
+        printf("Werte gleich!\n");  // die printf()-Anweisung wird immer ausgeführt
+```
+
+## 12.2. Die `switch-case` Anweisung 
+
+Die `switch-case`-Anweisung hat folgende Syntax:
+
+```c  
+    switch (ausdruck)
+    {
+    case konstante-1:
+        anweisung-1;
+    case konstante-2:
+        anweisung-2;
+      ...
+    case konstante-n: 
+        anweisung-n;
+    default:
+        anweisung;
+    }
+```  
+
+Die `switch-case`-Anweisung wird folgendermaßen abgearbeitet:  
+
+1.	Der Ausdruck hinter dem `switch` wird ausgewertet, wobei als Wert nur Ganzzahl-Datentypen wie `char` und `int` erlaubt sind.  
+2.	Der Wert des Ausdrucks wird nacheinander mit den Werten von *konstante-1* bis *konstante-n* verglichen. Wird eine Übereinstimmung gefunden, so werden alle folgenden Anweisungen bis zum Ende der `switch`-Anweisung oder bis zum nächsten `break` ausgeführt. 
+3.	Wird keine Übereinstimmung des Wertes von *ausdruck* mit einer der angegebenen Konstanten gefunden, so wird der `default`-Zweig und alle folgenden Anweisungen bis zum nächsten `break` ausgeführt.
+
+Weitere Eigenschaften der `switch-case` Anweisung:  
+
+- Jeder Ausdruck *anweisung-i* kann dabei auch aus mehreren Einzelanweisungen oder beliebig komplexen Kontrollstrukturen, wie Schleifen etc.,  bestehen.  
+- Der `default`-Zweig ist optional und muss nicht der letzte Zweig in der switch-Anweisung sein.  
+- Für den `konstante-i` Ausdruck dürfen keine Variablen verwendet werden.  
+- Jeder `konstante-i` Ausdruck muss eindeutig sein, d.h er darf nicht zweimal vorkommen.  
+- Es können beliebig viele `case`-Teile vorhanden sein.  
+-	Ein `konstante-i` Ausdruck kann auch ohne nachfolgende `anweisung-i` vorkommen.
+
+Das folgende Beispiel zeigt die Arbeitsweise der switch-case Anweisung:
+
+```c 
+    switch (punkte)
+    {
+    case 50:
+        printf("Sehr gut\n");
+        break;
+    case 40:
+        printf("Gut\n");
+        break;
+    case 30:
+        printf("Befriedigend 3\n");
+        break;
+    case 20:
+        printf("Genügend 4\n");
+        break;
+    default:
+        printf("Nicht genügend\n");
+    }
+```
+
+In diesem Beispiel wird für 50 Punkte "Sehr gut" ausgegeben, für 40 Punkte "Gut" usw. Für alle anderen Punktezahlen, wie z.B. 42 wird  "Nicht genügend" ausgegeben (Dieses Beisiel macht somit keinen Sinn).  
+
+Im folgenden Beispiel werden jeweils zwei Konstante von einem Anweisungsblock behandelt:
+
+```c
+    printf("\nBitte geben Sie Ihre Farbwahl ein: ");
+    switch (c = getchar())
+    {
+    case 'r':
+    case 'R':
+        printf("\nSie haben rot gewaehlt\n");
+        break;
+    case 'b':
+    case 'B':
+        printf("\nSie haben blau gewaehlt\n");
+        break;
+    case 'g':
+    case 'G':
+        printf("\nSie haben gelb gewaehlt\n");
+        break;
+    default:
+        printf("\nFalsche Farbwahl!\n");
+    }
+```
+
+# 13. Kontrollstrukturen – Schleifen  
+
+C stellt folgende drei Schleifen zur Verfügung:  
+- Die `while`-Schleife  
+- Die `do-while`-Schleife  
+- Die `for`-Schleife  
+
+## 13.1. Die `while`-Schleife
+
+Die `while`-Schleife hat folgende Syntax:
+
+```c  
+while (bedingung)
+  anweisung;
+```  
+
+Eigenschaften der `while`-Schleife:  
+- Die Bedingung wird vor jedem Schleifendurchgang geprüft.  
+- Die Schleife wird solange wiederholt, solange *bedingung* wahr ist, d.h.ungleich 0, ist.  
+- Die `while`-Schleife ist kopfgesteuert und hat eine Laufbedingung.  
+- Anstelle einer einzelnen Anweisung kann ein geklammerter Anweisungsblock `{` `}` stehen. 
+
+![Struktogramm while-Schleife](pictures/nsd_while.svg)  
+
+**Beispiel** 
+
+Mit einem Würfel wird, solange die Augensumme < 100 ist, gewürfelt. Wie oft gewürfelt wird, wird mitgezählt. 
+
+![Struktogramm while-Schleife Beisiel Würfel](pictures/nsd_while_wuerfel.svg)
+	
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+    int augensumme = 0;
+    int anzahlWuerfe = 0;
+    int wert;
+
+    srand(time(NULL));
+
+    while (augensumme < 100)
+    {
+        wert = rand() % 6 + 1;
+        augensumme = augensumme + wert;
+        anzahlWuerfe = anzahlWuerfe + 1;
+    }
+    printf("Mit %d Wuerfen wurde die Augensumme %d gewuerfelt.\n", 
+        anzahlWuerfe, augensumme);
+
+    return 0;
+}
+```
+
+## 13.2. Die `do-while`-Schleife
+
+Im Gegensatz zur `while`-Schleife wird bei der `do-while`-Schleife die Laufbedingung am Ende überprüft. Es handelt sich um eine fußgesteuerte Schleife. Die Syntax der `do-while`-Schleife lautet wie folgt:
+
+
+```c 
+do  
+  anweisung;  
+while (bedingung); 
+```  
+
+Eigenschaften der do-while-Schleife:  
+
+- Die Bedingung wird am Ende jedes Schleifendurchgangs geprüft.  
+- Die Schleife wird zumindest einmal durchlaufen.  
+- Die Schleife wird solange wiederholt solange *bedingung* wahr, d.h. ungleich 0, ist.
+- Die Schleife ist fußgesteuert und hat eine Laufbedingung.
+- Anstelle einer einzelnen Anweisung kann ein geklammerter Anweisungsblock `{` `}` stehen. 
+- Der Strichpunkt hinter der Bedingung darf nicht vergessen werden.
+
+![Struktogramm do-while-Schleife](pictures/nsd_do-while.svg)  
+
+**Beispiel**  
+
+Ermittle Zufallszahlen zwischen 0 und 100 und summiere die Zahlen auf. Sobald die Summe > 100 ist, soll die Berechnung beendet werden. Die Anzahl der Summanden ist mitzuzählen. 
+
+![Struktogramm do-while-Schleife Beisiel Summe aus Zufallszahlen](pictures/nsd_do-while_summe.svg)  
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main()
+{
+    int summe = 0;
+    int anzahl = 0;
+    int zufallszahl;
+
+    srand(time(NULL));
+
+    do
+    {
+        zufallszahl = rand() % 101;
+        summe = summe + zufallszahl;
+        anzahl = anzahl + 1;
+    } while (summe <= 100);
+    
+    printf("Mit %d Summanden wurde die Summe von %d erreicht.\n",
+           anzahl, summe);
+
+    return 0;
+}
+```  
+
+## 13.3. Die `for`-Schleife
+
+Die `for`-Schleife hat folgende Syntax:  
+
+```c  
+for (intialisierung; bedingung; update)
+  anweisung;
+```    
+
+Die `for`-Schleife wird folgendermaßen abgearbeitet:  
+
+1.	Vor dem ersten Schleifendurchlauf wird der Ausdruck *intialisierung* ausgeführt. Hier werden meistens eine oder mehrere (Lauf-)Variablen initialisert.
+2.	Vor jedem Schleifendurchlauf wird der *bedingung*-Ausdruck ausgewertet. Wenn das Ergebnis wahr (ungleich 0) ist, wird der Teil *anweisung* der Schleife durchlaufen.
+3.	Nach Beendigung jedes Schleifendurchlaufs wird der *update*–Ausdruck ausgeführt. Hier werden zumeist eine oder mehrere Laufvariablen verändert.
+
+Eigenschaften der for-Schleife:  
+- Alle drei Ausdrücke *intialisierung*, *bedingung* und *update* sind optional. Der Defaultwert für den Ausdruck *bedingung* ist wahr.
+- Anstelle einer einzelnen Anweisung kann ein geklammerter Anweisungsblock `{` `}` stehen. 
+
+![Struktogramm for-Schleife](pictures/nsd_for.svg)  
+
+Weitere Eigenschaften der for-Schleife:  
+- Die Laufvariable ist eine lokale Variable ganzzahligen Typs, z.B. `int` oder `char` (also nicht vom Typ double).  
+- Start- und Endwert sind Ausdrücke, die zur Laufvariable zuweisungskompatibel sind.  
+- In der (Block-)Anweisung darf der Wert der Laufvariable nicht geändert werden.  
+ 
+**Beispiel 1**
+
+Summe der Quadrate der Zahlen von 1 bis 5. 
+
+![Struktogramm Beispiel Summe von Quadraten](pictures/nsd_for_summe_quadrate.svg)  
+
+```c  
+#include <stdio.h>
+
+int main()
+{
+    int sum = 0;
+    for (int i = 1; i <= 5; i++)
+    {
+        sum += i * i;
+    }
+    printf("Summe der Quadrate: %d\n", sum);
+
+    return 0;
+}
+```  
+
+**Beispiel 2**  
+
+Summe der Wurzeln  der Zahlen von 5 bis 1  
+
+![Struktogramm Beispiel Summe von Wurzeln](pictures/nsd_for_summe_wurzeln.svg)  
+
+```c 
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    double sum = 0;
+    for (int i = 5; i > 0; i--)
+    {
+        sum += sqrt(i);
+    }
+    printf("Summe der Quadratwurzeln: %6.2f\n", sum);
+
+    return 0;
+}
+```  
+
+Zwei Beispiele für Endlosschleifen:
+
+```c 
+    for (;;)       // default-Wert der Bedingung ist wahr
+        printf("Endlosschleife\n");
+
+    for (; 5;)     // Bedingung besteht aus Konstanten != 0
+        printf("Endlosschleife\n");
+```
+
+`for`-Schleifen können beliebig ineinander verschachtelt werden. 
+
+**Beispiel 3**  
+
+Gib alle Variationen mit Wiederholung der Buchstaben `a`, `b` und `c` am Bildschirm aus.  
+
+![Struktogramm Variation mit Wiederholung der Buchstaben a, b, c](pictures/nsd_for_variation_mit_wiederholung.svg)  
+
+```c
+#include <stdio.h>
+
+int main()
+{
+
+    int c1, c2, c3;
+    int zaehler = 0;
+    for (c1 = 'a'; c1 <= 'c'; c1++)
+    {
+        for (c2 = 'a'; c2 <= 'c'; c2++)
+        {
+            for (c3 = 'a'; c3 <= 'c'; c3++)
+            {
+                printf("%c%c%c ", c1, c2, c3);
+                zaehler++;
+            }
+        }
+        printf("\n");
+    }
+    printf("Es gibt %d Variationen mit Wiederholung.\n", zaehler);
+
+    return 0;
+}
+```
+
+Bildschirmausgabe: 
+``` 
+aaa aab aac aba abb abc aca acb acc  
+baa bab bac bba bbb bbc bca bcb bcc  
+caa cab cac cba cbb cbc cca ccb ccc  
+Es gibt 27 Variationen mit Wiederholung.  
+```  
+
+Sehr häufig werden `for`-Schleifen zum Durchlaufen von Feldern verwendet:
+
+```c 
+#include <stdio.h>
+
+#define MAX 10
+
+int main()
+{
+    int i;
+    int array[MAX];
+    for (i = 0; i < MAX; i++)      // Feld vorwärts durchlaufen
+        array[i] = i;
+    for (i = MAX - 1; i >= 0; i--) // Feld rückwärts durchlaufen
+        printf("%d ", array[i]);
+
+    return 0;
+}
+```
+
+Bildschirmausgabe:  
+
+```  
+9 8 7 6 5 4 3 2 1 0
+```  
+
+## 13.4. Gegenüberstellung `for`-, `while`- und `do-while`-Schleife 
+
+```c
+    // for-Schleife  
+    for (intialisierung; bedingung; update) 
+    {
+        anweisung;
+    }
+
+    // while-Schleife  
+    initialisierung; 
+    while (bedingung) 
+    {
+        anweisung;
+        update;
+    }
+
+    // do-while-Schleife  
+    initialisierung; 
+    do
+    {
+        anweisung;
+        update; 
+    } while (bedingung);
+``` 
+
+**Beispiel**  
+
+Ausgabe der Zahlen 1 bis 5
+```c 
+    // for-Schleife
+    for (i = 1; i <= 5; i++)
+        printf("%d\n", i);
+
+    // while-Schleife  
+    int i = 1;
+    while (i <= 5)
+    {
+        printf("%d\n", i);
+        i++;
+    }
+
+    // do-while-Schleife  
+    i = 1;
+    do
+    {
+        printf("%d\n", i);
+        i++;
+    } while (i <= 5);
+``` 
+
+## 13.5. Abbruch einer Schleife mit `break` oder `continue`  
+
+Eigenschaften der `break`-Anweisung:  
+- Mit `break` kann die aktuell laufende Schleife abgebrochen werden. Das Programm setzt mit der nächsten Anweisung im unmittelbaren Anschluß an die Schleife fort.  
+- Bei mehreren ineinander geschachtelten Schleifen wird nur die unmittelbar umgebende Schleife abgebrochen. 
+- Mit `break` kann auch die `switch`-Anweisung verlassen werden.
+
+Eigenschaften der `continue`-Anweisung:  
+- Dient zum Vorzeitigen Abbruch eines Schleifendurchlaufs.
+- Bei `while` und `do-while` wird sofort die Schleifenbedingung geprüft.  
+- Bei der `for`-Schleife wird zuerst der update-Ausdruck ausgeführt und danach die Bedingung geprüft.
+
+Beispiel mit `break`-Anweisung:  
+
+```c
+int i;
+for (i = 1; i <= 5; i++)
+{
+    if (i == 3)
+    {
+        break;
+    }
+    printf("%d\n", i);
+}
+printf("Der Wert von i nach der Schleife ist %d\n", i);
+```
+
+Bildschirmausgabe:  
+
+``` 
+1
+2
+Der Wert von i nach der Schleife ist 3
+```  
+
+Beispiel mit `continue`-Anweisung:
+
+```c
+int i;
+for (i = 1; i <= 5; i++)
+{
+    if (i == 3)
+    {
+        continue;
+    }
+    printf("%d\n", i);
+}
+printf("Der Wert von i nach der Schleife ist %d\n", i);
+```
+
+Bildschirmausgabe:  
+
+``` 
+1
+2
+4
+5
+Der Wert von i nach der Schleife ist 6
+``` 
+
+## 13.6. Die `exit()`-Funktion 
+
+Die `exit()`-Funktion dient zum Beenden des gesamten Programms und hat die Syntax:
+
+```c  
+exit(parameter);
+```  
+
+Der Parameter muss vom Typ int sein, der Zahlenwert wird vom Betriebssystem bzw. vom Elternprozess ausgewertet. Ist der Wert des Parameters gleich 0 so wurde das Programm korrekt beendet, sonst wird mit dem Parameter eine Fehlernummer übergeben.
+
+Beispiel:
+
+```c 
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    char c;
+    printf("\nWeitermachen (J/N)? ");
+    scanf("%c", &c);
+    if (c == 'j' || c == 'J')
+        exit(0);
+    else
+        exit(1);
+}
+```
