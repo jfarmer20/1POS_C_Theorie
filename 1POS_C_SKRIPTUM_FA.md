@@ -730,17 +730,16 @@ printf("%c", zeichen);
 
 ## 10.2. Stringliterale
 
-Für Strings gibt es in C keinen eigenen Datentyp, daher müssen Zeichenketten in Form von `char`-Arrays behandelt werden.
+Für Strings gibt es in C keinen eigenen Datentyp. Zeichenketten werden daher in Form von `char`-Arrays dargestellt. 
 
 Folgende Eigenschaften gelten für Zeichenketten:
 
 * Sie bestehen aus einer Folge von Einzelzeichen. 
-* Sie werden in doppelte Anführungszeichen eingeschlossen:	
- "Das ist eine Zeichenkette". 
-* Am Ende muss ein NULL-Zeichen ('`\0`') zur Kennzeichnung des Endes angehängt werden.
-Es gelten die gleichen Escape-Sequenzen wie bei einzelnen Zeichen.
+* Sie werden mit doppelten Anführungszeichen eingeschlossen:	
+ `"Das ist eine Zeichenkette"`. 
+* Am Ende muss ein NULL-Zeichen ('`\0`') zur Kennzeichnung des Endes angehängt sein.  
 * Zeichenketten können über Zeilengrenzen gehen, wenn unmittelbar vor dem Zeilentrenner ein Backslash '`\`' steht. 
-Sie können einem Charaterfeld (char-Array) zugewiesen werden.
+Sie können einem Charaterfeld (`char`-Array) zugewiesen werden.
 Sie dürfen nur bei der Initialisierung oder beim Einlesen zugewiesen werden, nicht aber zu einem späteren Zeitpunkt.
 
 ```c 
@@ -748,27 +747,34 @@ char str1[100] = "";
 char str2[] = "Hallo";
 char str3[100] = "Hallo"; 
 char str4[] = {'H', 'a', 'l', 'l', 'o', '\0'};
-char str5[] = {72, 97, 108, 108, 111, 0};
+char str5[] = {72, 97, 108, 108, 111, 0}; // "Hallo"  
 char str6[20] = "Teil 1\
-Teil2"; // Der Zeilenumbruch ist auf dem String nicht sichtbar
-
+Teil2"; // Der Zeilenumbruch ist auf dem String nicht sichtbar  
 str1 = "ungueltige Zuweisung";  // Compilerfehler!
 ```
 
-Das Umwandlungszeichen (conversion), um Stringliterale auszugeben lautet „`%s`“: 
+Das Umwandlungszeichen (*conversion*), um Stringliterale auszugeben lautet „`%s`“: 
 
 ```c 
-char str1[] = { "Hallo" };
+char str1[] = "Hallo";
 printf("%s", str1);
 ```
 
-Fürs Einlesen von Stringliteralen von der Konsole stehen die beiden Befehle `gets(s, max)` und `scanf("%s, s)` zur Verfügung: 
+Fürs Einlesen von Stringliteralen von der Konsole stehen u.a. die beiden Befehle:  
+- `scanf("%s, s)` (*unsafe*, *Buffer-Overflows* möglich) und  
+- `fgets(s, ARRAY_SIZE, stdin)` (*safe*)  
+
+zur Verfügung:  
 
 ```c
-char str1[100] ="";
-gets(str1, 100); 
+#define SIZE 100
+char str1[SIZE] ="";
 scanf("%s", str1); 
+fgets(str1, SIZE, stdin); 
 ```
+Mit `fgets(s, ARRAY_SIZE, stdin)` werden maximal `ARRAY_SIZE - 1` Stellen eingelesen, weil die letzte Stelle im Array für das NULL-Zeichen ('`\0`') benötigt wird. 
+
+Die Deklaration und Initialiserung `char s[] = "";` erzeugt ein einstelliges `char`-Array mit dem NULL-Zeichen ('`\0`') an Stelle `s[0]` als Inhalt. 
 
 Um die Länge eines Stringliterals feszustellen, steht der Befehl `strlen(s)` zur Verfügung: 
 
