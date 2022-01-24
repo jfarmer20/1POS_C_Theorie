@@ -60,6 +60,12 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [13.4. Gegenüberstellung `for`-, `while`- und `do-while`-Schleife](#134-gegenüberstellung-for--while--und-do-while-schleife)
   - [13.5. Abbruch einer Schleife mit `break` oder `continue`](#135-abbruch-einer-schleife-mit-break-oder-continue)
   - [13.6. Die `exit()`-Funktion](#136-die-exit-funktion)
+- [14. Zahlensysteme: Dezimal-, Binär-, und Hexadezimal-System](#14-zahlensysteme-dezimal--binär--und-hexadezimal-system)
+  - [14.1. Umwandlung Dezimal- ins Binärsystem](#141-umwandlung-dezimal--ins-binärsystem)
+  - [14.2. Umwandlung Binär- ins Dezimalsystem](#142-umwandlung-binär--ins-dezimalsystem)
+  - [14.3. Umwandlung Binär- ins Dezimalsystem (Horner-Schema)](#143-umwandlung-binär--ins-dezimalsystem-horner-schema)
+  - [14.4. Umwandlung Binär- ins Hexadezimalsystem und umgekehrt](#144-umwandlung-binär--ins-hexadezimalsystem-und-umgekehrt)
+  - [14.5. Darstellung negativer Zahlen im Binärsystem (2er-Komplement)](#145-darstellung-negativer-zahlen-im-binärsystem-2er-komplement)
 
 # 1. Einführung
 
@@ -1521,3 +1527,118 @@ int main()
         exit(1);
 }
 ```
+
+# 14. Zahlensysteme: Dezimal-, Binär-, und Hexadezimal-System 
+
+## 14.1. Umwandlung Dezimal- ins Binärsystem  
+
+|   |   |   |
+|--:|:--|:--|
+| 150d | 0 | *least significant bit (LSB)*	  
+| 75 | 1 |		
+| 37 | 1 |		
+| 18 | 0 |		
+| 9  | 1 |		
+| 4  | 0 |		
+| 2  | 0 |		
+| 1  | 1 | *most significant bit (MSB)*	
+
+150d = 1001 0110b = 96h
+
+## 14.2. Umwandlung Binär- ins Dezimalsystem  
+
+```  
+150d = 1*10^2 + 5*10^1 + 0*10^0 = 1*100 + 5*10 + 0*1 = 150d  
+
+1001 0110b =  
+= 1*2^7 + 0*2^6 + 0*2^5 + 1*2^4 + 0*2^3 + 1*2^2 + 1*2^1 +0*2^0 =  
+= 1*128 + 0*64 + 0*32 + 1*16 + 0*8 + 1*4 + 1*2 + 0*1 =  
+= 128 + 16 + 4 + 2 =  
+= 150d  
+```  
+**1001 0110b = 150d** 
+
+## 14.3. Umwandlung Binär- ins Dezimalsystem (Horner-Schema)
+
+```  
+150d = 0 + 10*(5 + 10*(1))  
+
+1001 0110b =  
+= 0 + 2*(1 + 2*(1 + 2*(0 + 2*(1 + 2*(0 + 2*(0 + 2*(1))))))) =  
+= 0 + 2*(1 + 2*(1 + 2*(2*(1 + 2*(2*2))))) =  
+= 2*(1 + 2*(1 + 4*(1 + 8))) =  
+= 2*(1 + 2*(37)) = 
+= 150d  
+```  
+**1001 0110b = 150d**  
+
+## 14.4. Umwandlung Binär- ins Hexadezimalsystem und umgekehrt  
+
+Das Hexadezimalsystem ist „nur“ eine übersichtlichere Darstellung von Binärzahlen:  
+
+1001 0110b = 96h  
+
+Die Umwandlung von Dezimal- ins Hexadezimalsystem und umgekehrt funktioniert gleich wie die Umrechnung vom Dezimal- ins Binärsystem jedoch:  
+- Division durch 16 anstatt 2  
+- Multiplikation mit Basis 16 anstatt 2  
+
+```  
+59378d : 16 = 3711 : 16 = 231 : 16 = 14 = E
+113            51          71 
+  17            31          7
+   18           15 = F
+    2  
+```  
+**59378d = E7F2h**  
+
+```  
+E7F2h = E*16^3 + 7*16^2 + F*16^1 + 2*16^0 = 14*4096 + 7*256 + 15*16 + 2*1 = 59378d  
+```  
+**E7F2h = 59378d**
+
+|    | Dezimalsystem | Binärsystem | Hexadezimalsystem |  
+|:-- | :-- | :-- | :-- |  
+| Zur Basis | 10| 2 | 16 |  
+| Zeichenvorrat | 0,1 | 0,1,..,7,8,9 | 0,1,..,9,A,B,..,D,E,F |  
+| Darstellung | 150d | 1001 0110b | 96h |  
+
+## 14.5. Darstellung negativer Zahlen im Binärsystem (2er-Komplement) 
+
+Es gibt verschiedene Möglichkeiten, negative Zahlen im Binärsystem darzustellen. Z.B., dass man für das Vorzeichen ein separates Bit verwendet.  
+Das 2er-Komplement braucht kein separates Vorzeichen-Bit. Hat das MSB den Wert 1 => negative Zahl. Ist das MSB 0 => positive Zahl.  
+
+Mit 8 Bit lässt sich der Zahlenbereich  
+```  
+[-2^(8-1); +2^(8-1)-1] ... [-128, 127] 
+```  
+darstellen. 
+
+Mit 16 Bit:  
+```
+[-2^(16-1); +2^(16-1)-1] ... [-32768, +32767]  
+```  
+
+Negative Binärzahlen werden folgendermaßen kodiert:  
+1.	Vorzeichen nicht beachten und sämtliche Stellen negieren.  
+2.	Den Wert 1 hinzu addieren.  
+
+Beispiel: -4d:  
+```  
+1.	0000 01002b => 1111 1011b
+2.	1111 1011b + 1b => 1111 1100b  
+```   
+Rückumwandlung einer negativen Binärzahl in ihren positiven Betragswert:  
+Genau gleiches Schema 
+
+Beispiel Zahl -4d:  
+```  
+1.	1111 1100b => 0000 0011b
+2.	0000 0011b + 1b => 0000 0100b  
+```   
+
+Beispiel Zahl 1111 1111b (-1d):  
+```  
+1.	1111 1111b => 0000 0000b
+2.	0000 0000b + 1b => 0000 0001b 
+```  
+
