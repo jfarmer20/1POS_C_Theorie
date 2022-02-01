@@ -66,18 +66,20 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [14.3. Umwandlung Binär- ins Dezimalsystem (Horner-Schema)](#143-umwandlung-binär--ins-dezimalsystem-horner-schema)
   - [14.4. Umwandlung Binär- ins Hexadezimalsystem und umgekehrt](#144-umwandlung-binär--ins-hexadezimalsystem-und-umgekehrt)
   - [14.5. Darstellung negativer Zahlen im Binärsystem (2er-Komplement)](#145-darstellung-negativer-zahlen-im-binärsystem-2er-komplement)
-- [15. Arrays (Felder) - 1. Teil](#15-arrays-felder---1-teil)
-  - [15.1. Eindimensionale Arrays](#151-eindimensionale-arrays)
-  - [15.2. Initialisieren von Arrays](#152-initialisieren-von-arrays)
-- [16. Funktionen](#16-funktionen)
-- [17. Arrays (Felder) - 2. Teil](#17-arrays-felder---2-teil)
-  - [17.1. Eindimensionale Arrays dynamisch erzeugen](#171-eindimensionale-arrays-dynamisch-erzeugen)
-  - [17.2. Mehrdimensionale Arrays](#172-mehrdimensionale-arrays)
-  - [17.3. Übergabe von mehrdimensionalen Arrays an Funktionen](#173-übergabe-von-mehrdimensionalen-arrays-an-funktionen)
-  - [17.4. Mehrdimensionale Arrays dynamisch erzeugen](#174-mehrdimensionale-arrays-dynamisch-erzeugen)
-- [18. Anhang](#18-anhang)
-  - [18.1. Weitere Literatur](#181-weitere-literatur)
-  - [18.2. Übersicht des Unterrichtsstoffs](#182-übersicht-des-unterrichtsstoffs)
+- [15. Bitoperatoren](#15-bitoperatoren)
+  - [15.1. Shiftoperatoren](#151-shiftoperatoren)
+- [16. Arrays (Felder) - 1. Teil](#16-arrays-felder---1-teil)
+  - [16.1. Eindimensionale Arrays](#161-eindimensionale-arrays)
+  - [16.2. Initialisieren von Arrays](#162-initialisieren-von-arrays)
+- [17. Funktionen](#17-funktionen)
+- [18. Arrays (Felder) - 2. Teil](#18-arrays-felder---2-teil)
+  - [18.1. Eindimensionale Arrays dynamisch erzeugen](#181-eindimensionale-arrays-dynamisch-erzeugen)
+  - [18.2. Mehrdimensionale Arrays](#182-mehrdimensionale-arrays)
+  - [18.3. Übergabe von mehrdimensionalen Arrays an Funktionen](#183-übergabe-von-mehrdimensionalen-arrays-an-funktionen)
+  - [18.4. Mehrdimensionale Arrays dynamisch erzeugen](#184-mehrdimensionale-arrays-dynamisch-erzeugen)
+- [19. Anhang](#19-anhang)
+  - [19.1. Weitere Literatur](#191-weitere-literatur)
+  - [19.2. Übersicht des Unterrichtsstoffs](#192-übersicht-des-unterrichtsstoffs)
 
 # 1. Einführung
 
@@ -1654,9 +1656,134 @@ Beispiel Zahl 1111 1111b (-1d):
 2.	0000 0000b + 1b => 0000 0001b 
 ```  
 
-# 15. Arrays (Felder) - 1. Teil  
+# 15. Bitoperatoren
 
-## 15.1. Eindimensionale Arrays
+Mit Bitoperatoren lassen sich einzelne Bits von Variablen verändern. 
+
+| Operator | Bedeutung |  
+| :--: | :-- |  
+| ~	| Bitweises Komplement - dreht das Bitmuster des Operanden um |  
+| &	| Bitweises und - ergibt 1 wenn beide Bits 1 sind |  
+| \| | Bitweises oder - ergibt 1 wenn zumindest ein Bit 1 ist |  
+| ^ | Bitweises xor - ergibt 1 wenn beide Bits unterschiedlich sind |  
+| << | Linksshiftoperator |  
+| >> | Rechtsshiftoperator |  
+
+Die folgende Wertetabelle zeigt die möglichen Kombinationen  
+
+| Bit1 | Bit2 | ~Bit1 | Bit1 & Bit2 | Bit1 \| Bit2 | Bit1 ^ Bit2 |  
+| :--: | :--: | :--: | :--: | :--: | :--: |  
+| 0 | 0 | 1 | 0	| 0 | 0 |  
+| 0	| 1	| 1	| 0	| 1 | 1 |  
+| 1	| 0 | 0 | 0 | 1 | 1 |  
+| 1	| 1 | 0 | 1 | 1 | 0 |  
+  
+Beispiel für das bitweise Komplement einer Zahl:  
+
+```C  
+short int x = 4; // x = 0000 0000 0000 0100
+short int y;
+
+y = ~x;          // y = 1111 1111 1111 1011
+printf("Einserkomplement: %d\n", y);
+y = ~x + 1;      // y = 1111 1111 1111 1100
+printf("Zweierkomplement: %d\n", y);
+```  
+
+Ausgabe:  
+
+```  
+Einserkomplement: -5
+Zweierkomplement: -4
+```  
+
+Beispiele für Bitoperatoren:
+
+```C  
+short int a = 13; 	// a = 0000 0000 0000 1101
+short int b = 7; 	// b = 0000 0000 0000 0111
+short int c;
+
+c = a & b; 	// c = 0000 0000 0000 0101
+c = a | b; 	// c = 0000 0000 0000 1111
+c = a ˆ b; 	// c = 0000 0000 0000 1010
+```  
+
+Die Bitoperatoren lassen sich auch mit dem Zuweisungsoperator kombinieren: 
+`&=`, `|=` und `~=`  
+
+Das bitweise ODER kann verwendet werden, um mit Hilfe einer Maske mehrere Bits auf 1 zu setzen, während das bitweise UND verwendet werden kann, um mehrere Bits auf 0 zu setzen. Das folgende Beispiel zeigt den Zusammenhang:  
+
+```C  
+short int a = 0x07A9;     // a = 0000 0111 1010 1001
+
+short int maske = 0x1111; // maske = 0001 0001 0001 0001
+a |= maske;               // a =     0001 0111 1011 1001
+
+maske = 0x3333; // maske = 0011 0011 0011 0011
+a &= maske;     // a =     0001 0011 0011 0001
+```  
+
+Bei der `|=` Verknüpfung bleiben alle gesetzten Bits von `a` erhalten, zusätzlich werden die Bits von `maske` in `a` gesetzt. Das folgt aus der Tatsache dass:
+
+`b | 0 = b` und `b | 1 = 1`  
+
+wobei `b` für einen beliebigen Bitwert (0 oder 1) stehen kann.
+
+Bei der `&=` Verknüpfung werden alle Bits die in `maske` 0 sind, in `a` auf 0 gesetzt. Die Bits, die in `maske` auf 1 gesetzt sind bleiben in `a` erhalten. Das folgt aus der Tatsache dass:  
+
+`b & 0 = 0` und `b & 1 = b`  
+
+wobei `b` für einen beliebigen Bitwert (0 der 1) stehen kann.  
+
+## 15.1. Shiftoperatoren  
+
+Der Linksshiftoperator `<<` schiebt das Bitmuster um den, vom rechten Operanden angegebenen Wert, nach links. Es gelten dabei folgende Regeln:  
+- Die äußerst linken Bits werden herausgeschoben und gehen verloren.  
+- Von der rechten Seite werden Nullen nachgeschoben. 
+- Eine Kombination mit dem Zuweisungsoperator ist möglich: `<<=`.  
+
+Beispiel:
+
+```C  
+short int a = 6;  // a = 0000 0000 0000 0110b = 6d  
+a = a << 3;	      // a = 0000 0000 0011 0000b = 48d  
+```  
+
+Das Verschieben nach links entspricht einer Multiplikation mit 2n, wobei n der Verschiebefaktor ist: `x<<n = x * 2^n`  
+
+Der Rechtsshiftoperator `>>` schiebt das Bitmuster um den, vom rechten Operanden angegebenen Wert, nach rechts. Es gelten dabei folgende Regeln:  
+- Die äußerst rechten Bits werden herausgeschoben und gehen verloren.  
+- Von der linken Seite werden Nullen nachgeschoben wenn:  
+  - Die Variable vom Typ `signed` ist und das Vorzeichenbit 0 ist.  
+  - Die Variable vom Typ `unsigned` ist.  
+- Von der linken Seite werden Einsen nachgeschoben wenn:  
+  - Die Variable vom Typ `signed` ist und das Vorzeichenbit 1 ist  
+- Eine Kombination mit dem Zuweisungsoperator ist möglich: `>>=`.  
+
+Das Verschieben nach rechts entspricht einer Division durch 2^n, wobei n der Verschiebefaktor ist: `x>>n = x / 2^n`  
+
+Beispiel: Die Funktion `showBits()` gibt alle Bits einer Zahl `x` in Gruppen von jeweils einem Byte auf der Konsole aus:  
+
+```C  
+void showBits(int x) {
+    
+  int anzBits = 8 * sizeof(x);
+  int i;
+
+  for (i = anzBits-1; i >= 0; i--) {
+    printf("%d", (x >> i) & 0x0001 );
+    if ( i % 8 == 0) 
+    {
+      printf(" ");
+    }
+  }
+}
+```  
+
+# 16. Arrays (Felder) - 1. Teil  
+
+## 16.1. Eindimensionale Arrays
 
 Ein Array oder Feld ist eine Datenstruktur, die Werte vom gleichen Datentyp zusammenfasst.  
 
@@ -1731,7 +1858,7 @@ Anzahl an Bytes:     40
 Anzahl der Elemente: 10
 ```  
 
-## 15.2. Initialisieren von Arrays
+## 16.2. Initialisieren von Arrays
 
 Genauso wie Variablen haben auch Arrayelemente vor ihrer Initialisierung keinen definierten Wert. Arrays können bei ihrer Deklaration durch einen Initialisierungsblock mit Startwerten belegt werden. Der Block wird in geschwungenen Klammern `{}` eingeschlossen und muss bei der Deklaration des Arrays stehen. Die Werte werden durch Beistriche getrennt aufgelistet. 
 
@@ -1796,13 +1923,13 @@ Groesste Zufallszahl:   81
 Index:                   9
 ```  
 
-# 16. Funktionen  
+# 17. Funktionen  
 
 **To-Do**  
 
-# 17. Arrays (Felder) - 2. Teil  
+# 18. Arrays (Felder) - 2. Teil  
 
-## 17.1. Eindimensionale Arrays dynamisch erzeugen 
+## 18.1. Eindimensionale Arrays dynamisch erzeugen 
 
 Mit der Funktion `malloc()` lässt sich für ein Array ein zusammenhängender Speicherbereich zur Laufzeit reservieren.  
 **Wichtig:** Sobald das Array im Programm nicht mehr benötigt wird, ist der Speicherbereich verlässliche mit der Funktion `free()` wieder freizugeben. 
@@ -1848,7 +1975,7 @@ int main()
 }
 ```
 
-## 17.2. Mehrdimensionale Arrays 
+## 18.2. Mehrdimensionale Arrays 
 
 Jede Dimension des Arrays wird über einen eigenen Index angesprochen. 
 
@@ -1916,7 +2043,7 @@ int aTest[][] = {{1,2},             // Compilerfehler!
 
 Die dritte Deklaration führt zu einem Compilerfehler, da mehr als nur die erste Dimension nicht angegeben sind und der Compiler daher die Arraygröße nicht bestimmen kann. 
 
-## 17.3. Übergabe von mehrdimensionalen Arrays an Funktionen 
+## 18.3. Übergabe von mehrdimensionalen Arrays an Funktionen 
 
 Gleich wie bei eindimensionalen Arrays, erfolgt auch bei mehrdimensionalen Arrays die Parameterübergabe nach dem *call-by-reference* Prinzip. 
 
@@ -1945,7 +2072,7 @@ void initArray(int a2d[][10], int rows, int columns)
 }
 ```
 
-## 17.4. Mehrdimensionale Arrays dynamisch erzeugen 
+## 18.4. Mehrdimensionale Arrays dynamisch erzeugen 
 
 ```c 
 /* 2D_dyn_array.c */
@@ -1998,15 +2125,15 @@ int main(void)
 }
 ```
 
-# 18. Anhang 
+# 19. Anhang 
 
-## 18.1. Weitere Literatur
+## 19.1. Weitere Literatur
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, HTML-Version](https://algs4.cs.princeton.edu/home/)  
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, PDF-Version](https://github.com/Mcdonoughd/CS2223/raw/master/Books/Algorithhms%204th%20Edition%20by%20Robert%20Sedgewick%2C%20Kevin%20Wayne.pdf) 
 
-## 18.2. Übersicht des Unterrichtsstoffs
+## 19.2. Übersicht des Unterrichtsstoffs
 
 * Windows-Command-Shell (cmd): `dir`, `mkdir`, `ren`, `rmdir`, `cd`, `copy`, `del`, `help <command>`, … 
 
