@@ -65,7 +65,7 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [14.2. Umwandlung Binär- ins Dezimalsystem](#142-umwandlung-binär--ins-dezimalsystem)
   - [14.3. Umwandlung Binär- ins Dezimalsystem (Horner-Schema)](#143-umwandlung-binär--ins-dezimalsystem-horner-schema)
   - [14.4. Umwandlung Binär- ins Hexadezimalsystem und umgekehrt](#144-umwandlung-binär--ins-hexadezimalsystem-und-umgekehrt)
-  - [14.5. Darstellung negativer Zahlen im Binärsystem (2er-Komplement)](#145-darstellung-negativer-zahlen-im-binärsystem-2er-komplement)
+  - [14.5. Das 2er-Komplement](#145-das-2er-komplement)
 - [15. Bitoperatoren](#15-bitoperatoren)
   - [15.1. Shiftoperatoren](#151-shiftoperatoren)
 - [16. Arrays (Felder) - 1. Teil](#16-arrays-felder---1-teil)
@@ -500,7 +500,7 @@ Bei den Divisionsoperatoren (`/` und `%`) führt eine Divison durch `0` zu einem
 
 # 5. Datentypen
 
-In C gibt es eine Menge Datentypen, wobei die fett markierten für unseren weiteren Unterricht ausreichend sein werden. Die Größe und Wertebereiche der Datentypen sind nicht normiert. Bei den meisten Systemen gelten aber folgende Werte: 
+In C gibt es viele Datentypen. Die fett markierten werden hauptsächlich in unserem weiteren Unterricht verwendet.  
 
 | Name | Datentyp | Bytes |	Minimalwert | Maximalwert | Formatzeichen |  
 | --- | --- | :---: | --- | --- | --- |  
@@ -510,18 +510,17 @@ In C gibt es eine Menge Datentypen, wobei die fett markierten für unseren weite
 | `float` |	Fließkommazahl, 6-stellige Genauigkeit | 4 | 1.2E-38 | 3.4E+38 | `%f` 
 | **`double`** | Fließkommazahl, 15-stellige Genauigkeit | 8 | 2.3E-308 | 1.7E+308 | `%lf`
 | `short`| Ganze Zahl | 2 | –32.768 | +32.767 | `%d`  
-| `long`|  Ganze Zahl | 4 | (![-2^{31}](./pictures/CodeCogsEqn-31.gif)) | (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif)) | `%ld` 
+| `long`|  Ganze Zahl | 4 | (![-2^{31}](./pictures/CodeCogsEqn-31.gif)) | (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif)) | `%ld`  
 
-
-In C existiert kein logischer Datentyp (Datentyp `boolean`). Stattdessen werden Variablen vom Datentyp `int` für Bedingungen verwendet werden, wobei folgende Regeln gelten:
+In C existiert kein logischer Datentyp `boolean`. Stattdessen werden Variablen vom Datentyp `int` für Bedingungen verwendet werden, wobei folgende Regeln gelten:
 
 Variablenwert gleich 0 -> `FALSE`  
 Variablenwert ungleich 0 -> `TRUE`
 
-Alle Variablen müssen vor ihrer Verwendung **deklariert** werden. Die Deklaration legt den Namen und den Typ fest. Deklarationen müssen immer am Anfang eines Programms stehen. 
+Alle Variablen müssen vor ihrer Verwendung **deklariert** werden. Die Deklaration legt den Namen und den Typ fest.  
 
 Für ganzzahlige Datentypen als auch `char` können die Prefixe `signed` und `unsigned` verwendet werden. Insbesondere bei Bitoperationen ist das letztere Prefix von Bedeutung.  
-Abhängig vom Betriebssystem (16-, 32- oder 64-bit) belegen die einzelnen Datentypen unterschiedlich viel Speicher. Wieviel Speicher sie nun tatsächlich verwenden lässt sich mit dem `sizeof(`*type name*`)`-Operator feststellen.  
+Mit dem `sizeof(`*type name*`)`-Operator lässt sich die Anzahl an Bytes feststellen, die ein Datentyp oder eine Variable im Speicher belegen. 
 
 # 6. `printf()`-Befehl: Formatierte Ausgabe 
 
@@ -1588,7 +1587,7 @@ int main()
 
 ## 14.4. Umwandlung Binär- ins Hexadezimalsystem und umgekehrt  
 
-Das Hexadezimalsystem ist „nur“ eine übersichtlichere Darstellung von Binärzahlen:  
+Das Hexadezimalsystem ist eine übersichtlichere Darstellung von Binärzahlen:  
 
 1001 0110b = 96h  
 
@@ -1616,10 +1615,13 @@ E7F2h = E*16^3 + 7*16^2 + F*16^1 + 2*16^0 = 14*4096 + 7*256 + 15*16 + 2*1 = 5937
 | Zeichenvorrat | 0,1 | 0,1,..,7,8,9 | 0,1,..,9,A,B,..,D,E,F |  
 | Darstellung | 150d | 1001 0110b | 96h |  
 
-## 14.5. Darstellung negativer Zahlen im Binärsystem (2er-Komplement) 
+## 14.5. Das 2er-Komplement 
 
-Es gibt verschiedene Möglichkeiten, negative Zahlen im Binärsystem darzustellen. Z.B., dass man für das Vorzeichen ein separates Bit verwendet.  
-Das 2er-Komplement braucht kein separates Vorzeichen-Bit. Hat das MSB den Wert 1 => negative Zahl. Ist das MSB 0 => positive Zahl.  
+Es gibt verschiedene Möglichkeiten, negative Zahlen im Binärsystem darzustellen. Zum Beispiel, für das Vorzeichen ein separates Bit zu verwendet.  
+
+Das 2er-Komplement verwendet kein separates Vorzeichen-Bit. Dennoch gilt:  
+- Hat das MSB den Wert 1 => negative Zahl  
+- Ist das MSB 0 => positive Zahl  
 
 Mit 8 Bit lässt sich der Zahlenbereich  
 ```  
@@ -1633,16 +1635,17 @@ Mit 16 Bit:
 ```  
 
 Negative Binärzahlen werden folgendermaßen kodiert:  
-1.	Vorzeichen nicht beachten und sämtliche Stellen negieren.  
-2.	Den Wert 1 hinzu addieren.  
+1.	Alle Stellen des positiven Betragwerts der Zahl negieren.  
+2.	Den Wert 1 dazu addieren.  
 
-Beispiel: -4d:  
+Beispiel Zahl -4d:  
 ```  
-1.	0000 01002b => 1111 1011b
+1.	0000 0100b => 1111 1011b
 2.	1111 1011b + 1b => 1111 1100b  
 ```   
-Rückumwandlung einer negativen Binärzahl in ihren positiven Betragswert:  
-Genau gleiches Schema 
+Die Umwandlung einer negativen Binärzahl in ihren positiven Betragswert erfolgt genau gleich:  
+1.	Alle Stellen der Zahl negieren.  
+2.	Den Wert 1 dazu addieren.  
 
 Beispiel Zahl -4d:  
 ```  
@@ -1660,14 +1663,14 @@ Beispiel Zahl 1111 1111b (-1d):
 
 Mit Bitoperatoren lassen sich einzelne Bits von Variablen verändern. 
 
-| Operator | Bedeutung |  
-| :--: | :-- |  
-| ~	| Bitweises Komplement - dreht das Bitmuster des Operanden um |  
-| &	| Bitweises und - ergibt 1 wenn beide Bits 1 sind |  
-| \| | Bitweises oder - ergibt 1 wenn zumindest ein Bit 1 ist |  
-| ^ | Bitweises xor - ergibt 1 wenn beide Bits unterschiedlich sind |  
-| << | Linksshiftoperator |  
-| >> | Rechtsshiftoperator |  
+| Operator | Bezeichnung | Bedeutung |  
+| :--: | :-- | :-- |   
+| ~	| Bitweises Komplement | dreht das Bitmuster des Operanden um |  
+| &	| Bitweises UND | ergibt 1 wenn beide Bits 1 sind |  
+| \| | Bitweises ODER | ergibt 1 wenn zumindest ein Bit 1 ist |  
+| ^ | Bitweises XOR | ergibt 1 wenn beide Bits unterschiedlich sind |  
+| << | Linksshift |  
+| >> | Rechtsshift |  
 
 Die folgende Wertetabelle zeigt die möglichen Kombinationen  
 
@@ -1685,16 +1688,16 @@ short int x = 4; // x = 0000 0000 0000 0100
 short int y;
 
 y = ~x;          // y = 1111 1111 1111 1011
-printf("Einserkomplement: %d\n", y);
+printf("Einserkomplement von %d: %d\n", x, y);
 y = ~x + 1;      // y = 1111 1111 1111 1100
-printf("Zweierkomplement: %d\n", y);
+printf("Zweierkomplement von %d: %d\n", x, y);
 ```  
 
 Ausgabe:  
 
 ```  
-Einserkomplement: -5
-Zweierkomplement: -4
+Einserkomplement von 4: -5
+Zweierkomplement von 4: -4
 ```  
 
 Beispiele für Bitoperatoren:
@@ -1738,47 +1741,66 @@ wobei `b` für einen beliebigen Bitwert (0 der 1) stehen kann.
 
 ## 15.1. Shiftoperatoren  
 
-Der Linksshiftoperator `<<` schiebt das Bitmuster um den, vom rechten Operanden angegebenen Wert, nach links. Es gelten dabei folgende Regeln:  
+Der **Linksshiftoperator `<<`** schiebt das Bitmuster um den vom rechten Operanden angegebenen Wert nach links. Es gelten dabei folgende Regeln:  
 - Die äußerst linken Bits werden herausgeschoben und gehen verloren.  
 - Von der rechten Seite werden Nullen nachgeschoben. 
-- Eine Kombination mit dem Zuweisungsoperator ist möglich: `<<=`.  
+- Eine Kombination mit dem Zuweisungsoperator (`<<=`) ist möglich.  
 
-Beispiel:
+Beispiele:
 
 ```C  
-short int a = 6;  // a = 0000 0000 0000 0110b = 6d  
-a = a << 3;	      // a = 0000 0000 0011 0000b = 48d  
+unsigned char a = 6;  // a = 0000 0110b = 6d  
+a = a << 3;           // a = 0011 0000b = 48d  
+
+signed char b = -4;  // b = 1111 1100b = -4d 
+b = b << 3;          // b = 1110 0000b = -32d
 ```  
 
-Das Verschieben nach links entspricht einer Multiplikation mit 2n, wobei n der Verschiebefaktor ist: `x<<n = x * 2^n`  
+Das Verschieben nach links entspricht einer Multiplikation mit `2^n`, wobei `n` der Verschiebefaktor ist: `x << n = x * 2^n`  
 
-Der Rechtsshiftoperator `>>` schiebt das Bitmuster um den, vom rechten Operanden angegebenen Wert, nach rechts. Es gelten dabei folgende Regeln:  
+Der **Rechtsshiftoperator `>>`** schiebt das Bitmuster um den vom rechten Operanden angegebenen Wert nach rechts. Es gelten dabei folgende Regeln:  
 - Die äußerst rechten Bits werden herausgeschoben und gehen verloren.  
 - Von der linken Seite werden Nullen nachgeschoben wenn:  
-  - Die Variable vom Typ `signed` ist und das Vorzeichenbit 0 ist.  
+  - Die Variable vom Typ `signed` ist und das Vorzeichenbit `0` ist.  
   - Die Variable vom Typ `unsigned` ist.  
 - Von der linken Seite werden Einsen nachgeschoben wenn:  
-  - Die Variable vom Typ `signed` ist und das Vorzeichenbit 1 ist  
-- Eine Kombination mit dem Zuweisungsoperator ist möglich: `>>=`.  
+  - Die Variable vom Typ `signed` ist und das Vorzeichenbit `1` ist  
+- Eine Kombination mit dem Zuweisungsoperator (`>>=`) ist möglich.  
 
-Das Verschieben nach rechts entspricht einer Division durch 2^n, wobei n der Verschiebefaktor ist: `x>>n = x / 2^n`  
+Das Verschieben nach rechts entspricht einer Division durch `2^n`, wobei `n` der Verschiebefaktor ist: `x >> n = x / 2^n`  
 
-Beispiel: Die Funktion `showBits()` gibt alle Bits einer Zahl `x` in Gruppen von jeweils einem Byte auf der Konsole aus:  
+Beispiele:
 
 ```C  
-void showBits(int x) {
-    
-  int anzBits = 8 * sizeof(x);
-  int i;
+unsigned char a = 48;  // a = 0011 0000b = 48d 
+a = a >> 3;            //  a = 0000 0110b = 6d
 
-  for (i = anzBits-1; i >= 0; i--) {
-    printf("%d", (x >> i) & 0x0001 );
-    if ( i % 8 == 0) 
+signed char b = -32;  // b = 1110 0000b = -32d
+b = b >> 3;           // b = 1111 1100b = -4d
+```  
+**Fazit**  
+
+Mit den Shiftoperatoren lassen sich Multiplikation und Division mit 2er Potenzen sehr effizient umsetzen. Und das auch mit negative Zahlen, weil diese mit dem 2er Komplement kodiert sind. 
+
+Folgendes Beispiel liest vom Benutzer eine beliebige ganz Zahl ein und gibt diese binärkodiert, gruppiert in Bytes, am Bildschirm aus:    
+
+```C  
+    int x;
+
+    printf("Number: ");
+    scanf("%d", &x);
+
+    int anzBits = 8 * sizeof(x);
+    int i;
+
+    for (i = anzBits - 1; i >= 0; i--)
     {
-      printf(" ");
+        printf("%d", (x >> i) & 0x0001);
+        if (i % 8 == 0)
+        {
+            printf(" ");
+        }
     }
-  }
-}
 ```  
 
 # 16. Arrays (Felder) - 1. Teil  
