@@ -1623,16 +1623,12 @@ Das 2er-Komplement verwendet kein separates Vorzeichen-Bit. Dennoch gilt:
 - Hat das MSB den Wert 1 => negative Zahl  
 - Ist das MSB 0 => positive Zahl  
 
-Mit 8 Bit lässt sich der Zahlenbereich  
-```  
-[-2^(8-1); +2^(8-1)-1] ... [-128, 127] 
-```  
-darstellen. 
+Mit dem 2er-Komplement lassen sich z.B. folgende Zahlenbereiche darstellen:  
 
-Mit 16 Bit:  
-```
-[-2^(16-1); +2^(16-1)-1] ... [-32768, +32767]  
-```  
+| Bits | Bereich | Bereich |  
+| :-- | :-- | :-- |
+| 8 Bit | `[-2^(8-1); +2^(8-1)-1]` | `[-128; 127]` |  
+| 16 Bit | `[-2^(16-1); +2^(16-1)-1]` | `[-32768; +32767]` |  
 
 Negative Binärzahlen werden folgendermaßen kodiert:  
 1.	Alle Stellen des positiven Betragwerts der Zahl negieren.  
@@ -1640,8 +1636,8 @@ Negative Binärzahlen werden folgendermaßen kodiert:
 
 Beispiel Zahl -4d:  
 ```  
-1.	0000 0100b => 1111 1011b
-2.	1111 1011b + 1b => 1111 1100b  
+1.	4d = 0000 0100b => 1111 1011b
+2.	1111 1011b + 1b = 1111 1100b = -4d  
 ```   
 Die Umwandlung einer negativen Binärzahl in ihren positiven Betragswert erfolgt genau gleich:  
 1.	Alle Stellen der Zahl negieren.  
@@ -1649,14 +1645,51 @@ Die Umwandlung einer negativen Binärzahl in ihren positiven Betragswert erfolgt
 
 Beispiel Zahl -4d:  
 ```  
-1.	1111 1100b => 0000 0011b
-2.	0000 0011b + 1b => 0000 0100b  
+1.	-4d = 1111 1100b => 0000 0011b
+2.	0000 0011b + 1b = 0000 0100b = 4d 
 ```   
 
 Beispiel Zahl 1111 1111b (-1d):  
 ```  
-1.	1111 1111b => 0000 0000b
-2.	0000 0000b + 1b => 0000 0001b 
+1.	-1d = 1111 1111b => 0000 0000b
+2.	0000 0000b + 1b = 0000 0001b = 1d   
+```  
+
+| Dezimalzahl | 2er-Komplement |
+| --: | :-- |
+|  127 | 0111 1111 |  
+|    0 | 0000 0000 |
+|   -1 | 1111 1111 | 
+| -128 | 1000 0000 |
+
+Addition und Subtraktion im Bereich der ganzen Zahlen lassen sich folgendermaßen durchführen: Bei den Minuenden wird das 2er-Komplement gebildet und anschließend werden die Zahlen addiert.  
+
+Beispiel -27 + 3 = -24:  
+
+```  
+-27 + 3 = -24
+
+-27d     1110 0101b
+ +3d           +11b
+----     ----------
+-24d     1110 1000b => 0001 0111b
+                              +1b
+                       ----------
+                          1 1000b = 16d + 8d = 24d
+```  
+
+Beispiel -27 - 3 = -30:  
+
+```  
+-27d - 3d = -27d + (-3d) = -30d
+
+-27d      1110 0101b
+ -3d      1111 1101b
+----      ----------
+-30d    1 1110 0010b => 0 0001 1101b
+                                 +1b
+                        ------------
+                             1 1110b = 16d + 14d = 30d
 ```  
 
 # 15. Bitoperatoren
