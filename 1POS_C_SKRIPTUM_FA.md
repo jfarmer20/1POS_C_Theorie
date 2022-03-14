@@ -72,6 +72,14 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [16.1. Eindimensionale Arrays](#161-eindimensionale-arrays)
   - [16.2. Initialisieren von Arrays](#162-initialisieren-von-arrays)
 - [17. Funktionen](#17-funktionen)
+  - [17.1. Syntax einer Funktion](#171-syntax-einer-funktion)
+  - [17.2. Eigenschaften von Funktionen](#172-eigenschaften-von-funktionen)
+  - [17.3. Funktionsdeklaration](#173-funktionsdeklaration)
+  - [17.4. Lokale Variablen](#174-lokale-variablen)
+  - [17.5. Parameterübergabe](#175-parameterübergabe)
+    - [17.5.1. *Call-by-value*](#1751-call-by-value)
+    - [17.5.2. *Call-by-reference*](#1752-call-by-reference)
+  - [17.6. Rekursive Funktionen](#176-rekursive-funktionen)
 - [18. Arrays (Felder) - 2. Teil](#18-arrays-felder---2-teil)
   - [18.1. Eindimensionale Arrays dynamisch erzeugen](#181-eindimensionale-arrays-dynamisch-erzeugen)
   - [18.2. Mehrdimensionale Arrays](#182-mehrdimensionale-arrays)
@@ -1979,6 +1987,233 @@ Index:                   9
 ```  
 
 # 17. Funktionen  
+
+Eine Funktion (auch Unterprogramm) ist ein abgeschlossener Programmteil, der eine bestimmte Aufgabe durchführt. Jedes C-Programm besteht aus einer oder mehreren Funktionen.  
+Die wichtigste Funktion ist `main()`, die das Hauptprogramm bildet und von der aus weitere Funktionen aufgerufen werden können.  
+
+Mit Funktionen wird ein Programm übersichtlicher:  
+- Ein komplexes umfangreiches Problem wird in kleinere Teilprobleme zerlegt.  
+- Wiederkehrende Teilaufgaben brauchen als Funktion nur einmal umgesetzt werden.  
+
+Für viele Aufgaben gibt es bereits vordefinierte Funktionen in der C-Bibliothek: Funktionen wie `printf()`, `scanf()`, `pow()`, `rand()` usw. haben wir bereits verwendet.  
+
+## 17.1. Syntax einer Funktion  
+
+```c
+rückgabetyp funktionsname(formale_parameterliste)
+{
+  variablendeklarationen;
+  anweisungen;
+  return rückgabewert;
+}
+```  
+
+## 17.2. Eigenschaften von Funktionen  
+
+Die `formale_parameterliste` enthält Datentyp und Name aller Parameter, getrennt durch Beistriche:  
+- Die Liste der formalen Parameter ist optional. Soll nichts übergeben werden, wird die Funktion mit `()` deklariert (z.B. bei `rand()`).  
+- Die `return`-Anweisung beendet die Funktion und kann an beliebiger Stelle, auch mehrmals, stehen.  
+- Fehlt der Rückgabewert bei der return-Anweisung, so wird an die aufrufende Funktion kein Wert zurückgegeben.  
+- Die `return`-Anweisung kann fehlen, wenn als `rückgabetyp` `void` definiert wurde. Der Rücksprung erfolgt dann beim Erreichen des Funktionsendes.  
+
+Die formale und die aktuelle Parameterliste müssen in Anzahl, Reihenfolge und Typ übereinstimmen.  
+
+**Beispiele für Funktionen**  
+
+```c  
+int rectangleArea(int a, int b) // Funktion mit zwei         
+{                               // Formalparameter
+    int result;                 // und Rückgabewert
+    result = a * b;
+    return result;
+}
+
+void printSquareArea(int a) // Funktion gibt keinen Wert zurück, 
+{                           // d.h. return wird nicht gebraucht
+    printf("%d", a * a);
+}
+
+int getSquareArea() // Funktion besitzt keine Formalparameter
+{
+    int a;
+    scanf("%d", &a);
+    return (a * a);
+}
+```  
+
+## 17.3. Funktionsdeklaration  
+
+Innerhalb einer C Quellcodedatei können Funktionen beliebig angeordnet sein. Findet der Compiler einen Funktionsaufruf, so überprüft er diesen auf Richtigkeit. Ist die Funktion im Quellcode jedoch an einer hinteren Stelle definiert, braucht es eine Vorwärtsdeklaration. 
+
+Im folgenden Beispiel stehen zu Beginn die Vorwärtsdeklarationen. Im Hauptprogramm erfolgen die Funktionsaufrufe und am Ende sind die Funktionen implementiert. 
+
+```c  
+int readFromUser();              // Vorwärtsdeklaration der Funktion readFromUser()
+void printUserInput(int number); // Vorwärtsdeklaration der Funktion printUserInput()
+
+int main() // Hauptprogramm
+{
+    int value = 0;
+    value = readFromUser(); // Aufruf der Funktion readFromUser()
+    printUserInput(value);  // Aufruf der Funktion printUserInput()
+    return 0;
+}
+
+int readFromUser() // Implementierung der Funktion readFromUser()
+{
+    int number;
+    printf("Enter a number: ");
+    scanf("%d", &number);
+    return number;
+}
+
+void printUserInput(int number) // Implementierung der Funktion printUserInput()
+{
+    printf("You entered: %d\n", number);
+}
+```  
+
+Screenshot:  
+```  
+Enter a number: 5
+You entered: 5
+```  
+
+## 17.4. Lokale Variablen  
+
+Lokale Variablen werden in einer Funktion oder in einem Anwendungsblock deklariert und sind nur in diesen Code Abschnitten bekannt.  
+
+**Beispiel**  
+
+```c  
+void change()
+{
+    int i = 111;
+    printf("Within function change: %d\n", i);
+}
+
+int main(void)
+{
+    int i = 333;
+    printf("%d\n", i);
+    change();
+    printf("%d\n", i);
+    return 0;
+}
+```  
+
+Screenshot:  
+
+```  
+333
+Within function change: 111
+333  
+```  
+
+Wird die Laufvariable einer `for`-Schleife im Initialisierungsteil deklariert, so handelt es sich um eine lokale Variable die nur im Anwendungsblock der Schleife definiert ist. 
+
+## 17.5. Parameterübergabe
+
+Bei Funktionen ist es oft notwendig, Werte zur Verarbeitung zu übergeben.  
+Wird die Funktion kodiert, müssen dafür Parameter mit Datentyp und Namen, die sogenannte formale Parameterliste, deklariert werden. Diese **formalen Parameter** sind innerhalb der Funktion lokale Variablen. 	
+Beim Aufruf der Funktion wird dann eine Variable oder ein Wert an die Funktion übergeben, man spricht dabei von den **aktuellen Parametern**. Die aktuellen Parameter müssen mit den Formalparametern in Anzahl, Reihenfolge und Typ übereinstimmen.  
+
+**Beispiel**  
+
+```C   
+void function(int number) // number ist der Formalparameter
+{
+    printf("The value of number is: %d\n", number);
+}
+
+int main()                // Hauptprogramm
+{
+    int x = 12;
+    function(x);          // x ist der aktuelle Parameter
+    function(999);        // 999 ist der aktuelle Parameter
+}
+```  
+
+Screenshot:  
+
+```  
+The value of number is: 12
+The value of number is: 999
+```  
+
+### 17.5.1. *Call-by-value*  
+
+In C werden Parameter an Funktionen *by-value* übergeben. Das heißt, vom aktuellen Parameter wird in der Funktion eine lokale Kopie gemacht. Alle Änderungen des Parameters innerhalb der Funktion haben keine Auswirkung auf den Wert der Variablen im aufrufenden Programm.  
+
+**Beispiel**  
+
+```C  
+void increment(int x)
+{
+    x++; // Es wird x nicht aber x aus main() veraendert
+    printf("x within increment(): %d\n", x);
+}
+
+int main(void)
+{
+    int x = 10;
+
+    printf("x before increment() is called: %d\n", x);
+    increment(x);
+    printf("x after increment() was called: %d\n", x);
+    return 0;
+}
+```  
+
+Screenshot:  
+
+```  
+x before increment() is called: 10
+x within increment(): 11
+x after increment() was called: 10
+```  
+
+### 17.5.2. *Call-by-reference*  
+
+Sollen Änderungen von Parametern innerhalb einer Funktion auch in der aufrufenden Funktion wirksam sein, so übergibt man die Parameter *call-by-reference*. Das bedeutet, es werden die Pointer (Zeiger) der entsprechenden Datentypen an die Funktion übergeben. Durch Dereferenzieren des Pointers (d.h. Zugriff auf den Inhalt der Variablen, auf die der Pointer zeigt) ist es möglich, die Werte der Variablen der aufrufenden Funktion zu verändern.  
+
+Ein Pointer (z.B. `int *`, `double *`) repräsentiert die Adresse im Speicher, an der eine Variable abgelegt ist.  
+
+**Beispiel**  
+
+Das folgende Beispiel zeigt das Vertauschen von 2 Variablenwerten in der Funktion swap(), wobei die geänderten Werte auch auf den Variablen im Hauptprogramm wirksam sind: 
+
+
+```C  
+void swap(int *a, int *b) // Vertauscht die Werte von a und b
+{
+    int temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main()
+{
+    int n1 = 1;
+    int n2 = 8;
+    printf("Values before swap: %d %d\n", n1, n2);
+    swap(&n1, &n2);       // Übergabe der Adressen
+    printf("Values after swap:  %d %d\n", n1, n2);
+    return 0;
+}
+```  
+
+Screenshot:  
+
+```  
+Values before swap: 1 8
+Values after swap:  8 1
+```  
+
+Bei der Übergabe der aktuellen Parameter wird durch das Voranstellen des Ampersands '`&`', die Adresse der Variable an die Funktion übergeben. Innerhalb der Funktion werden die Parameter durch Verwenden des `*`-Operators derefenerziert.  
+
+## 17.6. Rekursive Funktionen  
 
 **To-Do**  
 
