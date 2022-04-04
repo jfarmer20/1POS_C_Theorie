@@ -80,6 +80,7 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
     - [17.5.1. *Call-by-value*](#1751-call-by-value)
     - [17.5.2. *Call-by-reference*](#1752-call-by-reference)
   - [17.6. Rekursive Funktionen](#176-rekursive-funktionen)
+    - [17.6.1. Dezimal- nach Binär-Umwandlung - rekusiv](#1761-dezimal--nach-binär-umwandlung---rekusiv)
 - [18. Arrays (Felder) - 2. Teil](#18-arrays-felder---2-teil)
   - [18.1. Eindimensionale Arrays dynamisch erzeugen](#181-eindimensionale-arrays-dynamisch-erzeugen)
   - [18.2. Mehrdimensionale Arrays](#182-mehrdimensionale-arrays)
@@ -1988,14 +1989,13 @@ Index:                   9
 
 # 17. Funktionen  
 
-Eine Funktion (auch Unterprogramm) ist ein abgeschlossener Programmteil, der eine bestimmte Aufgabe durchführt. Jedes C-Programm besteht aus einer oder mehreren Funktionen.  
-Die wichtigste Funktion ist `main()`, die das Hauptprogramm bildet und von der aus weitere Funktionen aufgerufen werden können.  
+Eine Funktion (auch Unterprogramm) ist ein abgeschlossener Programmteil, der eine bestimmte Aufgabe ausführt. Jedes C-Programm besteht zumindest aus einer Funktion - dem Hauptprogramm `main()`. Vom Hauptprogramm aus werden weitere Funktionen aufgerufen.  
+
+Befehle wie `printf()`, `scanf()`, `pow()`, `rand()` usw. sind nichts anderes als Funktionen. Sie stehen uns durch Einbinden der C-Bibliotheken `<stdio.h>`, `<math.h>` und `<stdlib.h>` usw. zur Verfügung.  
 
 Mit Funktionen wird ein Programm übersichtlicher:  
-- Ein komplexes umfangreiches Problem wird in kleinere Teilprobleme zerlegt.  
-- Wiederkehrende Teilaufgaben brauchen als Funktion nur einmal umgesetzt werden.  
-
-Für viele Aufgaben gibt es bereits vordefinierte Funktionen in der C-Bibliothek: Funktionen wie `printf()`, `scanf()`, `pow()`, `rand()` usw. haben wir bereits verwendet.  
+- Ein komplexes umfangreiches Problem wird in Teilprobleme zerlegt.  
+- Wiederkehrende Aufgaben brauchen als Funktion nur einmal umgesetzt werden.  
 
 ## 17.1. Syntax einer Funktion  
 
@@ -2010,56 +2010,55 @@ rückgabetyp funktionsname(formale_parameterliste)
 
 ## 17.2. Eigenschaften von Funktionen  
 
-Die `formale_parameterliste` enthält Datentyp und Name aller Parameter, getrennt durch Beistriche:  
-- Die Liste der formalen Parameter ist optional. Soll nichts übergeben werden, wird die Funktion mit `()` deklariert (z.B. bei `rand()`).  
+- Die `formale_parameterliste` enthält, durch Beistriche getrennt, Datentyp und Name aller Parameter.    
+- Die `formale_parameterliste` ist optional. Soll nichts übergeben werden, wird die Funktion mit `()` deklariert (z.B. bei `rand()`).  
 - Die `return`-Anweisung beendet die Funktion und kann an beliebiger Stelle, auch mehrmals, stehen.  
-- Fehlt der Rückgabewert bei der return-Anweisung, so wird an die aufrufende Funktion kein Wert zurückgegeben.  
-- Die `return`-Anweisung kann fehlen, wenn als `rückgabetyp` `void` definiert wurde. Der Rücksprung erfolgt dann beim Erreichen des Funktionsendes.  
-
-Die formale und die aktuelle Parameterliste müssen in Anzahl, Reihenfolge und Typ übereinstimmen.  
+- Fehlt der Rückgabewert bei der return-Anweisung, so wird kein Wert zurückgegeben. Die Ausführung der Funktion endet an dieser Stelle.  
+- Wird ein Rückgabewert nicht benötigt, so kann die `return`-Anweisung fehlen. Als `rückgabetyp` ist in diesem Fall `void` zu deklarieren.  
+- Die formale und die aktuelle Parameterliste müssen in Anzahl, Reihenfolge und Datentyp übereinstimmen.  
 
 **Beispiele für Funktionen**  
 
 ```c  
-int rectangleArea(int a, int b) // Funktion mit zwei         
-{                               // Formalparameter
-    int result;                 // und Rückgabewert
+int calcRectangleArea(int a, int b) // Funktion mit zwei         
+{                                   // Formalparameter
+    int result;                     // und Rückgabewert
     result = a * b;
     return result;
 }
 
-void printSquareArea(int a) // Funktion gibt keinen Wert zurück, 
-{                           // d.h. return wird nicht gebraucht
-    printf("%d", a * a);
-}
+void printRectangleArea(int a, int b) // Funktion gibt keinen
+{                                     // Wert zurück, 
+    printf("%d", a * b);              // return wird nicht 
+}                                     // benötigt  
 
-int getSquareArea() // Funktion besitzt keine Formalparameter
+int scanSideA() // Funktion besitzt keine Formalparameter
 {
     int a;
     scanf("%d", &a);
-    return (a * a);
+    return a;
 }
 ```  
 
 ## 17.3. Funktionsdeklaration  
 
-Innerhalb einer C Quellcodedatei können Funktionen beliebig angeordnet sein. Findet der Compiler einen Funktionsaufruf, so überprüft er diesen auf Richtigkeit. Ist die Funktion im Quellcode jedoch an einer hinteren Stelle definiert, braucht es eine Vorwärtsdeklaration. 
+Innerhalb einer C Quellcodedatei können Funktionen beliebig angeordnet sein. Findet der Compiler einen Funktionsaufruf, so überprüft er dessen Richtigkeit. Ist die Funktion im Quellcode jedoch an einer späteren Stelle definiert, braucht es eine Vorwärtsdeklaration. 
 
-Im folgenden Beispiel stehen zu Beginn die Vorwärtsdeklarationen. Im Hauptprogramm erfolgen die Funktionsaufrufe und am Ende sind die Funktionen implementiert. 
+Im folgenden Beispiel stehen zu Beginn die Vorwärtsdeklarationen. Im Hauptprogramm erfolgen die Funktionsaufrufe. Am Ende sind die Funktionen implementiert. 
 
 ```c  
-int readFromUser();              // Vorwärtsdeklaration der Funktion readFromUser()
-void printUserInput(int number); // Vorwärtsdeklaration der Funktion printUserInput()
+int readFromUser();              // Vorwärtsdeklaration
+void printUserInput(int number); // Vorwärtsdeklaration
 
-int main() // Hauptprogramm
+int main()                       // Hauptprogramm
 {
     int value = 0;
-    value = readFromUser(); // Aufruf der Funktion readFromUser()
-    printUserInput(value);  // Aufruf der Funktion printUserInput()
+    value = readFromUser();      // Funktionsaufruf
+    printUserInput(value);       // Funktionsaufruf
     return 0;
 }
 
-int readFromUser() // Implementierung der Funktion readFromUser()
+int readFromUser()              // Implementierung der Funktion
 {
     int number;
     printf("Enter a number: ");
@@ -2067,7 +2066,7 @@ int readFromUser() // Implementierung der Funktion readFromUser()
     return number;
 }
 
-void printUserInput(int number) // Implementierung der Funktion printUserInput()
+void printUserInput(int number) // Implementierung der Funktion
 {
     printf("You entered: %d\n", number);
 }
@@ -2081,7 +2080,7 @@ You entered: 5
 
 ## 17.4. Lokale Variablen  
 
-Lokale Variablen werden in einer Funktion oder in einem Anwendungsblock deklariert und sind nur in diesen Code Abschnitten bekannt.  
+Werden Variablen in einer Funktion oder in einem Anwendungsblock deklariert, dann sind sie nur in diesem Codeabschnitt bekannt und werden als lokale Veriablen bezeichnet.  
 
 **Beispiel**  
 
@@ -2089,7 +2088,7 @@ Lokale Variablen werden in einer Funktion oder in einem Anwendungsblock deklarie
 void change()
 {
     int i = 111;
-    printf("Within function change: %d\n", i);
+    printf("Within function: %d\n", i);
 }
 
 int main(void)
@@ -2106,11 +2105,11 @@ Screenshot:
 
 ```  
 333
-Within function change: 111
+Within function: 111
 333  
 ```  
 
-Wird die Laufvariable einer `for`-Schleife im Initialisierungsteil deklariert, so handelt es sich um eine lokale Variable die nur im Anwendungsblock der Schleife definiert ist. 
+Wird die Laufvariable einer `for`-Schleife im Initialisierungsteil deklariert, so ist sie eine lokale Variable und auch nur im Codeabschnitt der Schleife definiert.  
 
 ## 17.5. Parameterübergabe
 
@@ -2143,7 +2142,7 @@ The value of number is: 999
 
 ### 17.5.1. *Call-by-value*  
 
-In C werden Parameter an Funktionen *by-value* übergeben. Das heißt, vom aktuellen Parameter wird in der Funktion eine lokale Kopie gemacht. Alle Änderungen des Parameters innerhalb der Funktion haben keine Auswirkung auf den Wert der Variablen im aufrufenden Programm.  
+In C werden Parameter an Funktionen *by-value* übergeben. Das heißt, vom aktuellen Parameter wird in der Funktion eine lokale Kopie angelegt. Alle Änderungen des Parameters innerhalb der Funktion haben keine Auswirkung auf den Wert der Variablen im aufrufenden Programm.  
 
 **Beispiel**  
 
@@ -2175,13 +2174,17 @@ x after increment() was called: 10
 
 ### 17.5.2. *Call-by-reference*  
 
-Sollen Änderungen von Parametern innerhalb einer Funktion auch in der aufrufenden Funktion wirksam sein, so übergibt man die Parameter *call-by-reference*. Das bedeutet, es werden die Pointer (Zeiger) der entsprechenden Datentypen an die Funktion übergeben. Durch Dereferenzieren des Pointers (d.h. Zugriff auf den Inhalt der Variablen, auf die der Pointer zeigt) ist es möglich, die Werte der Variablen der aufrufenden Funktion zu verändern.  
+Bei *call-by-reference* ist eine Änderung eines Parameters innerhalb einer Funktion auch im aufrufendem Code wirksam. Komplexe Datentypen wie Arrays können nur *call-by-reference* übergeben werden.  
 
-Ein Pointer (z.B. `int *`, `double *`) repräsentiert die Adresse im Speicher, an der eine Variable abgelegt ist.  
+Eine Parameterübergabe *call-by-reference* bedeutet, dass die Speicheradresse einer Variablen - **Pointer**, **Zeiger** oder **Referenz** genannt - an die Funktion übergeben wird.  
+
+Durch Dereferenzieren des Pointers (d.h. Zugriff auf den Inhalt der Speicheradresse, auf die der Pointer zeigt) ist es möglich, den Wert der Variablen zu verändern.  
+
+Ein Pointer (z.B. `int *`, `double *`, ...) repräsentiert die Adresse im Speicher, an der ein Variableninhalt abgelegt ist.  
 
 **Beispiel**  
 
-Das folgende Beispiel zeigt das Vertauschen von 2 Variablenwerten in der Funktion swap(), wobei die geänderten Werte auch auf den Variablen im Hauptprogramm wirksam sind: 
+Das folgende Beispiel zeigt das Vertauschen von 2 Variablenwerten in der Funktion swap(). Die geänderten Werte sind anschließend auch im Hauptprogramm wirksam.  
 
 
 ```C  
@@ -2211,11 +2214,90 @@ Values before swap: 1 8
 Values after swap:  8 1
 ```  
 
-Bei der Übergabe der aktuellen Parameter wird durch das Voranstellen des Ampersands '`&`', die Adresse der Variable an die Funktion übergeben. Innerhalb der Funktion werden die Parameter durch Verwenden des `*`-Operators derefenerziert.  
+Bei der Übergabe der aktuellen Parameter wird durch das Voranstellen des Ampersands '`&`', die Adresse der Variable an die Funktion übergeben. Innerhalb der Funktion werden die Parameter durch Verwenden des `*`-Operators dereferenziert.  
 
 ## 17.6. Rekursive Funktionen  
 
-**To-Do**  
+Wird eine Aufgabe mit einer `while`- oder `for`-Schleife - einer sogenannten **Iteration** - gelöst, bezeichnen wir die Problemlösung als **iterativ**.  
+
+In manchen Situationen ist eine **rekursive** Problemlösung eleganter. Eine **Rekursion** ist eine Funktion, die sich selbst aufruft.  
+
+Betrachten wir den folgenden Code. 
+
+```C  
+#include <stdio.h>
+
+void launchRocket(int n)
+{
+    if (n == 0)
+        printf("Blast-off! ");
+    else
+    {
+        printf("%d ", n);
+        launchRocket(n - 1);
+    }
+}
+
+int main()
+{
+    launchRocket(10);
+    return 0;
+}
+```  
+Mit der zugehörigen Bildschirmausgabe. 
+```  
+10 9 8 7 6 5 4 3 2 1 Blast-off! 
+```  
+An die Funktion `launchRocket` wird ein einziger Parameter übergeben. Ist dieser `0`, so wird `Blast-off!` ausgegeben und das Programm beendet. Bei einem anderen Wert wird dieser angezeigt und `launchRocket` wird erneut mit `n-1` aufgerufen.  
+
+### 17.6.1. Dezimal- nach Binär-Umwandlung - rekusiv 
+
+Im Beispiel `launchRocket()` vertauschen wir im `else`-Zweig, die Ausgabe des Countdown-Wertes mit dem rekursiven Funktionsaufruf.  
+
+```C  
+void launchRocket2(int n)
+{
+    if (n == 0)
+        printf("Blast-off! ");
+    else
+    {
+        launchRocket2(n - 1);
+        printf("%d ", n);
+    }
+}
+```  
+Die zugehörige Bildschirmausgabe schaut nun folgendermaßen aus. 
+```  
+Blast-off! 1 2 3 4 5 6 7 8 9 10 
+``` 
+Das löst bei einer Dezimal- nach Binär-Umwandlung das Problem, das *most significant bit* (MSB) erst zum Schluss zu erhalten. Ein Dezimal- nach Binär-Umwandlung lässt sich folgendermaßen rekursiv elegant lösen.  
+
+```C  
+#include <stdio.h>
+
+void displayBinaryValue(int decimalValue)
+{
+    if (decimalValue > 0)
+    {
+        displayBinaryValue(decimalValue / 2);
+        printf("%d", decimalValue % 2);
+    }
+}
+
+int main()
+{
+    int value;
+    printf("Decimal value: ");
+    scanf("%d", &value);
+    displayBinaryValue(value);
+    return 0;
+}
+```  
+**Screenshot**  
+```  
+Decimal value: 23
+10111
+```  
 
 # 18. Arrays (Felder) - 2. Teil  
 
