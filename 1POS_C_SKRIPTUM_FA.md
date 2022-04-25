@@ -818,7 +818,7 @@ char c;
 c = str[0];    // Weist der Variablen c das Zeichen 'H' zu 
 ```
 
-Zur Umwandlung von Zeichenketten in numerische Werte stellt die Bibliothek `<stdlib.h>` unter anderem folgende Konvertierungsfunktionen zu Verfügung: 
+Zur Umwandlung von Zeichenketten in numerische Werte stellt die Bibliothek `<string.h>` unter anderem folgende Konvertierungsfunktionen zu Verfügung: 
 
 ```c 
 int atoi(<String>)	    // Konvertierung von String in int
