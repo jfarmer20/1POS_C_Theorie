@@ -815,7 +815,7 @@ Der Zugriff auf einzelne Zeichen eines Stringliterals erfolgt folgendermaßen:
 ```c 
 char str[] = { "Hallo" };
 char c; 
-c = str[0];    // Weist der Variablen c das Zeichen ‚'H' zu 
+c = str[0];    // Weist der Variablen c das Zeichen 'H' zu 
 ```
 
 Zur Umwandlung von Zeichenketten in numerische Werte stellt die Bibliothek `<stdlib.h>` unter anderem folgende Konvertierungsfunktionen zu Verfügung: 
@@ -2216,11 +2216,11 @@ Bei der Übergabe der aktuellen Parameter wird durch das Voranstellen des Ampers
 
 ## 17.6. Rekursive Funktionen  
 
-Wird eine Aufgabe mit einer `while`- oder `for`-Schleife - einer sogenannten **Iteration** - gelöst, bezeichnen wir die Problemlösung als **iterativ**.  
+Wird eine Aufgabe mit einer Schleife - einer sogenannten **Iteration** - gelöst, bezeichnen wir die Problemlösung als **iterativ**.  
 
 In manchen Situationen ist eine **rekursive** Problemlösung eleganter. Eine **Rekursion** ist eine Funktion, die sich selbst aufruft.  
 
-Betrachten wir den folgenden Code. 
+Betrachten wir folgenden Code. 
 
 ```C  
 #include <stdio.h>
@@ -2246,11 +2246,9 @@ Mit der zugehörigen Bildschirmausgabe.
 ```  
 10 9 8 7 6 5 4 3 2 1 Blast-off! 
 ```  
-An die Funktion `launchRocket` wird ein einziger Parameter übergeben. Ist dieser `0`, so wird `Blast-off!` ausgegeben und das Programm beendet. Bei einem anderen Wert wird dieser angezeigt und `launchRocket` wird erneut mit `n-1` aufgerufen.  
+An die Funktion `launchRocket` wird ein einziger Wert übergeben. Ist dieser `0`, so wird `Blast-off!` ausgegeben und das Programm endet. Wird ein anderer Wert `n` übergeben, so wird dieser ausgegeben und `launchRocket` erneut mit dem Wert `n-1` aufgerufen.  
 
-### 17.6.1. Dezimal- nach Binär-Umwandlung - rekusiv 
-
-Im Beispiel `launchRocket()` vertauschen wir im `else`-Zweig, die Ausgabe des Countdown-Wertes mit dem rekursiven Funktionsaufruf.  
+Wenn wir nun im Beispiel `launchRocket()` im `else`-Zweig die Ausgabe des Countdown-Wertes mit dem rekursiven Funktionsaufruf vertauschen, erhalten wir folgenden Code mit folgender Bildschirmausgabe:    
 
 ```C  
 void launchRocket2(int n)
@@ -2264,11 +2262,14 @@ void launchRocket2(int n)
     }
 }
 ```  
-Die zugehörige Bildschirmausgabe schaut nun folgendermaßen aus. 
+Bildschirmausgabe: 
 ```  
 Blast-off! 1 2 3 4 5 6 7 8 9 10 
 ``` 
-Das löst bei einer Dezimal- nach Binär-Umwandlung das Problem, das *most significant bit* (MSB) erst zum Schluss zu erhalten. Ein Dezimal- nach Binär-Umwandlung lässt sich folgendermaßen rekursiv elegant lösen.  
+
+### 17.6.1. Dezimal- nach Binär-Umwandlung - rekusiv  
+
+Die Variante 2 des `launchRocket()`-Beispiels löst bei einer Dezimal- nach Binär-Umwandlung das Problem, dass das *most significant bit* (MSB) erst am Ende der Umwandlung zur Verfügung steht. Eine Dezimal- nach Binär-Umwandlung lässt sich somit folgendermaßen mit einer Rekursion elegant lösen.  
 
 ```C  
 #include <stdio.h>
@@ -2291,7 +2292,8 @@ int main()
     return 0;
 }
 ```  
-**Screenshot**  
+
+**Bildschirmausgabe**  
 ```  
 Decimal value: 23
 10111
