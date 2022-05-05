@@ -89,6 +89,7 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
 - [19. Anhang](#19-anhang)
   - [19.1. Weitere Literatur](#191-weitere-literatur)
   - [19.2. Übersicht des Unterrichtsstoffs](#192-übersicht-des-unterrichtsstoffs)
+  - [19.3. Code Style Rules](#193-code-style-rules)
 
 # 1. Einführung
 
@@ -2552,4 +2553,32 @@ int main(void)
 
 * Strukturen
 
-* Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen) 
+* Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen)  
+
+## 19.3. Code Style Rules  
+
+Für alle **Bezeichner** (Variablen-, Funktionsnamen) ist Englisch und die CamelCase-Schreibweise zu verwenden (z.B. `counter`, `lastElement`, `getMinimum(...)`, `print2Screen(...)`). Variablenbezeichner dürfen, sofern der Code trotzdem leicht erfassbar bleibt, auch nur aus einem Buchstaben bestehen.  
+
+**Pro Zeile** nur eine Initialisierung bzw. Anweisung.  
+
+Code muss **auto-formatiert** sein (Tastenkombination `Shift`+`Alt`+`Entf` in VS Code).  
+
+ **Leerzeilen** sind zwischen dem `#include`-, `#define`-Bock, dem Block der Vorwärtsdeklarationen und den einzelnen Funktionen einzufügen. 
+
+
+Es sind **symbolische Konstanten** zu definieren und diese sind im Code auch zu verwenden (z.B. Array-Größe, Intervallgrenzen bei Zufallszahlen).  
+
+**Arrays als formale Parameter** in Funktionen sind immer zusammen mit der Array-Größe zu übergeben und folgendermaßen zu spezifizieren:  
+```C  
+void print2screen(int a[], int arraySize); 
+```  
+
+**Bezeichner für Pointer** beginnen mit einem p:  
+```C 
+int *pArea; 
+```  
+
+**Code muss jederzeit kompilier- und ausführbar sein.**  
+
+
+
