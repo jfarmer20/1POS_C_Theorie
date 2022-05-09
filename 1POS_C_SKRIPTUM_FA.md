@@ -82,6 +82,7 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
 - [18. Rekursive Funktionen](#18-rekursive-funktionen)
   - [18.1. Dezimal- nach Binär-Umwandlung - rekusiv](#181-dezimal--nach-binär-umwandlung---rekusiv)
   - [18.2. Stack Diagramme](#182-stack-diagramme)
+  - [18.3. Die Fibonacci-Folge mit Hasenpaaren erklärt](#183-die-fibonacci-folge-mit-hasenpaaren-erklärt)
 - [19. Mehrere .c- und -.h-Dateien kompilieren](#19-mehrere-c--und--h-dateien-kompilieren)
 - [20. Arrays (Felder) - 2. Teil](#20-arrays-felder---2-teil)
   - [20.1. Eindimensionale Arrays dynamisch erzeugen](#201-eindimensionale-arrays-dynamisch-erzeugen)
@@ -2475,7 +2476,46 @@ Die Ausgabe ergibt sich aus dem Stack Diagramm von rechts nach links zusammengef
 ```  
 Blast-off! 1 2 3 
 ```  
+
+## 18.3. Die Fibonacci-Folge mit Hasenpaaren erklärt 
+
+Nehmen wir an, wir haben ein Hasenpaar, das nach einem Monat geschlechtsreif wird und dann monatlich ein Hasenpaar wirft. Dadurch ergibt sich folgende Hasenpopulation:  
+
+|||||||||||  
+|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|
+| **Monat**        | 1 | 2 | 3 | 4 | 5 | 6 | 7  | 8  | ... |   
+| **# Hasenpaare** | 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | ... | 
  
+Die Zeitreihe der Hasenpopulation lässt sich mit der Fibonacci-Folge mathematisch beschreiben:  
+
+```
+fibonacci(1) = 1
+fibonacci(2) = 1
+fibonacci(n) = fibonacci(n-1) + fibonacci(n-2)  
+```  
+
+Gegenüberstellung Fibonacci-Folge, rekursiv versus iterativ  
+
+```C  
+long fibonacciR(int n)               long fibonacciI(int n)
+{                                    {
+    if (n < 3)                           long n_2 = 1;
+    {                                    long n_1 = 1;
+        return 1;                        long n_0;
+    }                                    if (n == 2 || n == 1)
+    else                                     return 1;
+    {                                    for (int i = 3; i <= n; i++)
+        return fibonacciR(n - 1) +       {
+               fibonacciR(n - 2);            n_0 = n_1 + n_2;
+    }                                        n_2 = n_1;
+}                                            n_1 = n_0;
+                                         }
+                                         return n_0;
+                                     }
+```  
+
+Ab dem 40. Folgenelement wird ersichtlich, dass die rekursive Funktion sehr ineffizient ist. Erkläre warum! 
+
 # 19. Mehrere .c- und -.h-Dateien kompilieren  
 
 Funktionen werden eingesetzt, um die Komplexität von Code zu reduzieren und Code wiederverwendbar zu machen.  
