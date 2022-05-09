@@ -2465,9 +2465,9 @@ Am Call Stack wurden die Funktionsaufrufe folgendermaßen abgelegt.
 
 ```  
 ||        ||
-|| lR2(3) ||
-|| lR2(2) ||
 || lR2(1) ||
+|| lR2(2) ||
+|| lR2(3) ||
 ============
 ```  
 
