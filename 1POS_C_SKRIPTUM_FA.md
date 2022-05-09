@@ -79,18 +79,19 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [17.5. Parameterübergabe](#175-parameterübergabe)
     - [17.5.1. *Call-by-value*](#1751-call-by-value)
     - [17.5.2. *Call-by-reference*](#1752-call-by-reference)
-- [17.6. Rekursive Funktionen](#176-rekursive-funktionen)
-  - [17.6.1. Dezimal- nach Binär-Umwandlung - rekusiv](#1761-dezimal--nach-binär-umwandlung---rekusiv)
-- [Mehrere .c- und -h-Dateien kompilieren](#mehrere-c--und--h-dateien-kompilieren)
-- [18. Arrays (Felder) - 2. Teil](#18-arrays-felder---2-teil)
-  - [18.1. Eindimensionale Arrays dynamisch erzeugen](#181-eindimensionale-arrays-dynamisch-erzeugen)
-  - [18.2. Mehrdimensionale Arrays](#182-mehrdimensionale-arrays)
-  - [18.3. Übergabe von mehrdimensionalen Arrays an Funktionen](#183-übergabe-von-mehrdimensionalen-arrays-an-funktionen)
-  - [18.4. Mehrdimensionale Arrays dynamisch erzeugen](#184-mehrdimensionale-arrays-dynamisch-erzeugen)
-- [19. Anhang](#19-anhang)
-  - [19.1. Weitere Literatur](#191-weitere-literatur)
-  - [19.2. Übersicht des Unterrichtsstoffs](#192-übersicht-des-unterrichtsstoffs)
-  - [19.3. Code Style Rules](#193-code-style-rules)
+- [18. Rekursive Funktionen](#18-rekursive-funktionen)
+  - [18.1. Dezimal- nach Binär-Umwandlung - rekusiv](#181-dezimal--nach-binär-umwandlung---rekusiv)
+  - [18.2. Stack Diagramme](#182-stack-diagramme)
+- [19. Mehrere .c- und -.h-Dateien kompilieren](#19-mehrere-c--und--h-dateien-kompilieren)
+- [20. Arrays (Felder) - 2. Teil](#20-arrays-felder---2-teil)
+  - [20.1. Eindimensionale Arrays dynamisch erzeugen](#201-eindimensionale-arrays-dynamisch-erzeugen)
+  - [20.2. Mehrdimensionale Arrays](#202-mehrdimensionale-arrays)
+  - [20.3. Übergabe von mehrdimensionalen Arrays an Funktionen](#203-übergabe-von-mehrdimensionalen-arrays-an-funktionen)
+  - [20.4. Mehrdimensionale Arrays dynamisch erzeugen](#204-mehrdimensionale-arrays-dynamisch-erzeugen)
+- [21. Anhang](#21-anhang)
+  - [21.1. Weitere Literatur](#211-weitere-literatur)
+  - [21.2. Übersicht des Unterrichtsstoffs](#212-übersicht-des-unterrichtsstoffs)
+  - [21.3. Code Style Rules](#213-code-style-rules)
 
 # 1. Einführung
 
@@ -349,9 +350,6 @@ und mit den Tasten `F5` (debuggen)  oder `Strg` + `F5` (nur ausführen) fortsetz
 
 ```JSON  
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
@@ -388,9 +386,6 @@ und mit den Tasten `F5` (debuggen)  oder `Strg` + `F5` (nur ausführen) fortsetz
 
 ```JSON  
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
@@ -2359,7 +2354,7 @@ Values after swap:  8 1
 
 Bei der Übergabe der aktuellen Parameter wird durch das Voranstellen des Ampersands '`&`', die Adresse der Variable an die Funktion übergeben. Innerhalb der Funktion werden die Parameter durch Verwenden des `*`-Operators dereferenziert.  
 
-# 17.6. Rekursive Funktionen  
+# 18. Rekursive Funktionen  
 
 Wird eine Aufgabe mit einer Schleife - einer sogenannten **Iteration** - gelöst, bezeichnen wir die Problemlösung als **iterativ**.  
 
@@ -2412,7 +2407,7 @@ Bildschirmausgabe:
 Blast-off! 1 2 3 4 5 6 7 8 9 10 
 ``` 
 
-## 17.6.1. Dezimal- nach Binär-Umwandlung - rekusiv  
+## 18.1. Dezimal- nach Binär-Umwandlung - rekusiv  
 
 Die Variante 2 des `launchRocket()`-Beispiels löst bei einer Dezimal- nach Binär-Umwandlung das Problem, dass das *most significant bit* (MSB) erst am Ende der Umwandlung zur Verfügung steht. Eine Dezimal- nach Binär-Umwandlung lässt sich somit folgendermaßen mit einer Rekursion elegant lösen.  
 
@@ -2444,7 +2439,44 @@ Decimal value: 23
 10111
 ```  
 
-# Mehrere .c- und -h-Dateien kompilieren  
+## 18.2. Stack Diagramme  
+
+Ein **Stack** (dt. Stapel) ist ein wichtiges Konzept, zur Erledigung von *tasks* (dt. Aufgaben). Einen Stack kann man sich wie einen Einkaufswagen im Supermarkt vorstellen. Die Dinge, die zuerst im Einkaufswagerl landen, werden beim Bezahlen zuletzt aufs Förderband gelegt. Die Tasks werden nach dem **lifo-Prinzip** abgearbeitet (*last-in-first-out*).  
+Das Gegenteil zum *Stack* ist die **Queue**. Hier erfolgt das Abarbeiten der Tasks nach dem **fifo-Prinzip** (*first-in-first-out*).  
+
+Fürs Ausführen von Rekursionen verwendet der Rechner einen sogenannten **Call Stack**. Wird eine Funktion innerhalb einer Funktion aufgerufen, so wird die aufrufende Funktion am Call Stack abgelegt und erst fortgesetzt, wenn die aufgerufene Funktion vollständig abgearbeitet ist. 
+
+Betrachten wir ein Stack-Diagramm für die Funktion `launchRocket2(int n)`, aufgerufen mit dem Wert `3` für `n`. Die Herangehensweise ist ähnlich den Schreibtischtests von Schleifen.  
+
+```  
+void launchRocket2(int n)  | lR2(3)   | lR2(2)   | lR2(1)   | lR2(0)         |  
+{                          |          |          |          |                |
+  if (n == 0)              |          |          |          | Basis erreicht |
+    printf("Blast-off! "); |          |          |          | "Blast-off! "  |
+  else                     |          |          |          |                |
+  {                        |          |          |          |                |
+    launchRocket2(n - 1);  | lR2(3-1) | lR2(2-1) | lR2(1-1) |                |
+    printf("%d ", n);      | "3 "     | "2 "     | "1 "     |                |
+  }                        |          |          |          |                |
+}                          |          |          |          |                |
+```  
+
+Am Call Stack wurden die Funktionsaufrufe folgendermaßen abgelegt. 
+
+```  
+||        ||
+|| lR2(3) ||
+|| lR2(2) ||
+|| lR2(1) ||
+============
+```  
+
+Die Ausgabe ergibt sich aus dem Stack Diagramm von rechts nach links zusammengefügt:  
+```  
+Blast-off! 1 2 3 
+```  
+ 
+# 19. Mehrere .c- und -.h-Dateien kompilieren  
 
 Funktionen werden eingesetzt, um die Komplexität von Code zu reduzieren und Code wiederverwendbar zu machen.  
 Funktionen können nun auch in separaten .c-Dateien ausgelagert und mit den Vorwärtsdeklarationen in .h-Dateien (den sogenannten Header-Dateien) beim Kompilieren eingebunden werden.  
@@ -2499,12 +2531,12 @@ in der Konfigurationsdatei `.vscode/tasks.json`:
   ],
 ```  
 
-# 18. Arrays (Felder) - 2. Teil  
+# 20. Arrays (Felder) - 2. Teil  
 
-## 18.1. Eindimensionale Arrays dynamisch erzeugen 
+## 20.1. Eindimensionale Arrays dynamisch erzeugen 
 
 Mit der Funktion `malloc()` lässt sich für ein Array ein zusammenhängender Speicherbereich zur Laufzeit reservieren.  
-**Wichtig:** Sobald das Array im Programm nicht mehr benötigt wird, ist der Speicherbereich verlässliche mit der Funktion `free()` wieder freizugeben. 
+**Wichtig:** Sobald das Array im Programm nicht mehr benötigt wird, ist der Speicherbereich verlässlich mit der Funktion `free()` wieder freizugeben. 
 
 Im folgende Programm wird ein Array dynamisch erzeugt, initialisiert, am Bildschirm ausgegeben und dessen Speicherbereich am Ende wieder freigegeben. 
 
@@ -2547,7 +2579,7 @@ int main()
 }
 ```
 
-## 18.2. Mehrdimensionale Arrays 
+## 20.2. Mehrdimensionale Arrays 
 
 Jede Dimension des Arrays wird über einen eigenen Index angesprochen. 
 
@@ -2615,7 +2647,7 @@ int aTest[][] = {{1,2},             // Compilerfehler!
 
 Die dritte Deklaration führt zu einem Compilerfehler, da mehr als nur die erste Dimension nicht angegeben sind und der Compiler daher die Arraygröße nicht bestimmen kann. 
 
-## 18.3. Übergabe von mehrdimensionalen Arrays an Funktionen 
+## 20.3. Übergabe von mehrdimensionalen Arrays an Funktionen 
 
 Gleich wie bei eindimensionalen Arrays, erfolgt auch bei mehrdimensionalen Arrays die Parameterübergabe nach dem *call-by-reference* Prinzip. 
 
@@ -2644,7 +2676,7 @@ void initArray(int a2d[][10], int rows, int columns)
 }
 ```
 
-## 18.4. Mehrdimensionale Arrays dynamisch erzeugen 
+## 20.4. Mehrdimensionale Arrays dynamisch erzeugen 
 
 ```c 
 /* 2D_dyn_array.c */
@@ -2697,15 +2729,15 @@ int main(void)
 }
 ```
 
-# 19. Anhang 
+# 21. Anhang 
 
-## 19.1. Weitere Literatur
+## 21.1. Weitere Literatur
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, HTML-Version](https://algs4.cs.princeton.edu/home/)  
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, PDF-Version](https://github.com/Mcdonoughd/CS2223/raw/master/Books/Algorithhms%204th%20Edition%20by%20Robert%20Sedgewick%2C%20Kevin%20Wayne.pdf) 
 
-## 19.2. Übersicht des Unterrichtsstoffs
+## 21.2. Übersicht des Unterrichtsstoffs
 
 * Windows-Command-Shell (cmd): `dir`, `mkdir`, `ren`, `rmdir`, `cd`, `copy`, `del`, `help <command>`, … 
 
@@ -2754,7 +2786,7 @@ int main(void)
 
 * Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen)  
 
-## 19.3. Code Style Rules  
+## 21.3. Code Style Rules  
 
 Für alle **Bezeichner** (Variablen-, Funktionsnamen) ist Englisch und die CamelCase-Schreibweise zu verwenden (z.B. `counter`, `lastElement`, `getMinimum(...)`, `print2Screen(...)`). Variablenbezeichner dürfen, sofern der Code trotzdem leicht erfassbar bleibt, auch nur aus einem Buchstaben bestehen.  
 
