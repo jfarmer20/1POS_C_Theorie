@@ -17,9 +17,9 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
 - [1. Einführung](#1-einführung)
   - [1.1. Begriffe](#11-begriffe)
   - [1.2. Geschichtliches der Programmiersprache C](#12-geschichtliches-der-programmiersprache-c)
-- [2. Installation der Programmierumgebung auf Windows 10](#2-installation-der-programmierumgebung-auf-windows-10)
-  - [2.1. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *MinGW*](#21-installationsanleitung-für-visual-studio-code-vs-code-auf-windows-10-mit-mingw)
-  - [2.2. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *Windows Subsystem for Linux (WSL)*](#22-installationsanleitung-für-visual-studio-code-vs-code-auf-windows-10-mit-windows-subsystem-for-linux-wsl)
+- [2. Einrichten der Entwicklungsumgebung](#2-einrichten-der-entwicklungsumgebung)
+  - [2.1. Installation auf *Windows 10* direkt](#21-installation-auf-windows-10-direkt)
+  - [2.2. Installation auf *Windows Subsystem for Linux (WSL)*](#22-installation-auf-windows-subsystem-for-linux-wsl)
   - [2.3. Erstes Programm mit Visual Studio Code (VS Code)](#23-erstes-programm-mit-visual-studio-code-vs-code)
   - [2.4. `helloworld.c` kompilieren](#24-helloworldc-kompilieren)
   - [2.5. `helloworld.c` starten/debuggen](#25-helloworldc-startendebuggen)
@@ -79,8 +79,9 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [17.5. Parameterübergabe](#175-parameterübergabe)
     - [17.5.1. *Call-by-value*](#1751-call-by-value)
     - [17.5.2. *Call-by-reference*](#1752-call-by-reference)
-  - [17.6. Rekursive Funktionen](#176-rekursive-funktionen)
-    - [17.6.1. Dezimal- nach Binär-Umwandlung - rekusiv](#1761-dezimal--nach-binär-umwandlung---rekusiv)
+- [17.6. Rekursive Funktionen](#176-rekursive-funktionen)
+  - [17.6.1. Dezimal- nach Binär-Umwandlung - rekusiv](#1761-dezimal--nach-binär-umwandlung---rekusiv)
+- [Mehrere .c- und -h-Dateien kompilieren](#mehrere-c--und--h-dateien-kompilieren)
 - [18. Arrays (Felder) - 2. Teil](#18-arrays-felder---2-teil)
   - [18.1. Eindimensionale Arrays dynamisch erzeugen](#181-eindimensionale-arrays-dynamisch-erzeugen)
   - [18.2. Mehrdimensionale Arrays](#182-mehrdimensionale-arrays)
@@ -133,15 +134,15 @@ C ist eine imperative und prozedurale Programmiersprache. C wurde 1972 „erfund
 
 Im Jahr 1999 erschien C99 mit Elementen der objekt-orientierten Programmiersprache C++. 
 
-# 2. Installation der Programmierumgebung auf Windows 10 
+# 2. Einrichten der Entwicklungsumgebung  
 
-Der Compiler `gcc` und der Debugger `gdb`  sind ein wesentlicher Bestandteil des Betriebssystems Linux. Es macht somit Sinn, `C` auf dem Windows Subsystem for Linux (WSL) zu programmieren. Die Installation dafür ist im übernächsten Abschnitt beschrieben.  
+Der Compiler `gcc` und der Debugger `gdb`  sind ein wesentlicher Bestandteil des Betriebssystems Linux. Es macht somit Sinn, `C`-Programme auf Windows Subsystem for Linux (WSL) zu entwickeln. Die Installation dafür ist im übernächsten Abschnitt beschrieben.  
 
-Will man `C` auf Windows entwickeln, so ist die Konfiguration der Entwicklungsumgebung einfacher und nachfolgend beschrieben. 
+Will man `C`-Programme auf Windows entwickeln, so ist die Konfiguration der Entwicklungsumgebung einfacher und die Installation dafür gleich anschließend beschrieben.  
 
-## 2.1. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *MinGW*  
+## 2.1. Installation auf *Windows 10* direkt  
 
-MinGW (*Minimalist GNU for Windows*) ist eine Portierung der Entwicklerwerkzeuge GNU Compiler Collection (GCC) und GNU Debugger (GDB) auf Windows.  
+Windows 10 stellt keinen `C`-Compiler und -Debugger zur verfügung. Wir installierend daher zuerst MinGW (*Minimalist GNU for Windows*). MinGW ist eine Portierung der Entwicklerwerkzeuge GNU Compiler Collection (GCC) und GNU Debugger (GDB) auf Windows.  
 
 1. MinGW-w64 ist auf Sourceforge unter folgendem Link verfügbar: [Mingw-w64 builds](https://www.mingw-w64.org/downloads/#mingw-builds)  
 
@@ -151,22 +152,24 @@ MinGW (*Minimalist GNU for Windows*) ist eine Portierung der Entwicklerwerkzeuge
 
     ![MinGW64_Installer_Screenshot2](./pictures/MinGW64_Installer_Screenshot2.PNG "MinGW64_Installer_Screenshot2")     
 
-2. Installiere [Visual Studio Code](https://code.visualstudio.com/Download).
-
-1. Installiere die [C/C++ extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).  
-
-    You can install the C/C++ extension by searching for 'c++' in the Extensions view  
-    ![C/C++ extension](./pictures/cpp-extension.png)
-
-
-4. Um zu prüfen, ob die Mingw-w64 Tools richtig installiert sind, offne ein Command Prompt und führe folgendes aus:
+2. Um zu prüfen, ob die Mingw-w64 Tools richtig installiert sind, öffne ein Command Prompt und führe folgendes aus:
 
     ```
      gcc --version
      gdb --version
      ```  
 
-## 2.2. Installationsanleitung für *Visual Studio Code (VS Code)* auf *Windows 10* mit *Windows Subsystem for Linux (WSL)*  
+3. Installiere [Visual Studio Code](https://code.visualstudio.com/Download).
+
+4. Installiere die [C/C++ extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).  
+
+    You can install the C/C++ extension by searching for 'c++' in the Extensions view  
+    ![C/C++ extension](./pictures/cpp-extension.png)
+
+
+
+
+## 2.2. Installation auf *Windows Subsystem for Linux (WSL)*  
 
 1. Windows auf die neueste Version aktualisieren: 
 
@@ -193,7 +196,7 @@ MinGW (*Minimalist GNU for Windows*) ist eine Portierung der Entwicklerwerkzeuge
 
 3. Linux-User anlegen: 
 
-    Einfachen Username und leicht zu merkendes Passwort wählen: 
+    Einen einfachen Username und ein leicht zu merkendes Passwort wählen: 
 
     ![Screenshot_Setup5.PNG](./pictures/Screenshot_Setup5.PNG "Screenshot Linux User Configuration") 
 
@@ -216,8 +219,9 @@ MinGW (*Minimalist GNU for Windows*) ist eine Portierung der Entwicklerwerkzeuge
 
     ![Screenshot_Setup9a.PNG](./pictures/Screenshot_Setup9a.PNG)  
 
-## 2.3. Erstes Programm mit Visual Studio Code (VS Code)
+## 2.3. Erstes Programm mit Visual Studio Code (VS Code)  
 
+In der folgenden Anleitung arbeiten wir im WSL. Unter Windows direkt ist das Ablauf ähnlich.  
 Ubuntu starten und in der Shell Projektverzeichnis erstellen und VS Code starten: 
 
 ```
@@ -252,7 +256,7 @@ int main()         // Funktion main() definiert das Hauptprogramm
 Datei speichern: Menü File -> Save 
 
 ## 2.4. `helloworld.c` kompilieren 
-Um VS Code zu sagen, wie die Quelldatei `helloworld.c` nun zu kompilieren ist, braucht es eine `tasks.json` Datei: 	
+Um VS Code zu sagen, wie die Quelldatei `helloworld.c` zu kompilieren ist, braucht es eine `tasks.json` Datei: 	
 
 Menü `Terminal` > `Configure Default Build Task…` > `C/C++:gcc build active file` auswählen. 
 
@@ -260,7 +264,73 @@ Quelldatei `helloworld.c` auswählen
 
 ![Screenshot Visual Studio Code Command Erstes Programm - Schritt 2](./pictures/Screenshot_VSC_2.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 2")
 
-und mit der Tastenkombination `Strg` + `Shift` + `B` kompilieren. 
+und mit der Tastenkombination `Strg` + `Shift` + `B` kompilieren.  
+
+**tasks.json (WSL)**  
+
+```JSON
+{
+  "version": "2.0.0",
+  "tasks": [
+	{
+	  "type": "cppbuild",
+	  "label": "C/C++: gcc build active file",
+	  "command": "/usr/bin/gcc",
+	  "args": [
+	    "-fdiagnostics-color=always",
+	    "-g",
+	    "${file}",
+	    "-o",
+	    "${fileDirname}/${fileBasenameNoExtension}"
+	  ],
+	  "options": {
+	    "cwd": "${fileDirname}"
+	  },
+	  "problemMatcher": [
+	    "$gcc"
+	  ],
+	  "group": {
+	    "kind": "build",
+	    "isDefault": true
+	  },
+	  "detail": "compiler: /usr/bin/gcc"
+	}
+  ]
+}
+```  
+
+**tasks.json (Windows direkt)**  
+
+```JSON
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+	  "type": "cppbuild",
+	  "label": "C/C++: gcc.exe build active file",
+	  "command": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\gcc.exe",
+	  "args": [
+        "-fdiagnostics-color=always",
+	    "-g",
+	    "${file}",
+	    "-o",
+	    "${fileDirname}\\${fileBasenameNoExtension}.exe"
+	  ],
+	  "options": {
+	    "cwd": "${fileDirname}"
+	  },
+	  "problemMatcher": [
+	    "$gcc"
+	  ],
+	  "group": {
+	    "kind": "build",
+	    "isDefault": true
+	  },
+	  "detail": "compiler: \"C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\gcc.exe\""
+    }
+  ]
+}
+```  
 
 ## 2.5. `helloworld.c` starten/debuggen 
 
@@ -268,15 +338,87 @@ Um `helloworld.c` starten oder debuggen zu können, braucht VS Code die Datei `l
 
 Menü `Run` > `Add Configuration…` > `C++ (GDB/LLDB)` und `gcc.exe – Build and debug active file` auswählen. 
 
-Das Programm wird anschließend gleich ausgeführt, was man mit der Tastenkombination Shift+F5 stoppen kann. 
 
 Quelldatei helloworld.c auswählen 
 
 ![Screenshot Visual Studio Code Command Erstes Programm - Schritt 3](./pictures/Screenshot_VSC_3.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 3") 
 
-und mit der Tastenkombination Strg+F5 starten. 
+und mit den Tasten `F5` (debuggen)  oder `Strg` + `F5` (nur ausführen) fortsetzen.  
 
-Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und das Programm mit der Taste F5 starten: 
+**launch.json (WSL)**  
+
+```JSON  
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "gcc - Build and debug active file",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set Disassembly Flavor to Intel",
+          "text": "-gdb-set disassembly-flavor intel",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "C/C++: gcc build active file",
+      "miDebuggerPath": "/usr/bin/gdb"
+    }
+  ]
+}
+```  
+
+**launch.json (Windows direkt)**  
+
+```JSON  
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "gcc.exe - Build and debug active file",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-posix-seh-rt_v6-rev0\\mingw64\\bin\\gdb.exe",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "C/C++: gcc.exe build active file"
+    }
+  ]
+}
+```  
+
+Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und das Programm mit der Taste `F5` starten: 
 
 ![Screenshot Visual Studio Code Command Erstes Programm - Schritt 4](./pictures/Screenshot_VSC_4.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 4") 
 
@@ -296,7 +438,9 @@ Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und
 - In Zwischenablage kopieren: Strg + C
 - Aus Zwischenablage einfügen: Strg + V  
 
-Drucken erfordert in VS Code die Extension [Print, PD Consulting](https://marketplace.visualstudio.com/items?itemName=pdconsec.vscode-print). Wird *remote* unter WSL entwickelt, erfordert die Ubuntu-Installation das Paket `xdg-utils`. Nachzuinstallieren mit folgendem Kommando:  
+Drucken erfordert in VS Code die Extension [Print, PD Consulting](https://marketplace.visualstudio.com/items?itemName=pdconsec.vscode-print).  
+
+Im WSL mit Ubuntu, braucht es das Paket `xdg-utils`. Dieses kann mit folgendem Kommando nachinstalliert werden:    
 `sudo apt-get install xdg-utils` 
 
 ### 2.5.2. Zugriff Dateisystem Windows <-> WSL
@@ -391,18 +535,18 @@ Erklärungen:
 Sogenannte Escape-Sequenzen ermöglichen Steuerzeichen und Sonderzeichen auszugeben. Eine Escape-Sequenz wird durch einen Backslash `\` (Tastenkombination `alt gr` und `ß`) eingeleitet, dem ein weiteres Zeichen folgt. Eine Escape-Sequenz gilt trotzdem als einzelnes Zeichen.
 In der folgenden Tabelle sind die wichtigsten Escape-Sequenzen aufgelistet: 
 
-| Escape-Sequenz | Bedeutung |
-| --- | --- |
-| `\n` | Zeilenumbruch |
-| `\t` | Tabulator |
-| `\'` | Einfaches Hochkomma |
-| `\"` | Doppeltes Hochkomma |
-| `\?` | Fragezeichen |
-| `\\` | Backslash |
-| `\0` | NULL zum Terminieren von Strings |
-| `\b` | Backspace - Zurücksetzen um ein Zeichen |
-| `\f` | Formfeed - Seitenumbruch |
-| `\a` | Piepston |
+| Escape-Sequenz | Bedeutung                               |
+| -------------- | --------------------------------------- |
+| `\n`           | Zeilenumbruch                           |
+| `\t`           | Tabulator                               |
+| `\'`           | Einfaches Hochkomma                     |
+| `\"`           | Doppeltes Hochkomma                     |
+| `\?`           | Fragezeichen                            |
+| `\\`           | Backslash                               |
+| `\0`           | NULL zum Terminieren von Strings        |
+| `\b`           | Backspace - Zurücksetzen um ein Zeichen |
+| `\f`           | Formfeed - Seitenumbruch                |
+| `\a`           | Piepston                                |
 
 ## 3.2. Struktogramm 
 
@@ -488,13 +632,13 @@ z2 = -9;
 ```
 ### 4.2.2. Binäre arithmetische  Operatoren
 
-| Operator | Bedeutung |
-| :---: | --- |
-| `+` |	Addition |
-| `-` |	Subtraktion |
-| `*` |	Multiplikation |
-| `/` |	Division |
-| `%` |	Modulo-Division |
+| Operator | Bedeutung       |
+| :------: | --------------- |
+|   `+`    | Addition        |
+|   `-`    | Subtraktion     |
+|   `*`    | Multiplikation  |
+|   `/`    | Division        |
+|   `%`    | Modulo-Division |
 
 Regeln für die arithmetischen Operatoren: 
 
@@ -512,15 +656,15 @@ Bei den Divisionsoperatoren (`/` und `%`) führt eine Divison durch `0` zu einem
 
 In C gibt es viele Datentypen. Die fett markierten werden hauptsächlich in unserem weiteren Unterricht verwendet.  
 
-| Name | Datentyp | Bytes |	Minimalwert | Maximalwert | Formatzeichen |  
-| --- | --- | :---: | --- | --- | --- |  
-| **`char`** | Ein Zeichen | 1 | -128 (![2^{31}-1](./pictures/CodeCogsEqn-7.gif)) | 127 (![2^{31}-1](./pictures/CodeCogsEqn_7-1.gif)) | `%c`  
-| **`char[]`** | Eine Zeichenkette (String) | - | - | - | `%s` |  
-| **`int`** | Ganze Zahl | 4 | (![-2^{31}](./pictures/CodeCogsEqn-31.gif)) | (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif)) | `%d`  
-| `float` |	Fließkommazahl, 6-stellige Genauigkeit | 4 | 1.2E-38 | 3.4E+38 | `%f` 
-| **`double`** | Fließkommazahl, 15-stellige Genauigkeit | 8 | 2.3E-308 | 1.7E+308 | `%lf`
-| `short`| Ganze Zahl | 2 | –32.768 | +32.767 | `%d`  
-| `long`|  Ganze Zahl | 4 | (![-2^{31}](./pictures/CodeCogsEqn-31.gif)) | (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif)) | `%ld`  
+| Name         | Datentyp                                | Bytes | Minimalwert                                      | Maximalwert                                       | Formatzeichen |
+| ------------ | --------------------------------------- | :---: | ------------------------------------------------ | ------------------------------------------------- | ------------- |
+| **`char`**   | Ein Zeichen                             |   1   | -128 (![2^{31}-1](./pictures/CodeCogsEqn-7.gif)) | 127 (![2^{31}-1](./pictures/CodeCogsEqn_7-1.gif)) | `%c`          |
+| **`char[]`** | Eine Zeichenkette (String)              |   -   | -                                                | -                                                 | `%s`          |
+| **`int`**    | Ganze Zahl                              |   4   | (![-2^{31}](./pictures/CodeCogsEqn-31.gif))      | (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif))    | `%d`          |
+| `float`      | Fließkommazahl, 6-stellige Genauigkeit  |   4   | 1.2E-38                                          | 3.4E+38                                           | `%f`          |
+| **`double`** | Fließkommazahl, 15-stellige Genauigkeit |   8   | 2.3E-308                                         | 1.7E+308                                          | `%lf`         |
+| `short`      | Ganze Zahl                              |   2   | –32.768                                          | +32.767                                           | `%d`          |
+| `long`       | Ganze Zahl                              |   4   | (![-2^{31}](./pictures/CodeCogsEqn-31.gif))      | (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif))    | `%ld`         |
 
 In C existiert kein logischer Datentyp `boolean`. Stattdessen werden Variablen vom Datentyp `int` für Bedingungen verwendet werden, wobei folgende Regeln gelten:
 
@@ -550,22 +694,22 @@ Der Formatstring enthält sowohl normalen Text als auch Platzhalter mit den jewe
 
 Der wichtigste und einzige nicht optionale Teil ist dabei das Umwandlungszeichen (conversion), das den Datentyp für die Umwandlung bestimmt:
 
-| `conversion` | Datentyp | Bedeutung |
-| --- | --- | --- | 
-| `d`, `i` | int | Integer |
-| `f` | float | Gleitkommazahl float - Default von 6 Kommastellen |
-| `lf` | double	| Gleitkommazahl double - Default von 6 Kommastellen |
-| `%` | | Ausgabe des % Zeichens |
+| `conversion` | Datentyp | Bedeutung                                          |
+| ------------ | -------- | -------------------------------------------------- |
+| `d`, `i`     | int      | Integer                                            |
+| `f`          | float    | Gleitkommazahl float - Default von 6 Kommastellen  |
+| `lf`         | double   | Gleitkommazahl double - Default von 6 Kommastellen |
+| `%`          |          | Ausgabe des % Zeichens                             |
 
 
 Die Flags sind optional und werden unmittelbar nach dem `%`-Zeichen angegeben:
 
 
-| `flag` | Bedeutung | 
-| --- | --- |
-| `-` |	Ausgabe linksbündig |
-| `+` |	Ausgabe mit Vorzeichen |
-| `0` |	Leerstellen werden mit Nullen gefüllt |
+| `flag` | Bedeutung                             |
+| ------ | ------------------------------------- |
+| `-`    | Ausgabe linksbündig                   |
+| `+`    | Ausgabe mit Vorzeichen                |
+| `0`    | Leerstellen werden mit Nullen gefüllt |
 
 Die Anzahl der auszugebenden Zeichen ist optional und wird durch die Breite (`width`) festgelegt. 
 
@@ -830,13 +974,13 @@ double atof(<String>)	// Konvertierung von String in double
 
 ## 11.1. Arithmetische  Zuweisungsoperatoren
 
-| Operator | Beispiel |	Bedeutung |
-|:----:|:----:|:----:|
-| += | a += 2; | a = a+2; | 
-| -= | a -= 2; | a = a-2;
-| *= | a *= 2; | a = a*2;
-| /= | a /= 2; | a = a/2;
-| %= | a %= 2; | a = a%2;
+| Operator | Beispiel | Bedeutung |
+| :------: | :------: | :-------: |
+|    +=    | a += 2;  | a = a+2;  |
+|    -=    | a -= 2;  | a = a-2;  |
+|    *=    | a *= 2;  | a = a*2;  |
+|    /=    | a /= 2;  | a = a/2;  |
+|    %=    | a %= 2;  | a = a%2;  |
 
 Achtung: Die Zuweisung:  
 `z1 *= z2 +1;`  
@@ -865,12 +1009,12 @@ Postfixnotation: Der Wert des Operanden ändert sich **nach** seiner weiteren Ve
 
 Die folgende Tabelle zeigt die unterschiedliche Bedeutung der Operatoren:
 
-| a vorher | Ausdruck | a nachher | b nachher |  
-|:----:|:----:|:----:|:----:|
-| 10 | b = a++; | 11 | 10 |  
-| 10 | b = ++a; | 11 | 11 |  
-| 10 | b = a--; | 9 | 10 |  
-| 10 | b = --a; | 9 | 9 |  
+| a vorher | Ausdruck | a nachher | b nachher |
+| :------: | :------: | :-------: | :-------: |
+|    10    | b = a++; |    11     |    10     |
+|    10    | b = ++a; |    11     |    11     |
+|    10    | b = a--; |     9     |    10     |
+|    10    | b = --a; |     9     |     9     |
 
 Die Inkrement- und Dekrementoperatoren können für einzelne Variablen, nicht aber für Zahlen oder Ausdrücke verwendet werden.
 
@@ -905,14 +1049,14 @@ Ausgabe:
 
 In C gibt es 6 Operatoren zum Vergleichen von numerischen Datentypen. Das Ergebnis eines Vergleichs ist immer vom Typ `int`, wobei 0 dem Wert falsch und 1 dem Wert wahr entspricht.
 
-| Operator | Bedeutung |  
-|:----:|:----:|  
-| == | gleich |  
-| != | ungleich |  
-| < | kleiner |  
-| <= | kleiner gleich |  
-| > | größer |  
-| >= | größer gleich |  
+| Operator |   Bedeutung    |
+| :------: | :------------: |
+|    ==    |     gleich     |
+|    !=    |    ungleich    |
+|    <     |    kleiner     |
+|    <=    | kleiner gleich |
+|    >     |     größer     |
+|    >=    | größer gleich  |
 
 Beispiel:  
 
@@ -935,20 +1079,20 @@ Ausgabe:
 
 Logische Operatoren verknüpfen Wahrheitswerte. Da in C die Wahrheitswerte durch ganzzahlige Werte beschrieben werden, können logische Operatoren für alle Datentypen verwendet werden.  
 
-| Operator | Bedeutung |  
-|:----|:----|  
-| ! | logisches nicht - dreht den Wahrheitswert um |  
-| && | logisches und - wahr wenn beide Operanden wahr sind |  
-| \|\| | logisches oder - wahr wenn zumindest einer der beiden Operanden wahr ist |  
+| Operator | Bedeutung                                                                |
+| :------- | :----------------------------------------------------------------------- |
+| !        | logisches nicht - dreht den Wahrheitswert um                             |
+| &&       | logisches und - wahr wenn beide Operanden wahr sind                      |
+| \|\|     | logisches oder - wahr wenn zumindest einer der beiden Operanden wahr ist |
 
 Die folgende Wertetabelle zeigt alle möglichen Kombinationen der Wahrheitswerte:  
 
-| a | b | !a | a && b | a \|\| b |  
-|:----:|:----:|:----:|:----:|:----:|  
-| 0 | 0 | 1 | 0 | 0 |  
-| 0 | 1 | 1 | 0 | 1 |  
-| 1 | 0 | 0 | 0 | 1 |  
-| 1 | 1 | 0 | 1 | 1 |  
+|   a   |   b   |  !a   | a && b | a \|\| b |
+| :---: | :---: | :---: | :----: | :------: |
+|   0   |   0   |   1   |   0    |    0     |
+|   0   |   1   |   1   |   0    |    1     |
+|   1   |   0   |   0   |   0    |    1     |
+|   1   |   1   |   0   |   1    |    1     |
 
 Die logischen Operatoren `&&` und `||` arbeiten mit der sog. short-circuit-evaluation, d.h. der rechte Operand wird nur dann ausgewertet, wenn das zur Bestimmung eines Ergebnisses notwendig ist.  
 Bei  `a && b` wird daher b nur ausgewertet, wenn a=1 ist.  
@@ -976,18 +1120,18 @@ Bei der ersten if-Anweisung wird d nur dann erhöht wenn `a < b` wahr ist. Bei d
 Die Rangfolge der Operatoren ist von oben nach unten angeordnet. Operatoren innerhalb derselben Zeilen sind gleichwertig und werden von links nach rechts abgearbeitet.
 Durch Verwendung von runden Klammern kann der Vorrag der Operatoren geändert werden.
 
-| Operator-Typ | Operator |  
-|:----|:----|  
-| unär Postfix | () [] ++ -- |  
-| unär Präfix | ++ -- (cast) sizeof |  
-| binär Arithmetisch | * / % |  
-| binär Arithmetisch | + - |  
-| Vergleich | < <= > >= |  
-| Vergleich | == != |  
-| logisch und | && |  
-| logisch oder | \|\| |  
-| Zuweisung | += -= *= /= %=  |  
-| Komma | , |  
+| Operator-Typ       | Operator            |
+| :----------------- | :------------------ |
+| unär Postfix       | () [] ++ --         |
+| unär Präfix        | ++ -- (cast) sizeof |
+| binär Arithmetisch | * / %               |
+| binär Arithmetisch | + -                 |
+| Vergleich          | < <= > >=           |
+| Vergleich          | == !=               |
+| logisch und        | &&                  |
+| logisch oder       | \|\|                |
+| Zuweisung          | += -= *= /= %=      |
+| Komma              | ,                   |
 
 # 12. Kontrollstrukturen – Entscheidung 
 
@@ -1553,16 +1697,16 @@ int main()
 
 ## 14.1. Umwandlung Dezimal- ins Binärsystem  
 
-|   |   |   |
-|--:|:--|:--|
-| 150d | 0 | *least significant bit (LSB)*	  
-| 75 | 1 |		
-| 37 | 1 |		
-| 18 | 0 |		
-| 9  | 1 |		
-| 4  | 0 |		
-| 2  | 0 |		
-| 1  | 1 | *most significant bit (MSB)*	
+|      |      |                               |
+| ---: | :--- | :---------------------------- |
+| 150d | 0    | *least significant bit (LSB)* |
+|   75 | 1    |
+|   37 | 1    |
+|   18 | 0    |
+|    9 | 1    |
+|    4 | 0    |
+|    2 | 0    |
+|    1 | 1    | *most significant bit (MSB)*  |
 
 150d = 1001 0110b = 96h
 
@@ -1617,11 +1761,11 @@ E7F2h = E*16^3 + 7*16^2 + F*16^1 + 2*16^0 = 14*4096 + 7*256 + 15*16 + 2*1 = 5937
 ```  
 **E7F2h = 59378d**
 
-|    | Dezimalsystem | Binärsystem | Hexadezimalsystem |  
-|:-- | :-- | :-- | :-- |  
-| Zur Basis | 10| 2 | 16 |  
-| Zeichenvorrat | 0,1 | 0,1,..,7,8,9 | 0,1,..,9,A,B,..,D,E,F |  
-| Darstellung | 150d | 1001 0110b | 96h |  
+|               | Dezimalsystem | Binärsystem  | Hexadezimalsystem     |
+| :------------ | :------------ | :----------- | :-------------------- |
+| Zur Basis     | 10            | 2            | 16                    |
+| Zeichenvorrat | 0,1           | 0,1,..,7,8,9 | 0,1,..,9,A,B,..,D,E,F |
+| Darstellung   | 150d          | 1001 0110b   | 96h                   |
 
 ## 14.5. Das 2er-Komplement 
 
@@ -1633,10 +1777,10 @@ Das 2er-Komplement verwendet kein separates Vorzeichen-Bit. Dennoch gilt:
 
 Mit dem 2er-Komplement lassen sich z.B. folgende Zahlenbereiche darstellen:  
 
-| Bits | Bereich | Bereich |  
-| :-- | :-- | :-- |
-| 8 Bit | `[-2^(8-1); +2^(8-1)-1]` | `[-128; 127]` |  
-| 16 Bit | `[-2^(16-1); +2^(16-1)-1]` | `[-32768; +32767]` |  
+| Bits   | Bereich                    | Bereich            |
+| :----- | :------------------------- | :----------------- |
+| 8 Bit  | `[-2^(8-1); +2^(8-1)-1]`   | `[-128; 127]`      |
+| 16 Bit | `[-2^(16-1); +2^(16-1)-1]` | `[-32768; +32767]` |
 
 Negative Binärzahlen werden folgendermaßen kodiert:  
 1.	Alle Stellen des positiven Betragwerts der Zahl negieren.  
@@ -1664,11 +1808,11 @@ Beispiel Zahl 1111 1111b (-1d):
 ```  
 
 | Dezimalzahl | 2er-Komplement |
-| --: | :-- |
-|  127 | 0111 1111 |  
-|    0 | 0000 0000 |
-|   -1 | 1111 1111 | 
-| -128 | 1000 0000 |
+| ----------: | :------------- |
+|         127 | 0111 1111      |
+|           0 | 0000 0000      |
+|          -1 | 1111 1111      |
+|        -128 | 1000 0000      |
 
 Addition und Subtraktion im Bereich der ganzen Zahlen lassen sich folgendermaßen durchführen: Bei den Minuenden wird das 2er-Komplement gebildet und anschließend werden die Zahlen addiert.  
 
@@ -1704,23 +1848,23 @@ Beispiel -27 - 3 = -30:
 
 Mit Bitoperatoren lassen sich einzelne Bits von Variablen verändern. 
 
-| Operator | Bezeichnung | Bedeutung |  
-| :--: | :-- | :-- |   
-| ~	| Bitweises Komplement | dreht das Bitmuster des Operanden um |  
-| &	| Bitweises UND | ergibt 1 wenn beide Bits 1 sind |  
-| \| | Bitweises ODER | ergibt 1 wenn zumindest ein Bit 1 ist |  
-| ^ | Bitweises XOR | ergibt 1 wenn beide Bits unterschiedlich sind |  
-| << | Linksshift |  
-| >> | Rechtsshift |  
+| Operator | Bezeichnung          | Bedeutung                                     |
+| :------: | :------------------- | :-------------------------------------------- |
+|    ~     | Bitweises Komplement | dreht das Bitmuster des Operanden um          |
+|    &     | Bitweises UND        | ergibt 1 wenn beide Bits 1 sind               |
+|    \|    | Bitweises ODER       | ergibt 1 wenn zumindest ein Bit 1 ist         |
+|    ^     | Bitweises XOR        | ergibt 1 wenn beide Bits unterschiedlich sind |
+|    <<    | Linksshift           |
+|    >>    | Rechtsshift          |
 
 Die folgende Wertetabelle zeigt die möglichen Kombinationen  
 
-| Bit1 | Bit2 | ~Bit1 | Bit1 & Bit2 | Bit1 \| Bit2 | Bit1 ^ Bit2 |  
-| :--: | :--: | :--: | :--: | :--: | :--: |  
-| 0 | 0 | 1 | 0	| 0 | 0 |  
-| 0	| 1	| 1	| 0	| 1 | 1 |  
-| 1	| 0 | 0 | 0 | 1 | 1 |  
-| 1	| 1 | 0 | 1 | 1 | 0 |  
+| Bit1  | Bit2  | ~Bit1 | Bit1 & Bit2 | Bit1 \| Bit2 | Bit1 ^ Bit2 |
+| :---: | :---: | :---: | :---------: | :----------: | :---------: |
+|   0   |   0   |   1   |      0      |      0       |      0      |
+|   0   |   1   |   1   |      0      |      1       |      1      |
+|   1   |   0   |   0   |      0      |      1       |      1      |
+|   1   |   1   |   0   |      1      |      1       |      0      |
   
 Beispiel für das bitweise Komplement einer Zahl:  
 
@@ -2215,7 +2359,7 @@ Values after swap:  8 1
 
 Bei der Übergabe der aktuellen Parameter wird durch das Voranstellen des Ampersands '`&`', die Adresse der Variable an die Funktion übergeben. Innerhalb der Funktion werden die Parameter durch Verwenden des `*`-Operators dereferenziert.  
 
-## 17.6. Rekursive Funktionen  
+# 17.6. Rekursive Funktionen  
 
 Wird eine Aufgabe mit einer Schleife - einer sogenannten **Iteration** - gelöst, bezeichnen wir die Problemlösung als **iterativ**.  
 
@@ -2268,7 +2412,7 @@ Bildschirmausgabe:
 Blast-off! 1 2 3 4 5 6 7 8 9 10 
 ``` 
 
-### 17.6.1. Dezimal- nach Binär-Umwandlung - rekusiv  
+## 17.6.1. Dezimal- nach Binär-Umwandlung - rekusiv  
 
 Die Variante 2 des `launchRocket()`-Beispiels löst bei einer Dezimal- nach Binär-Umwandlung das Problem, dass das *most significant bit* (MSB) erst am Ende der Umwandlung zur Verfügung steht. Eine Dezimal- nach Binär-Umwandlung lässt sich somit folgendermaßen mit einer Rekursion elegant lösen.  
 
@@ -2298,6 +2442,61 @@ int main()
 ```  
 Decimal value: 23
 10111
+```  
+
+# Mehrere .c- und -h-Dateien kompilieren  
+
+Funktionen werden eingesetzt, um die Komplexität von Code zu reduzieren und Code wiederverwendbar zu machen.  
+Funktionen können nun auch in separaten .c-Dateien ausgelagert und mit den Vorwärtsdeklarationen in .h-Dateien (den sogenannten Header-Dateien) beim Kompilieren eingebunden werden.  
+
+Betrachten wir dazu folgendes Beispiel:  
+
+1. Wir legen die Vorwärtsdeklaration unserer Funktion in einer Headerdatei mit der Bezeichnung `myhellolib.h` an.  
+
+```C  
+void hello(); 
+```  
+
+2. In der Datei `myhellolib.c` kodieren wir die Funktion aus.  
+
+```C
+#include <stdio.h>
+
+void hello()
+{
+    printf("Hello World!\n");
+}
+```  
+
+3. Im Hauptprogramm verwenden wir nun die Funktion. Wichtig ist, die Funktion über die Header-Datei einzubinden (Beachte: statt `<>` sind `""` zu verwenden).  
+
+```C  
+#include "myhellolib.h"
+
+int main()
+{
+    hello();
+    return 0;
+}
+```  
+
+4. Abschließend ist die neu erstellte *library* `myhellolib` beim Kompilieren einzubinden. Dazu ergänzen wir die Zeile  
+
+```JSON  
+"myhellolib.c",
+```  
+
+in der Konfigurationsdatei `.vscode/tasks.json`:  
+
+```JSON 
+  "args": [
+    "-fdiagnostics-color=always",
+	"-g",
+	"myhellolib.c",
+	"${file}",
+	"-o",
+	"${fileDirname}\\${fileBasenameNoExtension}.exe"
+  ],
 ```  
 
 # 18. Arrays (Felder) - 2. Teil  
