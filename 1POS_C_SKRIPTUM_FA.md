@@ -2481,6 +2481,7 @@ Blast-off! 1 2 3
 
 Nehmen wir an, wir haben ein Hasenpaar, das nach einem Monat geschlechtsreif wird und dann monatlich ein Hasenpaar wirft. Dadurch ergibt sich folgende Hasenpopulation:  
 
+|||||||||||  
 |:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|
 | **Monat**        | 1 | 2 | 3 | 4 | 5 | 6 | 7  | 8  | ... |   
 | **# Hasenpaare** | 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | ... | 
