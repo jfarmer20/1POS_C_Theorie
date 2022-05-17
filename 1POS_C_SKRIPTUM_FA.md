@@ -89,10 +89,11 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [20.2. Mehrdimensionale Arrays](#202-mehrdimensionale-arrays)
   - [20.3. Übergabe von mehrdimensionalen Arrays an Funktionen](#203-übergabe-von-mehrdimensionalen-arrays-an-funktionen)
   - [20.4. Mehrdimensionale Arrays dynamisch erzeugen](#204-mehrdimensionale-arrays-dynamisch-erzeugen)
-- [21. Anhang](#21-anhang)
-  - [21.1. Weitere Literatur](#211-weitere-literatur)
-  - [21.2. Übersicht des Unterrichtsstoffs](#212-übersicht-des-unterrichtsstoffs)
-  - [21.3. Code Style Rules](#213-code-style-rules)
+- [21. Dateien lesen und schreiben](#21-dateien-lesen-und-schreiben)
+- [22. Anhang](#22-anhang)
+  - [22.1. Weitere Literatur](#221-weitere-literatur)
+  - [22.2. Übersicht des Unterrichtsstoffs](#222-übersicht-des-unterrichtsstoffs)
+  - [22.3. Code Style Rules](#223-code-style-rules)
 
 # 1. Einführung
 
@@ -2575,15 +2576,12 @@ in der Konfigurationsdatei `.vscode/tasks.json`:
 
 ## 20.1. Eindimensionale Arrays dynamisch erzeugen 
 
-Mit der Funktion `malloc()` lässt sich für ein Array ein zusammenhängender Speicherbereich zur Laufzeit reservieren.  
-**Wichtig:** Sobald das Array im Programm nicht mehr benötigt wird, ist der Speicherbereich verlässlich mit der Funktion `free()` wieder freizugeben. 
+Oft ist erst zur Laufzeit bekannt, welche Array-Größe benötigt wird. Mit der Funktion `malloc()` lässt sich dann ein zusammenhängender Speicherbereich einem Array zuweisen.   
+**Wichtig:** Sobald das Array nicht mehr benötigt wird, ist der Speicherbereich verlässlich mit der Funktion `free()` wieder freizugeben. 
 
-Im folgende Programm wird ein Array dynamisch erzeugt, initialisiert, am Bildschirm ausgegeben und dessen Speicherbereich am Ende wieder freigegeben. 
+Im folgenden Programm gibt der Benutzer die Array-Größe vor. Das Array wird dann anschließend dynamisch erzeugt, initialisiert, am Bildschirm ausgegeben und die Speicherbelegung wieder freigegeben. 
 
-
-Ein dynamisch erzeugtes Feld kann gleich wie statisch erzeugte Felder verwendet werden (z.B. bei Funktionsübergabe, Zugriff auf die einzelnen Elemente). 
-
-```c 
+```C  
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -2592,28 +2590,31 @@ void printArray(int a[], int size)
     for (int i = 0; i < size; i++)
     {
         printf("%4d", a[i]);
-        if (i % 10 == 9)
+        if (i % 10 == 9 || i == size - 1)
             printf("\n");
     }
 }
 
 int main()
 {
-    int *a1;
-    int s1 = 100;
+    int *a;
+    int asize;
 
-    // Array dynamisch erzeugen 
-    a1 = (int *)malloc(sizeof(int) * s1);
+    printf("Array-Größe: ");
+    scanf("%d", &asize);
 
-    // Array initialisieren 
-    for (int i = 0; i < s1; i++)
-        a1[i] = i;
+    // Array dynamisch erzeugen
+    a = (int *)malloc(sizeof(int) * asize);
+
+    // Array initialisieren
+    for (int i = 0; i < asize; i++)
+        a[i] = i;
 
     // Array ausgeben
-    printArray(a1, s1);
+    printArray(a, asize);
 
-    // Reservierten Speicher freigeben 
-    free(a1);
+    // Reservierten Speicher freigeben
+    free(a);
 
     return 0;
 }
@@ -2769,15 +2770,87 @@ int main(void)
 }
 ```
 
-# 21. Anhang 
+# 21. Dateien lesen und schreiben  
 
-## 21.1. Weitere Literatur
+Dateien ermöglichen, Daten eines Programms zu persistieren. Das bedeutet, die Daten stehen auch nach Programmende zur Verfügung und können bei Programmneustart weiterverwendet werden.  
+
+Eine Datei ist prinzipiell ein großes `char`-Array. Bei Dateien unterscheidet man zwischen Binär- (z.B. `.exe`, `.mp4`) und Textdateien (z.B. `.txt`, `.csv`). Wir werden ausschließlich Textdateien behandeln.  
+
+Im Zusammenhang mit Dateien wird der Begriff **Stream** verwendet. Ein Stream bezeichnet den Datenfluss, von einer Quelle zu einem Ziel. 
+
+Bei Benutzerein- und ausgaben haben wir bereits - zwar nur indirekt - mit Streams gearbeitet: Mit den Standard-Streams `stdin` und `stdout`. 
+
+Betrachten wir folgendes Programm, das eine Datei zum Lesen öffnet und diese auch wieder schließt.  
+
+```C  
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    FILE *file;
+    char fileName[] = "test.txt";
+
+    file = fopen(fileName, "r");
+
+    if (file == NULL)
+    {
+        printf("Datei %s kann nicht geöffnet werden!\n", fileName);
+        return EXIT_FAILURE;
+    }
+
+    fclose(file);
+    return EXIT_SUCCESS;
+}
+```  
+
+Der Befehl `fopen` mit dem Parameter `"r"` (*read*) öffnet die Datei `test.txt` zum Lesen. Als Parameter kann auch `w` (*write*) für in-eine-neue-Datei-schreiben und `a` (*append*) für an-eine-bestehende-Datei-anfügen verwendet werden.  
+Ist die Datei zum Lesen nicht vorhanden oder bereits fürs Schreiben gesperrt (*locked*), gibt `fopen` den `NULL`-Zeiger zurück. In diesem Fall wird das Programm beendet.  
+
+Legen wir nun eine Textdatei `quotation.txt` mit folgendem Inhalt an.  
+
+```  
+The
+master
+has
+failed
+more
+times
+than
+the
+beginner
+even
+tried.
+```  
+
+Mit folgendem Code lässt sich dann die Datei, nach dem Befehl `fopen` Zeile für Zeile lesen und am Bildschirm ausgeben.  
+
+```C  
+    ...  
+    FILE *file;
+    char line[1024];
+    ...   
+
+    while (fgets(line, 1024, file))
+    {
+        printf("%s", line);
+    }
+```  
+
+Wurde die Datei `quotation.txt` unter Linux erstellt, so sehen wir beim Debuggen im `char`-Array `line`, dass jede Zeile mit dem Steuerzeichen `\n` (Wert 10, *Line Feed*) abschließt.  
+Wurde die Datei in Windows erstellt, so enthält jede Zeile vor dem Steuerzeichen `\n` zusätzlich das Steuerzeichen `\r` (Wert 13, *Carriage Return*).  
+
+
+# 22. Anhang 
+
+## 22.1. Weitere Literatur
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, HTML-Version](https://algs4.cs.princeton.edu/home/)  
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, PDF-Version](https://github.com/Mcdonoughd/CS2223/raw/master/Books/Algorithhms%204th%20Edition%20by%20Robert%20Sedgewick%2C%20Kevin%20Wayne.pdf) 
 
-## 21.2. Übersicht des Unterrichtsstoffs
+## 22.2. Übersicht des Unterrichtsstoffs
 
 * Windows-Command-Shell (cmd): `dir`, `mkdir`, `ren`, `rmdir`, `cd`, `copy`, `del`, `help <command>`, … 
 
@@ -2826,7 +2899,7 @@ int main(void)
 
 * Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen)  
 
-## 21.3. Code Style Rules  
+## 22.3. Code Style Rules  
 
 Für alle **Bezeichner** (Variablen-, Funktionsnamen) ist Englisch und die CamelCase-Schreibweise zu verwenden (z.B. `counter`, `lastElement`, `getMinimum(...)`, `print2Screen(...)`). Variablenbezeichner dürfen, sofern der Code trotzdem leicht erfassbar bleibt, auch nur aus einem Buchstaben bestehen.  
 
