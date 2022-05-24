@@ -90,10 +90,11 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [20.3. Übergabe von mehrdimensionalen Arrays an Funktionen](#203-übergabe-von-mehrdimensionalen-arrays-an-funktionen)
   - [20.4. Mehrdimensionale Arrays dynamisch erzeugen](#204-mehrdimensionale-arrays-dynamisch-erzeugen)
 - [21. Dateien lesen und schreiben](#21-dateien-lesen-und-schreiben)
-- [22. Anhang](#22-anhang)
-  - [22.1. Weitere Literatur](#221-weitere-literatur)
-  - [22.2. Übersicht des Unterrichtsstoffs](#222-übersicht-des-unterrichtsstoffs)
-  - [22.3. Code Style Rules](#223-code-style-rules)
+- [22. Strukturen](#22-strukturen)
+- [23. Anhang](#23-anhang)
+  - [23.1. Weitere Literatur](#231-weitere-literatur)
+  - [23.2. Übersicht des Unterrichtsstoffs](#232-übersicht-des-unterrichtsstoffs)
+  - [23.3. Code Style Rules](#233-code-style-rules)
 
 # 1. Einführung
 
@@ -2841,16 +2842,92 @@ Mit folgendem Code lässt sich dann die Datei, nach dem Befehl `fopen` Zeile fü
 Wurde die Datei `quotation.txt` unter Linux erstellt, so sehen wir beim Debuggen im `char`-Array `line`, dass jede Zeile mit dem Steuerzeichen `\n` (Wert 10, *Line Feed*) abschließt.  
 Wurde die Datei in Windows erstellt, so enthält jede Zeile vor dem Steuerzeichen `\n` zusätzlich das Steuerzeichen `\r` (Wert 13, *Carriage Return*).  
 
+# 22. Strukturen  
 
-# 22. Anhang 
+Will man von einer Person, Name, Wohnort und Geburtsjahr verwalten:  
 
-## 22.1. Weitere Literatur
+```C  
+char firstName[20];
+char familyName[20];
+long zipCode;
+char city[20];
+int yearOfBirth;
+```  
+
+dann lassen sich diese Variablen zu einer Struktur (`struct`) zusammenfassen. Die Struktur kann dann wie folgt deklariert werden:  
+
+```C  
+struct sAddress
+{
+  char firstName[20];
+  char familyName[20];
+  long zipCode;
+  char city[20];
+  int yearOfBirth;
+}; 
+```  
+Benötigt man dann eine Variable vom Typ der deklarierten Struktur, so initialisiert man diese mit dem Schlüsselwort `struct`:  
+
+```C  
+struct sAddress myAddress;
+```  
+
+Deklarieren und Initialisieren lassen sich aber auch wie folgt zusammenfassen:  
+
+```C  
+struct sAddress
+{
+  char firstName[20];
+  char familyName[20];
+  long zipCode;
+  char city[20];
+  int yearOfBirth;
+} myAddress; 
+```  
+
+Üblich ist bei der Deklaration auch die Verwendung eines *type synonym*. Dann entfällt bei der Variableninitialisierung das Schlüsselwort `struct`.  
+
+```C  
+typedef struct
+{
+    char firstName[20];
+    char familyName[20];
+    long zipCode;
+    char city[20];
+    int yearOfBirth;
+} sAddress;
+
+sAddress myAddress;
+```  
+
+Zugegriffen wird auf die Elemente einer Variablen vom Typ `struct` mit dem `.`-Operator.  
+
+```C  
+  strcpy(myAddress.firstName, "Johannes"); // erfordert #include <string.h>
+  strcpy(myAddress.familyName, "Farmer");
+  myAddress.zipCode = 8430;
+  strcpy(myAddress.city, "Leibnitz");
+  myAddress.yearOfBirth = 1974;
+
+  printf("%s %s, born %d, works in %ld %s\n", myAddress.firstName,
+         myAddress.familyName, myAddress.yearOfBirth,
+         myAddress.zipCode, myAddress.city);
+```   
+
+**Screenshot**  
+```  
+Johannes Farmer, born 1974, works in 8430 Leibnitz
+```  
+
+# 23. Anhang 
+
+## 23.1. Weitere Literatur
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, HTML-Version](https://algs4.cs.princeton.edu/home/)  
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, PDF-Version](https://github.com/Mcdonoughd/CS2223/raw/master/Books/Algorithhms%204th%20Edition%20by%20Robert%20Sedgewick%2C%20Kevin%20Wayne.pdf) 
 
-## 22.2. Übersicht des Unterrichtsstoffs
+## 23.2. Übersicht des Unterrichtsstoffs
 
 * Windows-Command-Shell (cmd): `dir`, `mkdir`, `ren`, `rmdir`, `cd`, `copy`, `del`, `help <command>`, … 
 
@@ -2899,7 +2976,7 @@ Wurde die Datei in Windows erstellt, so enthält jede Zeile vor dem Steuerzeiche
 
 * Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen)  
 
-## 22.3. Code Style Rules  
+## 23.3. Code Style Rules  
 
 Für alle **Bezeichner** (Variablen-, Funktionsnamen) ist Englisch und die CamelCase-Schreibweise zu verwenden (z.B. `counter`, `lastElement`, `getMinimum(...)`, `print2Screen(...)`). Variablenbezeichner dürfen, sofern der Code trotzdem leicht erfassbar bleibt, auch nur aus einem Buchstaben bestehen.  
 
