@@ -90,11 +90,12 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [20.3. Übergabe von mehrdimensionalen Arrays an Funktionen](#203-übergabe-von-mehrdimensionalen-arrays-an-funktionen)
   - [20.4. Mehrdimensionale Arrays dynamisch erzeugen](#204-mehrdimensionale-arrays-dynamisch-erzeugen)
 - [21. Dateien lesen und schreiben](#21-dateien-lesen-und-schreiben)
-- [22. Strukturen](#22-strukturen)
-- [23. Anhang](#23-anhang)
-  - [23.1. Weitere Literatur](#231-weitere-literatur)
-  - [23.2. Übersicht des Unterrichtsstoffs](#232-übersicht-des-unterrichtsstoffs)
-  - [23.3. Code Style Rules](#233-code-style-rules)
+- [22. `scanf`, `sscanf`, `gets`, `fgets` und `fscanf`](#22-scanf-sscanf-gets-fgets-und-fscanf)
+- [23. Strukturen](#23-strukturen)
+- [24. Anhang](#24-anhang)
+  - [24.1. Weitere Literatur](#241-weitere-literatur)
+  - [24.2. Übersicht des Unterrichtsstoffs](#242-übersicht-des-unterrichtsstoffs)
+  - [24.3. Code Style Rules](#243-code-style-rules)
 
 # 1. Einführung
 
@@ -2775,11 +2776,13 @@ int main(void)
 
 Dateien ermöglichen, Daten eines Programms zu persistieren. Das bedeutet, die Daten stehen auch nach Programmende zur Verfügung und können bei Programmneustart weiterverwendet werden.  
 
-Eine Datei ist prinzipiell ein großes `char`-Array. Bei Dateien unterscheidet man zwischen Binär- (z.B. `.exe`, `.mp4`) und Textdateien (z.B. `.txt`, `.csv`). Wir werden ausschließlich Textdateien behandeln.  
+Eine Datei ist prinzipiell ein großes `char`-Array. Bei Dateien unterscheidet man zwischen Binär- (z.B. `.exe`, `.mp4`) und Textdateien (z.B. `.txt`, `.csv`).  
+
+Wir werden ausschließlich Textdateien behandeln.  
 
 Im Zusammenhang mit Dateien wird der Begriff **Stream** verwendet. Ein Stream bezeichnet den Datenfluss, von einer Quelle zu einem Ziel. 
 
-Bei Benutzerein- und ausgaben haben wir bereits - zwar nur indirekt - mit Streams gearbeitet: Mit den Standard-Streams `stdin` und `stdout`. 
+Bei Benutzerein- und ausgaben haben wir bereits mit Streams gearbeitet: Mit den Standard-Streams `stdin` und `stdout`. 
 
 Betrachten wir folgendes Programm, das eine Datei zum Lesen öffnet und diese auch wieder schließt.  
 
@@ -2825,7 +2828,7 @@ even
 tried.
 ```  
 
-Mit folgendem Code lässt sich dann die Datei, nach dem Befehl `fopen` Zeile für Zeile lesen und am Bildschirm ausgeben.  
+Mit folgendem Code lässt sich die Datei, nach dem Befehl `fopen` Zeile für Zeile lesen und am Bildschirm ausgeben.  
 
 ```C  
     ...  
@@ -2840,94 +2843,138 @@ Mit folgendem Code lässt sich dann die Datei, nach dem Befehl `fopen` Zeile fü
 ```  
 
 Wurde die Datei `quotation.txt` unter Linux erstellt, so sehen wir beim Debuggen im `char`-Array `line`, dass jede Zeile mit dem Steuerzeichen `\n` (Wert 10, *Line Feed*) abschließt.  
-Wurde die Datei in Windows erstellt, so enthält jede Zeile vor dem Steuerzeichen `\n` zusätzlich das Steuerzeichen `\r` (Wert 13, *Carriage Return*).  
+Unter Windows enthält jede Zeile vor dem Steuerzeichen `\n` zusätzlich das Steuerzeichen `\r` (Wert 13, *Carriage Return*).  
 
-# 22. Strukturen  
+# 22. `scanf`, `sscanf`, `gets`, `fgets` und `fscanf`
 
-Will man von einer Person, Name, Wohnort und Geburtsjahr verwalten:  
+Für die Benutzereingabe in der Konsole gibt es verschiedene Befehle.  
+
+Die Befehle `gets` und `fgets` lesen, vorausgesetzt die Stringvariable ist ausreichend groß, die gesamte Zeile ein. Im Fehlerfall wird `stdin` geleert. 
+
+Die Befehle `scanf`, `sscanf` und `fscanf` lesen zeichenweise ein. Es ergibt sich dadurch das Problem, dass einerseits das `\n` in `stdin` zurückbleibt bzw. im Fehlerfall `stdin` auch nicht geleert wird. 
+
+Aus diesem Grund macht es Sinn, `fgets` mit `sscanf` zu kombinieren. Da die Befehle `gets` und `scanf` *unsafe* sind, verzichten wir im folgenden Beispiel auf sie. 
+
+Vom Benutzer lesen wir nun inklusive Plausibilitätscheck mit Schleife einen Integer-Wert ein. 
+
+```C 
+int readInt(char prompt[])
+{
+  char line[80] = "";
+  int len = 0;
+  int value = 0;
+
+  do
+  {
+    printf("%s", prompt);
+    fgets(line, sizeof(line), stdin);
+    len = sscanf(line, "%d", &value);
+  } while (len != 1);
+
+  return value;
+}
+
+int main()
+{
+  char prompt[30] = {0};
+  int value;
+  strcpy(prompt, "Integer value: ");
+  value = readInt(prompt);
+  return EXIT_SUCCESS;
+}
+```  
+
+`fgets` liest die komplette Zeile der Konsole ein. `sscanf` zerlegt diese entsprechend des Format-Strings. `sscanf` retourniert die Anzahl der Parameter, die geparst wurden. Dadurch kann die Variable `len` zur Plausibilitätsprüfung verwendet werden. 
+
+# 23. Strukturen  
+
+Will man von einer Person, Name und Geburtsjahr verwalten:  
 
 ```C  
-char firstName[20];
-char familyName[20];
-long zipCode;
-char city[20];
+char name[30];
 int yearOfBirth;
 ```  
 
 dann lassen sich diese Variablen zu einer Struktur (`struct`) zusammenfassen. Die Struktur kann dann wie folgt deklariert werden:  
 
 ```C  
-struct sAddress
+struct sPerson
 {
-  char firstName[20];
-  char familyName[20];
-  long zipCode;
-  char city[20];
+  char name[30];
   int yearOfBirth;
 }; 
 ```  
 Benötigt man dann eine Variable vom Typ der deklarierten Struktur, so initialisiert man diese mit dem Schlüsselwort `struct`:  
 
 ```C  
-struct sAddress myAddress;
+struct SPerson myPerson;
 ```  
 
-Deklarieren und Initialisieren lassen sich aber auch wie folgt zusammenfassen:  
+Deklaration und Initialisierung lassen sich aber auch zusammenfassen:  
 
 ```C  
-struct sAddress
+struct sPerson
 {
-  char firstName[20];
-  char familyName[20];
-  long zipCode;
-  char city[20];
+  char name[30];
   int yearOfBirth;
-} myAddress; 
+} myPerson; 
 ```  
 
-Üblich ist bei der Deklaration auch die Verwendung eines *type synonym*. Dann entfällt bei der Variableninitialisierung das Schlüsselwort `struct`.  
+Üblich ist bei der Deklaration auch die Verwendung eines Typsynonyms. Dann entfällt bei der Variableninitialisierung das Schlüsselwort `struct`.  
 
 ```C  
 typedef struct
 {
-    char firstName[20];
-    char familyName[20];
-    long zipCode;
-    char city[20];
-    int yearOfBirth;
-} sAddress;
+  char name[30];
+  int yearOfBirth;
+} sPerson;
 
-sAddress myAddress;
+sPerson myPeson;
 ```  
 
-Zugegriffen wird auf die Elemente einer Variablen vom Typ `struct` mit dem `.`-Operator.  
+Zugegriffen wird auf die Elemente einer Strukturvariablen mit dem `.`-Operator.  
 
 ```C  
-  strcpy(myAddress.firstName, "Johannes"); // erfordert #include <string.h>
-  strcpy(myAddress.familyName, "Farmer");
-  myAddress.zipCode = 8430;
-  strcpy(myAddress.city, "Leibnitz");
-  myAddress.yearOfBirth = 1974;
+strcpy(myPerson.name, "John Doe"); // <string.h>
+myPerson.yearOfBirth = 1974;
 
-  printf("%s %s, born %d, works in %ld %s\n", myAddress.firstName,
-         myAddress.familyName, myAddress.yearOfBirth,
-         myAddress.zipCode, myAddress.city);
+printf("%s, born %d\n", myPerson.name, myPerson.yearOfBirth);
 ```   
 
-**Screenshot**  
+Screenshot:  
 ```  
-Johannes Farmer, born 1974, works in 8430 Leibnitz
+John Doe, born 1974
 ```  
 
-# 23. Anhang 
+Wird eine Struktur an eine Funktion übergeben, liegt die Strukturvariable dort als Referenzvariable (Pointer) vor. Ein Zugriff auf die Strukturelemente würde dann so aussehen:  
 
-## 23.1. Weitere Literatur
+```C 
+void initPerson(sPerson *pPerson)
+{
+  strcpy((*pPerson).name, "John Doe");
+  (*pPerson).yearOfBirth = 1974;
+}
+```  
+
+Allerdings gibt es für Strukturvariablen als Referenzvariablen (Pointer) den `>-`-Operator. Damit erfolgt der Zugriff einfacher und der Code ist auch lesbarer:  
+
+```C 
+void initPerson(sPerson *pPerson)
+{
+    strcpy(pPerson->name, "John Doe");
+    pPerson->yearOfBirth = 1974;
+}
+``` 
+
+# 24. Anhang 
+
+## 24.1. Weitere Literatur
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, HTML-Version](https://algs4.cs.princeton.edu/home/)  
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, PDF-Version](https://github.com/Mcdonoughd/CS2223/raw/master/Books/Algorithhms%204th%20Edition%20by%20Robert%20Sedgewick%2C%20Kevin%20Wayne.pdf) 
 
-## 23.2. Übersicht des Unterrichtsstoffs
+## 24.2. Übersicht des Unterrichtsstoffs
 
 * Windows-Command-Shell (cmd): `dir`, `mkdir`, `ren`, `rmdir`, `cd`, `copy`, `del`, `help <command>`, … 
 
@@ -2976,7 +3023,7 @@ Johannes Farmer, born 1974, works in 8430 Leibnitz
 
 * Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen)  
 
-## 23.3. Code Style Rules  
+## 24.3. Code Style Rules  
 
 Für alle **Bezeichner** (Variablen-, Funktionsnamen) ist Englisch und die CamelCase-Schreibweise zu verwenden (z.B. `counter`, `lastElement`, `getMinimum(...)`, `print2Screen(...)`). Variablenbezeichner dürfen, sofern der Code trotzdem leicht erfassbar bleibt, auch nur aus einem Buchstaben bestehen.  
 
