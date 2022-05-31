@@ -2484,10 +2484,10 @@ Blast-off! 1 2 3
 
 Nehmen wir an, wir haben ein Hasenpaar, das nach einem Monat geschlechtsreif wird und dann monatlich ein Hasenpaar wirft. Dadurch ergibt sich folgende Hasenpopulation:  
 
-|||||||||||  
-|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|
-| **Monat**        | 1 | 2 | 3 | 4 | 5 | 6 | 7  | 8  | ... |   
-| **# Hasenpaare** | 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | ... | 
+|                  |      |      |      |      |      |      |      |      |      |
+| :--------------- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Monat**        | 1    | 2    | 3    | 4    | 5    | 6    | 7    | 8    | ...  |
+| **# Hasenpaare** | 1    | 1    | 2    | 3    | 5    | 8    | 13   | 21   | ...  |
  
 Die Zeitreihe der Hasenpopulation lässt sich mit der Fibonacci-Folge mathematisch beschreiben:  
 
@@ -2828,7 +2828,7 @@ even
 tried.
 ```  
 
-Mit folgendem Code lässt sich die Datei, nach dem Befehl `fopen` Zeile für Zeile lesen und am Bildschirm ausgeben.  
+Mit folgendem Code lässt sich die Datei, nach dem `fopen`-Befehl  **zeilenweise** einlesen und am Bildschirm ausgeben.  
 
 ```C  
     ...  
@@ -2842,8 +2842,36 @@ Mit folgendem Code lässt sich die Datei, nach dem Befehl `fopen` Zeile für Zei
     }
 ```  
 
+Der Rückgabewert von `fgets` ist die gelesene Zeile (`char *`). Ist das Ende der Datei erreicht, so gibt `fgets` den `NULL`-Wert zurück und die Laufbedingung der `while`-Schleife ist nicht mehr erfüllt.  
+
 Wurde die Datei `quotation.txt` unter Linux erstellt, so sehen wir beim Debuggen im `char`-Array `line`, dass jede Zeile mit dem Steuerzeichen `\n` (Wert 10, *Line Feed*) abschließt.  
 Unter Windows enthält jede Zeile vor dem Steuerzeichen `\n` zusätzlich das Steuerzeichen `\r` (Wert 13, *Carriage Return*).  
+
+Will man eine Datei **zeichenweise** einlesen, so eignet sich dafür der folgende Code:  
+
+```C 
+int c; 
+
+while ((c = fgetc(file)) != EOF)
+{
+  printf("%c", c);
+}
+```  
+Bei erreichen des Dateiendes gibt `fgetc` das Zeichen `EOF` (Wert -1) zurück. Wichtig ist, die Variable für den Rückgabewert vom Typ `int` zu deklarieren. Damit die 255 Zeichen des erweiterten ASCII-Codes und EOF mit seinen Wert -1 aufgenommen werden kann.  
+
+Fürs **zeilenweise** und **zeichenweise** **Schreiben** in eine Datei stehen folgende beiden Befehle zur Verfügung:  
+
+```C  
+FILE *file;
+char c; 
+char line[1024]; 
+
+// zeichenweises Schreiben
+fputc(c, file);
+
+// zeilenweises Schreiben 
+fputs(line, file);
+```  
 
 # 22. `scanf`, `sscanf`, `gets`, `fgets` und `fscanf`
 
