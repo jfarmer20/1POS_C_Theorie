@@ -1,23 +1,32 @@
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/jfarmer20/1POS_C_Theorie/blob/main/1POS_C_SKRIPTUM_FA.md">Unterrichtsskriptum "Programmieren und Software Engineering", Erster Jahrgang der Abteilung Informatik, HTBLA-Kaindorf an der Sulm, Austria, Europe</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/jfarmer20">Johannes Farmer </a> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+# Die Programmiersprache C <!-- omit in toc -->
 
-# Allgemeines <!-- omit in toc -->
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/jfarmer20/1POS_C_Theorie/blob/main/1POS_C_SKRIPTUM_FA.md">Dieses Unterrichtsskriptum "Die Programmiersprache C" für den Gegenstand "Programmieren und Software Engineering" im ersten Jahrgang der Abteilung Informatik, HTBLA-Kaindorf an der Sulm, Österreich</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/jfarmer20">Johannes Farmer </a> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
 
-Dieses Skriptum umfasst den Unterrichtsstoff für POS (Programmieren und Software Engineering) des ersten Jahrgangs der Abteilung Informatik an der Höheren Technischen Bundeslehranstalt Kaindorf, Österreich. 
+Der Inhalt richtet sich nach dem [Lehrplan für Informatik-HTLs](https://www.ris.bka.gv.at/Dokumente/BgblAuth/BGBLA_2015_II_262/COO_2026_100_2_1135489.pdfsig), entnommen aus dem [Bundesgesetzblatt, Jahrgang 2015, Teil II, 262. Verordnung](https://www.ris.bka.gv.at/Dokumente/BgblAuth/BGBLA_2015_II_262/BGBLA_2015_II_262.pdfsig).  
 
-Als Erweiterung dieses Skriptums steht das frei verfügbare Lehrbuch zur Programmiersprache C des Rheinwerk Verlags zur Verfügung:  
-[Wolf, Jürgen: C von A bis Z](https://openbook.rheinwerk-verlag.de/c_von_a_bis_z/)
+Ergänzend zu diesem Skriptum stehen folgende, frei verfügbare Unterlagen, zur Verfügung:  
+- [Wolf, Jürgen: C von A bis Z, Rheinwerk Verlag](https://openbook.rheinwerk-verlag.de/c_von_a_bis_z/)  
+- [Wikibook "C Programming"](https://en.wikibooks.org/wiki/C_Programming)  
+- [C/C++ Befehlsreferenz](https://cplusplus.com/)  
 
-Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgenden Seiten perfektioniert werden: 
+Übungsmöglichkeiten gibt es hier:  
 
-[Project Euler](https://projecteuler.net/)  
-[CodinGame](https://www.codingame.com/start)  
+- https://www.learn-c.org/
+- [Project Euler](https://projecteuler.net/)  
+- [CodinGame](https://www.codingame.com/start)  
+
+Online C-Compiler:  
+- https://onecompiler.com/c  
+- https://www.onlinegdb.com/  
+- https://replit.com/  
+
 
 # Inhaltsverzeichnis <!-- omit in toc -->
 
 - [1. Einführung](#1-einführung)
   - [1.1. Begriffe](#11-begriffe)
   - [1.2. Geschichtliches der Programmiersprache C](#12-geschichtliches-der-programmiersprache-c)
-- [2. Einrichten der Entwicklungsumgebung](#2-einrichten-der-entwicklungsumgebung)
+- [2. Einrichten der Entwicklungsumgebung Visual Studio Code (VSC)](#2-einrichten-der-entwicklungsumgebung-visual-studio-code-vsc)
   - [2.1. Installation auf *Windows 10* direkt](#21-installation-auf-windows-10-direkt)
   - [2.2. Installation auf *Windows Subsystem for Linux (WSL)*](#22-installation-auf-windows-subsystem-for-linux-wsl)
   - [2.3. Erstes Programm mit Visual Studio Code (VS Code)](#23-erstes-programm-mit-visual-studio-code-vs-code)
@@ -96,14 +105,15 @@ Werden die Grundlagen beherrscht, können die Programmierfähigkeiten auf folgen
   - [24.1. Weitere Literatur](#241-weitere-literatur)
   - [24.2. Übersicht des Unterrichtsstoffs](#242-übersicht-des-unterrichtsstoffs)
   - [24.3. Code Style Rules](#243-code-style-rules)
+  - [24.4. .c-Dateivorlage in VSC](#244-c-dateivorlage-in-vsc)
 
 # 1. Einführung
 
 ## 1.1. Begriffe 
 
-Ein **Programm** ist eine Abfolge von Befehlen/Anweisungen in einer bestimmten Programmiersprache. 
+Ein **Programm** ist eine Abfolge von Befehlen/Anweisungen.  
 
-Ein **Compiler** übersetzt ein Programm, geschrieben in einer  Programmiersprache (z.B. C, Java, Python) in Maschinensprache (`01100010001`…). 
+Ein **Compiler** übersetzt ein Programm, geschrieben in einer  Programmiersprache wie z.B. C in Maschinensprache (`01100010001`…). 
 
 Ein **Debugger** dient zur Fehlersuche in Programmen. Damit lassen sich Programme Schritt für Schritt ausführen und Variableninhalte anzeigen.  
 
@@ -124,7 +134,7 @@ Jede Programmiersprache stellt **Befehle** für:
 
 zur Verfügung.  
 
-Zudem stellt jede Programmiersprache **Datentypen** für 
+Zudem stellt eine Programmiersprache **Datentypen** für 
 * Ganze Zahlen
 * Gleitkommazahlen
 * Einen logischen Datentyp
@@ -133,17 +143,18 @@ Zudem stellt jede Programmiersprache **Datentypen** für
 bereit.  
 
 ## 1.2. Geschichtliches der Programmiersprache C 
-C ist eine imperative und prozedurale Programmiersprache. C wurde 1972 „erfunden“ und seit damals in Varianten weiterentwickelt. Das *American National Standards Institute* (ANSI) vereinheitlichte die C-Varianten und veröffentlichte 1989 ein standardisiertes C. Dieser C-Standard wird im Sprachgebrauch als C89 bzw. ANSI-C bezeichnet. Dieser C-Standard wurde auch von der *International Organization for Standardization* (ISO) übernommen und im Sprachgebrauch mit C90 bezeichnet. 
+C ist eine imperative und prozedurale Programmiersprache. C wurde 1972 entworfen und seit damals in Varianten weiterentwickelt. Das *American National Standards Institute* (ANSI) vereinheitlichte die C-Varianten und veröffentlichte 1989 ein standardisiertes C. Dieser C-Standard wird im Sprachgebrauch als C89 bzw. ANSI-C bezeichnet. Dieser C-Standard wurde auch von der *International Organization for Standardization* (ISO) übernommen und wird im Sprachgebrauch mit C90 bezeichnet. 
 
 [ANSI-C Reference Card](http://users.ece.utexas.edu/~adnan/c-refcard.pdf)  
 
 Im Jahr 1999 erschien C99 mit Elementen der objekt-orientierten Programmiersprache C++. 
 
-# 2. Einrichten der Entwicklungsumgebung  
+# 2. Einrichten der Entwicklungsumgebung Visual Studio Code (VSC)
 
-Der Compiler `gcc` und der Debugger `gdb`  sind ein wesentlicher Bestandteil des Betriebssystems Linux. Es macht somit Sinn, `C`-Programme auf Windows Subsystem for Linux (WSL) zu entwickeln. Die Installation dafür ist im übernächsten Abschnitt beschrieben.  
+Microsoft Windows 10 stellt auf seinem Betriebssystem mit dem "Windows Subsystem für Linux" (WSL) auch das Betriebssystem Linux zur Verfügung.  
 
-Will man `C`-Programme auf Windows entwickeln, so ist die Konfiguration der Entwicklungsumgebung einfacher und die Installation dafür gleich anschließend beschrieben.  
+Im folgenden Kapitel wird beschrieben, wie man Visual Studio Code (VSC) auf Windows 10 installiert (die einfache und empfohlene Variante).  
+Im darauffolgenden Kapitel wird beschrieben, wie man VSC mit Linux und dem WSL nutzt (die komplizierte Variante). C auf Linux zu entwickeln macht Sinn, weil der Compiler `gcc` und der Debugger `gdb` fixe Bestandteile des Betriebssystems Linux sind.  
 
 ## 2.1. Installation auf *Windows 10* direkt  
 
@@ -3053,18 +3064,18 @@ void initPerson(sPerson *pPerson)
 
 ## 24.3. Code Style Rules  
 
-Für alle **Bezeichner** (Variablen-, Funktionsnamen) ist Englisch und die CamelCase-Schreibweise zu verwenden (z.B. `counter`, `lastElement`, `getMinimum(...)`, `print2Screen(...)`). Variablenbezeichner dürfen, sofern der Code trotzdem leicht erfassbar bleibt, auch nur aus einem Buchstaben bestehen.  
+Für alle **Bezeichner** (Variablen-, Funktionsnamen) verwenden wir Englisch und die camelCase-Schreibweise (z.B. `counter`, `lastElement`, `getMinimum(...)`, `print2Screen(...)`).  
+Sofern der Code verständlich bleibt, dürfen Variablenbezeichner aus nur einem Buchstaben bestehen.  
 
 **Pro Zeile** nur eine Initialisierung bzw. Anweisung.  
 
-Code muss **auto-formatiert** sein (Tastenkombination `Shift`+`Alt`+`Entf` in VS Code).  
+Beim Coden achten wir darauf, dass unser Code immer **auto-formatiert** ist (Tastenkombination `Shift`+`Alt`+`F`) und **fehlerfrei kompiliert** (Tastenkombination `Strg` + `Shift` + `B`). 
 
- **Leerzeilen** sind zwischen dem `#include`-, `#define`-Bock, dem Block der Vorwärtsdeklarationen und den einzelnen Funktionen einzufügen. 
+ Wir verwenden zwischen dem `#include`-, `#define`-Bock, dem Block der Vorwärtsdeklarationen und den einzelnen Funktionen **Leerzeilen**. 
 
+Wir definieren **symbolische Konstanten** und verwenden diese auch im Code (z.B. Array-Größe, Intervallgrenzen bei Zufallszahlen, ...).  
 
-Es sind **symbolische Konstanten** zu definieren und diese sind im Code auch zu verwenden (z.B. Array-Größe, Intervallgrenzen bei Zufallszahlen).  
-
-**Arrays als formale Parameter** in Funktionen sind immer zusammen mit der Array-Größe zu übergeben und folgendermaßen zu spezifizieren:  
+**Arrays als formale Parameter** in Funktionen deklarieren wir folgendermaßen. Optional kann auch die Array-Größe mitübergeben werden. 
 ```C  
 void print2screen(int a[], int arraySize); 
 ```  
@@ -3074,7 +3085,38 @@ void print2screen(int a[], int arraySize);
 int *pArea; 
 ```  
 
-**Code muss jederzeit kompilier- und ausführbar sein.**  
+## 24.4. .c-Dateivorlage in VSC  
 
+Damit nach Eingabe des Präfix "`c`" und mit Hilfe der Auto-Vervollständigung ...  
 
+![Screenshot #1 Basic Template for a simple C-program](./pictures/cTemplate1.png)
 
+... das Rohgerüst eines C-Programms angelegt wird, ...  
+
+![Screenshot #2 Basic Template for a simple C-program](./pictures/cTemplate2.png)
+
+... ist folgende Konfiguration in VSC vorzunehmen: 
+
+![Screenshot #3 Basic Template for a simple C-program](./pictures/cTemplate3.png)
+
+Wähle den Eintrag "`c (C)`" bzw. gib "`c (C)`" ein, wenn dieser Wert fehlt.  
+
+Ersetze dann den Inhalt der Konfigurationsdatei "`c.json`" ...  
+
+![Screenshot #3 Basic Template for a simple C-program](./pictures/cTemplate4.png)
+
+... mit folgendem Code und sichere die Änderung.  
+
+```json
+{
+	".c basic structure": {
+		"prefix": "c",
+		"body": [
+			"#include <stdio.h>\n#include <stdlib.h>\n#include <time.h>\n#include <math.h>\n#include <string.h>\n\nint main()\n{\n\t$0\n\n\treturn EXIT_SUCCESS;\n}"
+		],
+		"description": "Set up structure for a simple c file"
+	}
+}
+```  
+
+Nach einem Neustart von VSC ist die Vorlagenfunktion aktiv.  
