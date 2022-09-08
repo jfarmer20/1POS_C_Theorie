@@ -164,9 +164,9 @@ Windows 10 stellt keinen `C`-Compiler und -Debugger zur verfügung. Wir installi
 
     Starte die Setup-Datei:  
 
-    ![MinGW64_Installer_Screenshot1](./pictures/MinGW64_Installer_Screenshot1.PNG "MinGW64_Installer_Screenshot1") 
+    ![MinGW64_Installer_Screenshot1](./img/MinGW64_Installer_Screenshot1.PNG "MinGW64_Installer_Screenshot1") 
 
-    ![MinGW64_Installer_Screenshot2](./pictures/MinGW64_Installer_Screenshot2.PNG "MinGW64_Installer_Screenshot2")     
+    ![MinGW64_Installer_Screenshot2](./img/MinGW64_Installer_Screenshot2.PNG "MinGW64_Installer_Screenshot2")     
 
 2. Um zu prüfen, ob die Mingw-w64 Tools richtig installiert sind, öffne ein Command Prompt und führe folgendes aus:
 
@@ -180,7 +180,7 @@ Windows 10 stellt keinen `C`-Compiler und -Debugger zur verfügung. Wir installi
 4. Installiere die [C/C++ extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).  
 
     You can install the C/C++ extension by searching for 'c++' in the Extensions view  
-    ![C/C++ extension](./pictures/cpp-extension.png)
+    ![C/C++ extension](./img/cpp-extension.png)
 
 
 
@@ -191,30 +191,30 @@ Windows 10 stellt keinen `C`-Compiler und -Debugger zur verfügung. Wir installi
 
     `Start` > `Einstellungen` > `Update und Sicherheit`
 
-    ![Screenshot_Setup1.PNG](./pictures/Screenshot_Setup1.PNG "Screenshot Windows 10 Update")  
+    ![Screenshot_Setup1.PNG](./img/Screenshot_Setup1.PNG "Screenshot Windows 10 Update")  
 
 2. Windows Subsystem für Linux installieren: 
 
     `Windows Suche` > `cmd` > `Als Administrator ausführen`
 
-    ![Screenshot_Setup2.PNG](./pictures/Screenshot_Setup2.PNG "Screenshot Windows 10 Command Line Interface CLI") 
+    ![Screenshot_Setup2.PNG](./img/Screenshot_Setup2.PNG "Screenshot Windows 10 Command Line Interface CLI") 
 
     `wsl --install` ausführen 
 
-   ![Screenshot_Setup3.PNG](./pictures/Screenshot_Setup3.PNG "Screenshot Windows Subsystem for Linux Installation") 
+   ![Screenshot_Setup3.PNG](./img/Screenshot_Setup3.PNG "Screenshot Windows Subsystem for Linux Installation") 
 
 
     Nach fertiger Installation muss der Rechner neu gestartet werden. 
     Ubuntu Linux installiert sich danach automatisch.  
 
-    ![Screenshot_Setup4.PNG](./pictures/Screenshot_Setup4.PNG "Screenshot Ubuntu Linux Installation") 
+    ![Screenshot_Setup4.PNG](./img/Screenshot_Setup4.PNG "Screenshot Ubuntu Linux Installation") 
 
 
 3. Linux-User anlegen: 
 
     Einen einfachen Username und ein leicht zu merkendes Passwort wählen: 
 
-    ![Screenshot_Setup5.PNG](./pictures/Screenshot_Setup5.PNG "Screenshot Linux User Configuration") 
+    ![Screenshot_Setup5.PNG](./img/Screenshot_Setup5.PNG "Screenshot Linux User Configuration") 
 
 
 4. Visual Studio Code (Windows 10) downloaden und installieren:  
@@ -227,13 +227,13 @@ Windows 10 stellt keinen `C`-Compiler und -Debugger zur verfügung. Wir installi
 
     https://code.visualstudio.com/docs/cpp/config-wsl#_set-up-your-linux-environment
 
-    ![Screenshot_Setup6a.PNG](./pictures/Screenshot_Setup6a.PNG) 
+    ![Screenshot_Setup6a.PNG](./img/Screenshot_Setup6a.PNG) 
 
-    ![Screenshot_Setup7a.PNG](./pictures/Screenshot_Setup7a.PNG) 
+    ![Screenshot_Setup7a.PNG](./img/Screenshot_Setup7a.PNG) 
 
-    ![Screenshot_Setup8.PNG](./pictures/Screenshot_Setup8.PNG) 
+    ![Screenshot_Setup8.PNG](./img/Screenshot_Setup8.PNG) 
 
-    ![Screenshot_Setup9a.PNG](./pictures/Screenshot_Setup9a.PNG)  
+    ![Screenshot_Setup9a.PNG](./img/Screenshot_Setup9a.PNG)  
 
 ## 2.3. Erstes Programm mit Visual Studio Code (VS Code)  
 
@@ -250,7 +250,7 @@ code .
 
 Quelldatei “helloworld.c” erstellen: 
 
-![Screenshot Visual Studio Code Command Erstes Programm - Schritt 1](./pictures/Screenshot_New_File.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 1")
+![Screenshot Visual Studio Code Command Erstes Programm - Schritt 1](./img/Screenshot_New_File.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 1")
 
 ```c
 // #include bewirkt das Einfügen von Quellcode aus einer anderen  
@@ -278,7 +278,7 @@ Menü `Terminal` > `Configure Default Build Task…` > `C/C++:gcc build active f
 
 Quelldatei `helloworld.c` auswählen  
 
-![Screenshot Visual Studio Code Command Erstes Programm - Schritt 2](./pictures/Screenshot_VSC_2.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 2")
+![Screenshot Visual Studio Code Command Erstes Programm - Schritt 2](./img/Screenshot_VSC_2.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 2")
 
 und mit der Tastenkombination `Strg` + `Shift` + `B` kompilieren.  
 
@@ -357,7 +357,7 @@ Menü `Run` > `Add Configuration…` > `C++ (GDB/LLDB)` und `gcc.exe – Build a
 
 Quelldatei helloworld.c auswählen 
 
-![Screenshot Visual Studio Code Command Erstes Programm - Schritt 3](./pictures/Screenshot_VSC_3.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 3") 
+![Screenshot Visual Studio Code Command Erstes Programm - Schritt 3](./img/Screenshot_VSC_3.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 3") 
 
 und mit den Tasten `F5` (debuggen)  oder `Strg` + `F5` (nur ausführen) fortsetzen.  
 
@@ -430,7 +430,7 @@ und mit den Tasten `F5` (debuggen)  oder `Strg` + `F5` (nur ausführen) fortsetz
 
 Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und das Programm mit der Taste `F5` starten: 
 
-![Screenshot Visual Studio Code Command Erstes Programm - Schritt 4](./pictures/Screenshot_VSC_4.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 4") 
+![Screenshot Visual Studio Code Command Erstes Programm - Schritt 4](./img/Screenshot_VSC_4.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 4") 
 
 ### 2.5.1. Wichtige Tastenkombinationen 
 
@@ -565,13 +565,13 @@ Ein Struktogramm setzt sich aus Strukturblöcken zusammen. Diese können, wie wi
 
 Beispiel eines Struktogramms mit Sequenz-Symbolen: 
 
-![Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen](./pictures/NSD_01.PNG "Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen") 
+![Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen](./img/NSD_01.PNG "Nassi-Shneiderman-Diagramm nur mit Sequenzsymbolen") 
 
 **Aufgabe**: Lese eine Ganzzahl ein, erhöhe diese um eins und gib die Zahl aus. 
 
 Struktogramm: 
 
-![Nassi-Shneiderman-Diagramm Beispiel 1](./pictures/NSD_02.PNG "Nassi-Shneiderman-Diagramm Beispiel 1") 
+![Nassi-Shneiderman-Diagramm Beispiel 1](./img/NSD_02.PNG "Nassi-Shneiderman-Diagramm Beispiel 1") 
 
 Programm: 
 
@@ -668,13 +668,13 @@ In C gibt es viele Datentypen. Die fett markierten werden hauptsächlich in unse
 
 | Name         | Datentyp                                | Bytes | Minimalwert                                      | Maximalwert                                       | Formatzeichen |
 | ------------ | --------------------------------------- | :---: | ------------------------------------------------ | ------------------------------------------------- | ------------- |
-| **`char`**   | Ein Zeichen                             |   1   | -128 (![2^{31}-1](./pictures/CodeCogsEqn-7.gif)) | 127 (![2^{31}-1](./pictures/CodeCogsEqn_7-1.gif)) | `%c`          |
+| **`char`**   | Ein Zeichen                             |   1   | -128 (![2^{31}-1](./img/CodeCogsEqn-7.gif)) | 127 (![2^{31}-1](./img/CodeCogsEqn_7-1.gif)) | `%c`          |
 | **`char[]`** | Eine Zeichenkette (String)              |   -   | -                                                | -                                                 | `%s`          |
-| **`int`**    | Ganze Zahl                              |   4   | (![-2^{31}](./pictures/CodeCogsEqn-31.gif))      | (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif))    | `%d`          |
+| **`int`**    | Ganze Zahl                              |   4   | (![-2^{31}](./img/CodeCogsEqn-31.gif))      | (![2^{31}-1](./img/CodeCogsEqn_31-1.gif))    | `%d`          |
 | `float`      | Fließkommazahl, 6-stellige Genauigkeit  |   4   | 1.2E-38                                          | 3.4E+38                                           | `%f`          |
 | **`double`** | Fließkommazahl, 15-stellige Genauigkeit |   8   | 2.3E-308                                         | 1.7E+308                                          | `%lf`         |
 | `short`      | Ganze Zahl                              |   2   | –32.768                                          | +32.767                                           | `%d`          |
-| `long`       | Ganze Zahl                              |   4   | (![-2^{31}](./pictures/CodeCogsEqn-31.gif))      | (![2^{31}-1](./pictures/CodeCogsEqn_31-1.gif))    | `%ld`         |
+| `long`       | Ganze Zahl                              |   4   | (![-2^{31}](./img/CodeCogsEqn-31.gif))      | (![2^{31}-1](./img/CodeCogsEqn_31-1.gif))    | `%ld`         |
 
 In C existiert kein logischer Datentyp `boolean`. Stattdessen werden Variablen vom Datentyp `int` für Bedingungen verwendet werden, wobei folgende Regeln gelten:
 
@@ -1326,13 +1326,13 @@ Eigenschaften der `while`-Schleife:
 - Die `while`-Schleife ist kopfgesteuert und hat eine Laufbedingung.  
 - Anstelle einer einzelnen Anweisung kann ein geklammerter Anweisungsblock `{` `}` stehen. 
 
-![Struktogramm while-Schleife](pictures/nsd_while.svg)  
+![Struktogramm while-Schleife](img/nsd_while.svg)  
 
 **Beispiel** 
 
 Mit einem Würfel wird, solange die Augensumme < 100 ist, gewürfelt. Wie oft gewürfelt wird, wird mitgezählt. 
 
-![Struktogramm while-Schleife Beisiel Würfel](pictures/nsd_while_wuerfel.svg)
+![Struktogramm while-Schleife Beisiel Würfel](img/nsd_while_wuerfel.svg)
 	
 ```c
 #include <stdio.h>
@@ -1380,13 +1380,13 @@ Eigenschaften der do-while-Schleife:
 - Anstelle einer einzelnen Anweisung kann ein geklammerter Anweisungsblock `{` `}` stehen. 
 - Der Strichpunkt hinter der Bedingung darf nicht vergessen werden.
 
-![Struktogramm do-while-Schleife](pictures/nsd_do-while.svg)  
+![Struktogramm do-while-Schleife](img/nsd_do-while.svg)  
 
 **Beispiel**  
 
 Ermittle Zufallszahlen zwischen 0 und 100 und summiere die Zahlen auf. Sobald die Summe > 100 ist, soll die Berechnung beendet werden. Die Anzahl der Summanden ist mitzuzählen. 
 
-![Struktogramm do-while-Schleife Beisiel Summe aus Zufallszahlen](pictures/nsd_do-while_summe.svg)  
+![Struktogramm do-while-Schleife Beisiel Summe aus Zufallszahlen](img/nsd_do-while_summe.svg)  
 
 ```c
 #include <stdio.h>
@@ -1434,7 +1434,7 @@ Eigenschaften der for-Schleife:
 - Alle drei Ausdrücke *intialisierung*, *bedingung* und *update* sind optional. Der Defaultwert für den Ausdruck *bedingung* ist wahr.
 - Anstelle einer einzelnen Anweisung kann ein geklammerter Anweisungsblock `{` `}` stehen. 
 
-![Struktogramm for-Schleife](pictures/nsd_for.svg)  
+![Struktogramm for-Schleife](img/nsd_for.svg)  
 
 Weitere Eigenschaften der for-Schleife:  
 - Die Laufvariable ist eine lokale Variable ganzzahligen Typs, z.B. `int` oder `char` (also nicht vom Typ double).  
@@ -1445,7 +1445,7 @@ Weitere Eigenschaften der for-Schleife:
 
 Summe der Quadrate der Zahlen von 1 bis 5. 
 
-![Struktogramm Beispiel Summe von Quadraten](pictures/nsd_for_summe_quadrate.svg)  
+![Struktogramm Beispiel Summe von Quadraten](img/nsd_for_summe_quadrate.svg)  
 
 ```c  
 #include <stdio.h>
@@ -1467,7 +1467,7 @@ int main()
 
 Summe der Wurzeln  der Zahlen von 5 bis 1  
 
-![Struktogramm Beispiel Summe von Wurzeln](pictures/nsd_for_summe_wurzeln.svg)  
+![Struktogramm Beispiel Summe von Wurzeln](img/nsd_for_summe_wurzeln.svg)  
 
 ```c 
 #include <stdio.h>
@@ -1502,7 +1502,7 @@ Zwei Beispiele für Endlosschleifen:
 
 Gib alle Variationen mit Wiederholung der Buchstaben `a`, `b` und `c` am Bildschirm aus.  
 
-![Struktogramm Variation mit Wiederholung der Buchstaben a, b, c](pictures/nsd_for_variation_mit_wiederholung.svg)  
+![Struktogramm Variation mit Wiederholung der Buchstaben a, b, c](img/nsd_for_variation_mit_wiederholung.svg)  
 
 ```c
 #include <stdio.h>
@@ -3089,21 +3089,21 @@ int *pArea;
 
 Damit nach Eingabe des Präfix "`c`" und mit Hilfe der Auto-Vervollständigung ...  
 
-![Screenshot #1 Basic Template for a simple C-program](./pictures/cTemplate1.png)
+![Screenshot #1 Basic Template for a simple C-program](./img/cTemplate1.png)
 
 ... das Rohgerüst eines C-Programms angelegt wird, ...  
 
-![Screenshot #2 Basic Template for a simple C-program](./pictures/cTemplate2.png)
+![Screenshot #2 Basic Template for a simple C-program](./img/cTemplate2.png)
 
 ... ist folgende Konfiguration in VSC vorzunehmen: 
 
-![Screenshot #3 Basic Template for a simple C-program](./pictures/cTemplate3.png)
+![Screenshot #3 Basic Template for a simple C-program](./img/cTemplate3.png)
 
 Wähle den Eintrag "`c (C)`" bzw. gib "`c (C)`" ein, wenn dieser Wert fehlt.  
 
 Ersetze dann den Inhalt der Konfigurationsdatei "`c.json`" ...  
 
-![Screenshot #3 Basic Template for a simple C-program](./pictures/cTemplate4.png)
+![Screenshot #3 Basic Template for a simple C-program](./img/cTemplate4.png)
 
 ... mit folgendem Code und sichere die Änderung.  
 
