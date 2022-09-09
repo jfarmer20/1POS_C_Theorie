@@ -100,12 +100,14 @@ Online C-Compiler:
   - [20.4. Mehrdimensionale Arrays dynamisch erzeugen](#204-mehrdimensionale-arrays-dynamisch-erzeugen)
 - [21. Dateien lesen und schreiben](#21-dateien-lesen-und-schreiben)
 - [22. `scanf`, `sscanf`, `gets`, `fgets` und `fscanf`](#22-scanf-sscanf-gets-fgets-und-fscanf)
-- [23. Strukturen](#23-strukturen)
-- [24. Anhang](#24-anhang)
-  - [24.1. Weitere Literatur](#241-weitere-literatur)
-  - [24.2. Übersicht des Unterrichtsstoffs](#242-übersicht-des-unterrichtsstoffs)
-  - [24.3. Code Style Rules](#243-code-style-rules)
-  - [24.4. .c-Dateivorlage in VSC](#244-c-dateivorlage-in-vsc)
+- [23. Der Datentyp `enum` (Enumeration)](#23-der-datentyp-enum-enumeration)
+- [24. Strukturen](#24-strukturen)
+  - [24.1. Funktionsübergabe von Strukturen](#241-funktionsübergabe-von-strukturen)
+- [25. Anhang](#25-anhang)
+  - [25.1. Weitere Literatur](#251-weitere-literatur)
+  - [25.2. Übersicht des Unterrichtsstoffs](#252-übersicht-des-unterrichtsstoffs)
+  - [25.3. Code Style Rules](#253-code-style-rules)
+  - [25.4. .c-Dateivorlage in VSC](#254-c-dateivorlage-in-vsc)
 
 # 1. Einführung
 
@@ -2925,16 +2927,51 @@ int main()
 
 `fgets` liest die komplette Zeile der Konsole ein. `sscanf` zerlegt diese entsprechend des Format-Strings. `sscanf` retourniert die Anzahl der Parameter, die geparst wurden. Dadurch kann die Variable `len` zur Plausibilitätsprüfung verwendet werden. 
 
-# 23. Strukturen  
+# 23. Der Datentyp `enum` (Enumeration)
 
-Will man von einer Person, Name und Geburtsjahr verwalten:  
+Mit dem Datentyp `enum` lassen sich Begriffe aufzählen. Man spricht daher auch vom Aufzählungstyp `enum`. `Enum` macht nichts anderes, als den aufsteigenden Zahlen `0`, `1`, `2`, *lables* zu verpassen. Im Programm selbst wird mit diesen Labels gearbeitet, was den Code lesbarer macht. 
+
+Betrachten wir folgendes Code-Snippet, mit einem Aufzählungstyp mit Rennradherstellern:  
+
+```C  
+typedef enum brand
+{
+    BULLS,
+    BIANCHI,
+    SPECIALIZED
+} eBrand;
+
+// ...
+
+eBrand myBrand = BULLS;
+
+switch (myBrand)
+{
+case BULLS:
+    printf("You have decided to ride a budget bike.\n");
+    break;
+case BIANCHI:
+    printf("You have chosen a middle-class bike.\n");
+    break;
+case SPECIALIZED:
+    printf("Wow! You make it with a pro bike.\n");
+    break;
+}
+```  
+
+
+
+# 24. Strukturen  
+
+Braucht man von einer Person, Name und Geburtsjahr, ...  
 
 ```C  
 char name[30];
 int yearOfBirth;
 ```  
 
-dann lassen sich diese Variablen zu einer Struktur (`struct`) zusammenfassen. Die Struktur kann dann wie folgt deklariert werden:  
+... so lassen sich diese Variablen zu einer Struktur (`struct`) zusammenfassen.  
+Die Struktur kann dann wie folgt deklariert werden:  
 
 ```C  
 struct sPerson
@@ -2943,10 +2980,11 @@ struct sPerson
   int yearOfBirth;
 }; 
 ```  
-Benötigt man dann eine Variable vom Typ der deklarierten Struktur, so initialisiert man diese mit dem Schlüsselwort `struct`:  
+
+Eine Variable vom Typ dieser Struktur initialisiert man mit dem Schlüsselwort `struct`:  
 
 ```C  
-struct SPerson myPerson;
+struct sPerson myPerson;
 ```  
 
 Deklaration und Initialisierung lassen sich aber auch zusammenfassen:  
@@ -2959,22 +2997,22 @@ struct sPerson
 } myPerson; 
 ```  
 
-Üblich ist bei der Deklaration auch die Verwendung eines Typsynonyms. Dann entfällt bei der Variableninitialisierung das Schlüsselwort `struct`.  
+In der Praxis verwendet man beim Deklarieren ein Typsynonym. Damit entfällt beim Initialisieren das Schlüsselwort `struct`.  
 
 ```C  
 typedef struct
 {
   char name[30];
   int yearOfBirth;
-} sPerson;
+} SPerson;
 
-sPerson myPeson;
+SPerson myPeson;
 ```  
 
 Zugegriffen wird auf die Elemente einer Strukturvariablen mit dem `.`-Operator.  
 
 ```C  
-strcpy(myPerson.name, "John Doe"); // <string.h>
+strcpy(myPerson.name, "John Doe"); // benötigt <string.h>
 myPerson.yearOfBirth = 1974;
 
 printf("%s, born %d\n", myPerson.name, myPerson.yearOfBirth);
@@ -2983,37 +3021,107 @@ printf("%s, born %d\n", myPerson.name, myPerson.yearOfBirth);
 Screenshot:  
 ```  
 John Doe, born 1974
-```  
+``` 
 
-Wird eine Struktur an eine Funktion übergeben, liegt die Strukturvariable dort als Referenzvariable (Pointer) vor. Ein Zugriff auf die Strukturelemente würde dann so aussehen:  
+## 24.1. Funktionsübergabe von Strukturen
+
+Wird eine Struktur an eine Funktion call-by-reference übergeben, liegt die Strukturvariable innerhalb der Funktion als Referenzvariable (Pointer) vor. Ein Zugriff auf die Werte würde dann so aussehen:  
 
 ```C 
-void initPerson(sPerson *pPerson)
+void initPerson(SPerson *pPerson) // call-by-reference
 {
   strcpy((*pPerson).name, "John Doe");
   (*pPerson).yearOfBirth = 1974;
 }
 ```  
 
-Allerdings gibt es für Strukturvariablen als Referenzvariablen (Pointer) den `>-`-Operator. Damit erfolgt der Zugriff einfacher und der Code ist auch lesbarer:  
+Um das lesbarer zu gestalten, wurde der "`>-`"-Operator eingeführt. Der Zugriff auf die Werte einer Struktur-Referenzvariable ist damit einfacher:  
 
 ```C 
-void initPerson(sPerson *pPerson)
+void initPerson(SPerson *pPerson) // call-by-reference
 {
     strcpy(pPerson->name, "John Doe");
     pPerson->yearOfBirth = 1974;
 }
 ``` 
 
-# 24. Anhang 
+Die Funktionsübergabe einer Struktur ist sowohl *call-by-reference* als auch *call-by-value* möglich.  
 
-## 24.1. Weitere Literatur
+Folgendes Programm zeigt, dass bei *call-by-value*-Übergabe, eine Änderung der Strukturvariablen sich auch auf ihren Inhalt im Hauptgrogramm auswirkt (`initPerson1`, `firstPerson`).  
+
+Bei einer "call-by-value*-Übergabe wird in der Fuktion eine Kopie angelegt. Änderungen dieser wirken sich nicht aufs Hauptprogramm aus (`initPerson2`, `secondPerson`).  
+Die veränderte Strukturvariable der Funktion `initPerson2` kann aber als Retourwert zurückgegeben werden. Dann steht die veränderte Kopie auch im Hauptprogramm zur Verfügung (`thirdPerson`). 
+
+```C 
+#include <stdio.h>
+#include <string.h>
+
+typedef struct
+{
+    char name[30];
+    int yearOfBirth;
+} SPerson;
+
+// call-by-reference
+void initPerson1(SPerson *pPerson)
+{
+    strcpy(pPerson->name, "John Doe");
+    pPerson->yearOfBirth = 1974;
+}
+
+// call-by-value
+SPerson initPerson2(SPerson person)
+{
+    strcpy(person.name, "Sarah Doe");
+    person.yearOfBirth = 1984;
+    return person;
+}
+
+int main()
+{
+    SPerson firstPerson, secondPerson, thirdPerson;
+
+    strcpy(firstPerson.name, "N.N.");
+    firstPerson.yearOfBirth = 1900;
+
+    strcpy(secondPerson.name, "N.N.");
+    secondPerson.yearOfBirth = 1900;
+
+    initPerson1(&firstPerson);
+    
+    thirdPerson = initPerson2(secondPerson);
+
+    printf("%s, born %d\n", firstPerson.name, firstPerson.yearOfBirth);
+    printf("%s, born %d\n", secondPerson.name, secondPerson.yearOfBirth);
+    printf("%s, born %d\n", thirdPerson.name, thirdPerson.yearOfBirth);
+
+    return 0;
+}
+```  
+
+**Screenshot:**  
+
+```  
+John Doe, born 1974
+N.N., born 1900
+Sarah Doe, born 1984
+```  
+
+Strukturvariablen können wie einfache Datentypen behandelt werden. Strukturvariablen lassen sich in Funktionen deklariert und als Retourwert ans Hauptprogramm übergeben.  
+
+
+
+
+
+# 25. Anhang 
+
+## 25.1. Weitere Literatur
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, HTML-Version](https://algs4.cs.princeton.edu/home/)  
 
 [Sedgewick, R.; Wayne, K.: Algorithms. Fourth Edition. Pearson Education 2011, PDF-Version](https://github.com/Mcdonoughd/CS2223/raw/master/Books/Algorithhms%204th%20Edition%20by%20Robert%20Sedgewick%2C%20Kevin%20Wayne.pdf) 
 
-## 24.2. Übersicht des Unterrichtsstoffs
+## 25.2. Übersicht des Unterrichtsstoffs
 
 * Windows-Command-Shell (cmd): `dir`, `mkdir`, `ren`, `rmdir`, `cd`, `copy`, `del`, `help <command>`, … 
 
@@ -3062,7 +3170,7 @@ void initPerson(sPerson *pPerson)
 
 * Rekursion versus Iteration (am Beispiel Fakultätsberechnung und Fibonacci-Zahlen)  
 
-## 24.3. Code Style Rules  
+## 25.3. Code Style Rules  
 
 Für alle **Bezeichner** (Variablen-, Funktionsnamen) verwenden wir Englisch und die camelCase-Schreibweise (z.B. `counter`, `lastElement`, `getMinimum(...)`, `print2Screen(...)`).  
 Sofern der Code verständlich bleibt, dürfen Variablenbezeichner aus nur einem Buchstaben bestehen.  
@@ -3085,7 +3193,7 @@ void print2screen(int a[], int arraySize);
 int *pArea; 
 ```  
 
-## 24.4. .c-Dateivorlage in VSC  
+## 25.4. .c-Dateivorlage in VSC  
 
 Damit nach Eingabe des Präfix "`c`" und mit Hilfe der Auto-Vervollständigung ...  
 
