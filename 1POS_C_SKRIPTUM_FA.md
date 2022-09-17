@@ -2,7 +2,7 @@
 
 <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/jfarmer20/1POS_C_Theorie/blob/main/1POS_C_SKRIPTUM_FA.md">Dieses Unterrichtsskriptum "Die Programmiersprache C" für den Gegenstand "Programmieren und Software Engineering" im ersten Jahrgang der Abteilung Informatik, HTBLA-Kaindorf an der Sulm, Österreich</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/jfarmer20">Johannes Farmer </a> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
 
-Der Inhalt richtet sich nach dem [Lehrplan für Informatik-HTLs](https://www.ris.bka.gv.at/Dokumente/BgblAuth/BGBLA_2015_II_262/COO_2026_100_2_1135489.pdfsig), entnommen aus dem [Bundesgesetzblatt, Jahrgang 2015, Teil II, 262. Verordnung](https://www.ris.bka.gv.at/Dokumente/BgblAuth/BGBLA_2015_II_262/BGBLA_2015_II_262.pdfsig).  
+Der Inhalt richtet sich nach dem [Lehrplan für Informatik-HTLs](https://www.ris.bka.gv.at/Dokumente/BgblAuth/BGBLA_2015_II_262/COO_2026_100_2_1135489.pdfsig), entnommen aus dem [Bundesgesetzblatt, Jahrgang 2021, Teil II, 383. Verordnung](./doc/Lehrplan_Informatik_2021.pdf).  
 
 Ergänzend zu diesem Skriptum stehen folgende, frei verfügbare Unterlagen, zur Verfügung:  
 - [Wolf, Jürgen: C von A bis Z, Rheinwerk Verlag](https://openbook.rheinwerk-verlag.de/c_von_a_bis_z/)  
@@ -153,39 +153,51 @@ Im Jahr 1999 erschien C99 mit Elementen der objekt-orientierten Programmiersprac
 
 # 2. Einrichten der Entwicklungsumgebung Visual Studio Code (VSC)
 
-Microsoft Windows 10 stellt auf seinem Betriebssystem mit dem "Windows Subsystem für Linux" (WSL) auch das Betriebssystem Linux zur Verfügung.  
+Im folgenden Kapitel wird beschrieben, wie man Visual Studio Code (VSC) auf Windows 10 installiert (die einfache Installationsvariante).  
 
-Im folgenden Kapitel wird beschrieben, wie man Visual Studio Code (VSC) auf Windows 10 installiert (die einfache und empfohlene Variante).  
-Im darauffolgenden Kapitel wird beschrieben, wie man VSC mit Linux und dem WSL nutzt (die komplizierte Variante). C auf Linux zu entwickeln macht Sinn, weil der Compiler `gcc` und der Debugger `gdb` fixe Bestandteile des Betriebssystems Linux sind.  
+Microsoft Windows 10 stellt auf seinem Betriebssystem mit dem "Windows Subsystem für Linux" (WSL) auch das Betriebssystem Linux zur Verfügung. Linux besitzt als fixe Bestandteile seines Betriebssystems bereits den C-Compiler `gcc` mit dem zugehörigen Debugger `gdb`. Aus diesem Grund wird im Anschluss auch beschrieben, 
+wie man VSC mit Linux und dem WSL nutzt (die aufwändige Installationsvariante). 
 
 ## 2.1. Installation auf *Windows 10* direkt  
 
 Windows 10 stellt keinen `C`-Compiler und -Debugger zur verfügung. Wir installierend daher zuerst MinGW (*Minimalist GNU for Windows*). MinGW ist eine Portierung der Entwicklerwerkzeuge GNU Compiler Collection (GCC) und GNU Debugger (GDB) auf Windows.  
 
-1. MinGW-w64 ist auf Sourceforge unter folgendem Link verfügbar: [Mingw-w64 builds](https://www.mingw-w64.org/downloads/#mingw-builds)  
+1. MinGW-w64 ist hier downloadbar: <https://osdn.net/projects/mingw/>  
 
-    Starte die Setup-Datei:  
+    ![Download-Seite MinGW](./img/2022-09_Screenshot1.PNG)
 
-    ![MinGW64_Installer_Screenshot1](./img/MinGW64_Installer_Screenshot1.PNG "MinGW64_Installer_Screenshot1") 
+    Führe die Installation durch, wobei nur folgende zwei Optionen anzuwählen sind:  
 
-    ![MinGW64_Installer_Screenshot2](./img/MinGW64_Installer_Screenshot2.PNG "MinGW64_Installer_Screenshot2")     
+    ![MinGW Installation Manager Auswahldialog](./img/2022-09_Screenshot2.PNG)  
 
-2. Um zu prüfen, ob die Mingw-w64 Tools richtig installiert sind, öffne ein Command Prompt und führe folgendes aus:
+    Nach Auswahl werden mit folgendem Menüpunkt die Optionen installiert:  
+
+    ![MinGW Installation Manager Installationsstart](./img/2022-09_Screenshot3.png)  
+
+2. Damit `gcc` und `gdb` auch gefunden werden, ist die `Path`-Umgebungsvariable zu setzen. Öffne zu diesem Zweck die Konsole als Administrator:  
+
+    ![Konsole_Path-Variable_setzen](./img/2022-09_Screenshot6.PNG)  
+
+    Und ergänze die `Path`-Umgebungsvariable um den entsprechenden Pfad:  
+
+    ![Screenshot_cmd_setx-Kommande](./img/2022-09_Screenshot4.PNG)  
+
+3. Um zu prüfen, ob  `gcc` und `gdb` nun auch gefunden werden, öffne ein weiteres Konsolenfenster (ohne Administratorrechte) und führe folgendes aus:
 
     ```
      gcc --version
      gdb --version
      ```  
 
-3. Installiere [Visual Studio Code](https://code.visualstudio.com/Download).
+4. Installiere [Visual Studio Code](https://code.visualstudio.com/Download).  
 
-4. Installiere die [C/C++ extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).  
+    Beachte bei der Installation, dass Du auch folgendes auswählst:  
 
-    You can install the C/C++ extension by searching for 'c++' in the Extensions view  
-    ![C/C++ extension](./img/cpp-extension.png)
+    ![Screenshot_Auswahldialog_VSC](./img/2022-09_Screenshot5.PNG)  
 
+5. Abschließend installiere die [C/C++ extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).  
 
-
+    ![C/C++ extension](./img/cpp-extension.png)  
 
 ## 2.2. Installation auf *Windows Subsystem for Linux (WSL)*  
 
