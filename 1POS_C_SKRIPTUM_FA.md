@@ -742,26 +742,28 @@ Die Anzahl der Nachkommastellen ist optional und wird durch die Genauigkeit (`pr
 Beispiele von Formatangaben für ganzzahlige Werte (Datentyp `int`): 
 
 ```
-%d 		Ausgabe der Zahl ohne zusätzliche Vorgabe 
-%5d 	rechtsbündige Ausgabe der Zahl auf 5 Stellen 
-%-5d 	linksbündige Ausgabe der Zahl auf 5 Stellen 
-%05d 	Ausgabe der Zahl auf 5 Stellen mit führenden Nullen 
-%+5d 	rechtsbündige Ausgabe der Zahl auf 5 Stellen mit Vorzeichen 
-%+-5d   linksbündige Ausgabe der Zahl auf 5 Stellen mit Vorzeichen 
+%d    Ausgabe der Zahl ohne zusätzliche Vorgabe 
+%5d   rechtsbündige Ausgabe der Zahl auf 5 Stellen 
+%-5d  linksbündige Ausgabe der Zahl auf 5 Stellen 
+%05d  Ausgabe der Zahl auf 5 Stellen mit führenden Nullen 
+%+5d  rechtsbündige Ausgabe der Zahl auf 5 Stellen mit Vorzeichen 
+%+-5d linksbündige Ausgabe der Zahl auf 5 Stellen mit Vorzeichen 
 ```
 
 Beispiele von Formatangaben für Fließkommazahlen (Datentyp `float`):
 
 ```
-%f 		    Ausgabe der Zahl ohne zusätzliche Vorgabe 
-%10f 		rechtsbündige Ausgabe der Zahl auf 10 Stellen
-%.2f 		rechtsbündige Ausgabe der Zahl mit 2 Nachkommastellen 
-%-10.2f 	linksbündige Ausgabe auf 10 Stellen, davon 2 Nachkommastellen 
-%010.2f 	Ausgabe der Zahl auf 10 Stellen mit führenden Nullen, davon 2       
-            Nachkommastellen
-%+10.2f 	rechtsbündige Ausgabe der Zahl auf 10 Stellen und Vorzeichen,  
-            davon 2 Nachkommastellen  
-%+-.2f 	    linksbündige Ausgabe der Zahl mit Vorzeichen und 2 Nachkommastellen
+%f      Ausgabe der Zahl ohne zusätzliche Vorgabe 
+%10f    rechtsbündige Ausgabe der Zahl auf 10 Stellen
+%.2f    rechtsbündige Ausgabe der Zahl mit 2 Nachkommastellen 
+%-10.2f   linksbündige Ausgabe 10 Stellen, 
+          davon 2 Nachkommastellen 
+%010.2f   Ausgabe der Zahl auf 10 Stellen, 
+          führende Nullen, 2 Nachkommastellen
+%+10.2f   rechtsbündige Ausgabe mit Vorzeichen auf 10 Stellen 
+          mit Vorzeichen und davon 2 Nachkommastellen  
+%+-.2f    linksbündige Ausgabe der Zahl mit Vorzeichen 
+          und 2 Nachkommastellen  
 ```  
 
 # 7. Zufallszahlen 
@@ -1141,21 +1143,29 @@ Bei der ersten if-Anweisung wird d nur dann erhöht wenn `a < b` wahr ist. Bei d
 
 ## 11.5. Die Operatorenrangfolge
 
-Die Rangfolge der Operatoren ist von oben nach unten angeordnet. Operatoren innerhalb derselben Zeilen sind gleichwertig und werden von links nach rechts abgearbeitet.
-Durch Verwendung von runden Klammern kann der Vorrag der Operatoren geändert werden.
+Die Rangfolge der Operatoren ist in nachfolgender Tabelle von oben nach unten absteigend angeordnet. Operatoren innerhalb derselben Zeile sind gleichwertig und werden von links nach rechts abgearbeitet.
+Durch Verwendung von runden Klammern kann der Vorrang der Operatoren geändert werden.  
 
-| Operator-Typ       | Operator            |
+Siehe auch:  
+[C Operator Precedence (cppreference.com)](https://en.cppreference.com/w/c/language/operator_precedence)  
+
+| Beschreibung       | Operator            |
 | :----------------- | :------------------ |
-| unär Postfix       | () [] ++ --         |
-| unär Präfix        | ++ -- (cast) sizeof |
-| binär Arithmetisch | * / %               |
-| binär Arithmetisch | + -                 |
-| Vergleich          | < <= > >=           |
-| Vergleich          | == !=               |
-| logisch und        | &&                  |
-| logisch oder       | \|\|                |
-| Zuweisung          | += -= *= /= %=      |
-| Komma              | ,                   |
+| Postfix increment/decrement, function call, array index, structure member access, structure member access through pointer | `++` `--`, `()`, `[]`, `.`, `->` |
+| Präfix increment/decrement, unär +/-, logisches/bitweises NOT, cast, Dereferenz, Addresse, sizeof | `++` `--`, `+` `-`, `!` `~`, `(cast)`, `*`, `&`, `sizeof()` |
+| Multiplikation, Division, Modulo | `*`, `/`, `%` |
+| Addition, Subtraktion | `+`, `-` |  
+| Bitweises Shift | `<<`, `>>` |  
+| Vergleich | `<`, `<=`, `>`, `>=` |
+| Vergleich | `==`, `!=` |  
+| Bitweises UND | `&` |  
+| Bitweises XOR | `^` |  
+| Bitweises ODER | `|` |
+| logisches UND | `&&` |  
+| logisch ODER | `\|\|` |  
+| Ternärer Bedingungsoperator | `?` `:` |  
+| Zuweisung | `=`, `+=`, `-=`, `*=`, `/=`, `%=`, `<<=`, `>>=`, `&=`, `^=`, `\|=` |  
+| Komma | `,` |  
 
 # 12. Kontrollstrukturen – Entscheidung 
 
