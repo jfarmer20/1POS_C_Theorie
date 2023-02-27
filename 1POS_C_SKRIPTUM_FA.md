@@ -1,27 +1,4 @@
-# Die Programmiersprache C <!-- omit in toc -->
-
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/jfarmer20/1POS_C_Theorie/blob/main/1POS_C_SKRIPTUM_FA.md">Dieses Unterrichtsskriptum "Die Programmiersprache C" für den Gegenstand "Programmieren und Software Engineering" im ersten Jahrgang der Abteilung Informatik, HTBLA-Kaindorf an der Sulm, Österreich</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/jfarmer20">Johannes Farmer </a> is licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
-
-Der Inhalt richtet sich nach dem [Lehrplan für Informatik-HTLs](https://www.ris.bka.gv.at/Dokumente/BgblAuth/BGBLA_2015_II_262/COO_2026_100_2_1135489.pdfsig), entnommen aus dem [Bundesgesetzblatt, Jahrgang 2021, Teil II, 383. Verordnung](./doc/Lehrplan_Informatik_2021.pdf).  
-
-Ergänzend zu diesem Skriptum stehen folgende, frei verfügbare Unterlagen, zur Verfügung:  
-- [Wolf, Jürgen: C von A bis Z, Rheinwerk Verlag](https://openbook.rheinwerk-verlag.de/c_von_a_bis_z/)  
-- [Wikibook "C Programming"](https://en.wikibooks.org/wiki/C_Programming)  
-- [C/C++ Befehlsreferenz](https://cplusplus.com/)  
-
-Übungsmöglichkeiten gibt es hier:  
-
-- https://www.learn-c.org/
-- [Project Euler](https://projecteuler.net/)  
-- [CodinGame](https://www.codingame.com/start)  
-
-Online C-Compiler:  
-- https://onecompiler.com/c  
-- https://www.onlinegdb.com/  
-- https://replit.com/  
-
-
-# Inhaltsverzeichnis <!-- omit in toc -->
+# 1. Die Programmiersprache C <!-- omit in toc -->
 
 - [1. Einführung](#1-einführung)
   - [1.1. Begriffe](#11-begriffe)
@@ -33,7 +10,7 @@ Online C-Compiler:
   - [2.4. `helloworld.c` kompilieren](#24-helloworldc-kompilieren)
   - [2.5. `helloworld.c` starten/debuggen](#25-helloworldc-startendebuggen)
     - [2.5.1. Wichtige Tastenkombinationen](#251-wichtige-tastenkombinationen)
-    - [2.5.2. Zugriff Dateisystem Windows <-> WSL](#252-zugriff-dateisystem-windows---wsl)
+    - [2.5.2. Zugriff Dateisystem Windows \<-\> WSL](#252-zugriff-dateisystem-windows---wsl)
   - [2.6. Einführungsbeispiel](#26-einführungsbeispiel)
 - [3. Mein erstes Programm mit Eingabe, Zuweisung und Ausgabe](#3-mein-erstes-programm-mit-eingabe-zuweisung-und-ausgabe)
   - [3.1. `printf()`-Befehl: Steuerzeichen und Sonderzeichen](#31-printf-befehl-steuerzeichen-und-sonderzeichen)
@@ -81,7 +58,7 @@ Online C-Compiler:
   - [16.1. Eindimensionale Arrays](#161-eindimensionale-arrays)
   - [16.2. Initialisieren von Arrays](#162-initialisieren-von-arrays)
 - [17. Funktionen](#17-funktionen)
-  - [17.1. Syntax einer Funktion](#171-syntax-einer-funktion)
+  - [17.1. Syntax der Funktion](#171-syntax-der-funktion)
   - [17.2. Eigenschaften von Funktionen](#172-eigenschaften-von-funktionen)
   - [17.3. Funktionsdeklaration](#173-funktionsdeklaration)
   - [17.4. Lokale Variablen](#174-lokale-variablen)
@@ -108,6 +85,7 @@ Online C-Compiler:
   - [25.2. Übersicht des Unterrichtsstoffs](#252-übersicht-des-unterrichtsstoffs)
   - [25.3. Code Style Rules](#253-code-style-rules)
   - [25.4. .c-Dateivorlage in VSC](#254-c-dateivorlage-in-vsc)
+
 
 # 1. Einführung
 
@@ -2166,17 +2144,17 @@ Index:                   9
 
 # 17. Funktionen  
 
-Eine Funktion (auch Unterprogramm) ist ein abgeschlossener Programmteil, der eine bestimmte Aufgabe ausführt. Jedes C-Programm besteht zumindest aus einer Funktion - dem Hauptprogramm `main()`. Vom Hauptprogramm aus werden weitere Funktionen aufgerufen.  
+Eine Funktion, auch Unterprogramm, ist ein abgeschlossener Programmteil, der eine bestimmte Aufgabe ausführt. Jedes C-Programm besteht zumindest aus einer Funktion - dem Hauptprogramm `main()`. Vom Hauptprogramm aus werden weitere Funktionen aufgerufen.  
 
-Befehle wie `printf()`, `scanf()`, `pow()`, `rand()` usw. sind nichts anderes als Funktionen. Sie stehen uns durch Einbinden der C-Bibliotheken `<stdio.h>`, `<math.h>` und `<stdlib.h>` usw. zur Verfügung.  
+Befehle wie `printf()`, `pow()`, `rand()` usw. sind nichts anderes als Funktionen. Sie stehen uns durch Einbinden der C-Bibliotheken `<stdio.h>`, `<math.h>` und `<stdlib.h>` usw. zur Verfügung.  
 
 Mit Funktionen wird ein Programm übersichtlicher:  
 - Ein komplexes umfangreiches Problem wird in Teilprobleme zerlegt.  
-- Wiederkehrende Aufgaben brauchen als Funktion nur einmal umgesetzt werden.  
+- Wiederkehrende Aufgaben werden als Funktion nur einmal umgesetzt.  
 
-## 17.1. Syntax einer Funktion  
+## 17.1. Syntax der Funktion  
 
-```c
+```C
 rückgabetyp funktionsname(formale_parameterliste)
 {
   variablendeklarationen;
@@ -2188,7 +2166,7 @@ rückgabetyp funktionsname(formale_parameterliste)
 ## 17.2. Eigenschaften von Funktionen  
 
 - Die `formale_parameterliste` enthält, durch Beistriche getrennt, Datentyp und Name aller Parameter.    
-- Die `formale_parameterliste` ist optional. Soll nichts übergeben werden, wird die Funktion mit `()` deklariert (z.B. bei `rand()`).  
+- Die `formale_parameterliste` ist optional. Soll nichts übergeben werden, wird die Funktion mit `(void)` deklariert (z.B. bei `rand(void)`).  
 - Die `return`-Anweisung beendet die Funktion und kann an beliebiger Stelle, auch mehrmals, stehen.  
 - Fehlt der Rückgabewert bei der return-Anweisung, so wird kein Wert zurückgegeben. Die Ausführung der Funktion endet an dieser Stelle.  
 - Wird ein Rückgabewert nicht benötigt, so kann die `return`-Anweisung fehlen. Als `rückgabetyp` ist in diesem Fall `void` zu deklarieren.  
@@ -2196,10 +2174,10 @@ rückgabetyp funktionsname(formale_parameterliste)
 
 **Beispiele für Funktionen**  
 
-```c  
+```C  
 int calcRectangleArea(int a, int b) // Funktion mit zwei         
-{                                   // Formalparameter
-    int result;                     // und Rückgabewert
+{                                   // Formalparametern
+    int result;                     // und einem Rückgabewert
     result = a * b;
     return result;
 }
@@ -2209,7 +2187,7 @@ void printRectangleArea(int a, int b) // Funktion gibt keinen
     printf("%d", a * b);              // return wird nicht 
 }                                     // benötigt  
 
-int scanSideA() // Funktion besitzt keine Formalparameter
+int scanSideA(void) // Funktion besitzt keine Formalparameter
 {
     int a;
     scanf("%d", &a);
@@ -2223,11 +2201,11 @@ Innerhalb einer C Quellcodedatei können Funktionen beliebig angeordnet sein. Fi
 
 Im folgenden Beispiel stehen zu Beginn die Vorwärtsdeklarationen. Im Hauptprogramm erfolgen die Funktionsaufrufe. Am Ende sind die Funktionen implementiert. 
 
-```c  
-int readFromUser();              // Vorwärtsdeklaration
+```C  
+int readFromUser(void);          // Vorwärtsdeklaration
 void printUserInput(int number); // Vorwärtsdeklaration
 
-int main()                       // Hauptprogramm
+int main(void)                   // Hauptprogramm
 {
     int value = 0;
     value = readFromUser();      // Funktionsaufruf
@@ -2235,7 +2213,7 @@ int main()                       // Hauptprogramm
     return 0;
 }
 
-int readFromUser()              // Implementierung der Funktion
+int readFromUser(void)           // Implementierung der Funktion
 {
     int number;
     printf("Enter a number: ");
@@ -2257,12 +2235,12 @@ You entered: 5
 
 ## 17.4. Lokale Variablen  
 
-Werden Variablen in einer Funktion oder in einem Anwendungsblock deklariert, dann sind sie nur in diesem Codeabschnitt bekannt und werden als lokale Veriablen bezeichnet.  
+Werden Variablen in einer Funktion oder in einem Anwendungsblock deklariert, dann sind sie nur in diesem Codeabschnitt bekannt und werden als lokale Variablen bezeichnet.  
 
 **Beispiel**  
 
 ```c  
-void change()
+void change(void)
 {
     int i = 111;
     printf("Within function: %d\n", i);
@@ -2302,7 +2280,7 @@ void function(int number) // number ist der Formalparameter
     printf("The value of number is: %d\n", number);
 }
 
-int main()                // Hauptprogramm
+int main(void)            // Hauptprogramm
 {
     int x = 12;
     function(x);          // x ist der aktuelle Parameter
@@ -2319,14 +2297,14 @@ The value of number is: 999
 
 ### 17.5.1. *Call-by-value*  
 
-In C werden Parameter an Funktionen *by-value* übergeben. Das heißt, vom aktuellen Parameter wird in der Funktion eine lokale Kopie angelegt. Alle Änderungen des Parameters innerhalb der Funktion haben keine Auswirkung auf den Wert der Variablen im aufrufenden Programm.  
+In C werden Parameter an Funktionen *by-value* übergeben. Das heißt, vom aktuellen Parameter wird an die Funktion eine Kopie übergeben. Alle Änderungen des Parameters innerhalb der Funktion haben keine Auswirkung auf den Wert der Variablen im aufrufenden Programm.  
 
 **Beispiel**  
 
 ```C  
 void increment(int x)
 {
-    x++; // Es wird x nicht aber x aus main() veraendert
+    x++;     // hier wird x, nicht aber x in main() veraendert
     printf("x within increment(): %d\n", x);
 }
 
@@ -2351,7 +2329,7 @@ x after increment() was called: 10
 
 ### 17.5.2. *Call-by-reference*  
 
-Bei *call-by-reference* ist eine Änderung eines Parameters innerhalb einer Funktion auch im aufrufendem Code wirksam. Komplexe Datentypen wie Arrays können nur *call-by-reference* übergeben werden.  
+Bei *call-by-reference* ist eine Änderung eines Parameters innerhalb einer Funktion auch im aufrufendem Code wirksam. Komplexe Datentypen, sogenannte Referenztypen, wie Arrays können nur *call-by-reference* übergeben werden.  
 
 Eine Parameterübergabe *call-by-reference* bedeutet, dass die Speicheradresse einer Variablen - **Pointer**, **Zeiger** oder **Referenz** genannt - an die Funktion übergeben wird.  
 
@@ -2399,7 +2377,7 @@ Wird eine Aufgabe mit einer Schleife - einer sogenannten **Iteration** - gelöst
 
 In manchen Situationen ist eine **rekursive** Problemlösung eleganter. Eine **Rekursion** ist eine Funktion, die sich selbst aufruft.  
 
-Betrachten wir folgenden Code. 
+Betrachten wir folgenden Code:  
 
 ```C  
 #include <stdio.h>
@@ -2407,7 +2385,7 @@ Betrachten wir folgenden Code.
 void launchRocket(int n)
 {
     if (n == 0)
-        printf("Blast-off! ");
+        printf("Blast-off! ");  // Basis erreicht  
     else
     {
         printf("%d ", n);
@@ -2421,11 +2399,11 @@ int main()
     return 0;
 }
 ```  
-Mit der zugehörigen Bildschirmausgabe. 
+Mit der zugehörigen Bildschirmausgabe:  
 ```  
 10 9 8 7 6 5 4 3 2 1 Blast-off! 
 ```  
-An die Funktion `launchRocket` wird ein einziger Wert übergeben. Ist dieser `0`, so wird `Blast-off!` ausgegeben und das Programm endet. Wird ein anderer Wert `n` übergeben, so wird dieser ausgegeben und `launchRocket` erneut mit dem Wert `n-1` aufgerufen.  
+An die Funktion `launchRocket` wird ein einziger Wert übergeben. Ist dieser `0`, so wird `Blast-off!` ausgegeben und das Programm endet (Sprich: Die Basis wurde erreicht). Wird ein anderer Wert `n` übergeben, so wird dieser ausgegeben und `launchRocket` erneut mit dem Wert `n-1` aufgerufen.  
 
 Wenn wir nun im Beispiel `launchRocket()` im `else`-Zweig die Ausgabe des Countdown-Wertes mit dem rekursiven Funktionsaufruf vertauschen, erhalten wir folgenden Code mit folgender Bildschirmausgabe:    
 
@@ -2441,7 +2419,7 @@ void launchRocket2(int n)
     }
 }
 ```  
-Bildschirmausgabe: 
+Bildschirmausgabe:  
 ```  
 Blast-off! 1 2 3 4 5 6 7 8 9 10 
 ``` 
