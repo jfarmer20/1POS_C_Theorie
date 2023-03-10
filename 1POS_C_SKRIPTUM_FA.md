@@ -2144,7 +2144,7 @@ Index:                   9
 
 # 17. Funktionen  
 
-Eine Funktion, auch Unterprogramm, ist ein abgeschlossener Programmteil, der eine bestimmte Aufgabe ausführt. Jedes C-Programm besteht zumindest aus einer Funktion - dem Hauptprogramm `main()`. Vom Hauptprogramm aus werden weitere Funktionen aufgerufen.  
+Eine Funktion, auch Unterprogramm, ist ein abgeschlossener Programmteil, der eine bestimmte Aufgabe ausführt.   
 
 Befehle wie `printf()`, `pow()`, `rand()` usw. sind nichts anderes als Funktionen. Sie stehen uns durch Einbinden der C-Bibliotheken `<stdio.h>`, `<math.h>` und `<stdlib.h>` usw. zur Verfügung.  
 
@@ -2166,9 +2166,9 @@ rückgabetyp funktionsname(formale_parameterliste)
 ## 17.2. Eigenschaften von Funktionen  
 
 - Die `formale_parameterliste` enthält, durch Beistriche getrennt, Datentyp und Name aller Parameter.    
-- Die `formale_parameterliste` ist optional. Soll nichts übergeben werden, wird die Funktion mit `(void)` deklariert (z.B. bei `rand(void)`).  
-- Die `return`-Anweisung beendet die Funktion und kann an beliebiger Stelle, auch mehrmals, stehen.  
-- Fehlt der Rückgabewert bei der return-Anweisung, so wird kein Wert zurückgegeben. Die Ausführung der Funktion endet an dieser Stelle.  
+- Die `formale_parameterliste` ist optional. Soll nichts übergeben werden, wird die Funktion mit `(void)` deklariert.  
+- Die `return`-Anweisung beendet die Funktion und kann an beliebiger Stelle auch mehrmals stehen.  
+- Fehlt der Rückgabewert bei der `return`-Anweisung, so wird kein Wert zurückgegeben. Die Ausführung der Funktion endet an dieser Stelle.  
 - Wird ein Rückgabewert nicht benötigt, so kann die `return`-Anweisung fehlen. Als `rückgabetyp` ist in diesem Fall `void` zu deklarieren.  
 - Die formale und die aktuelle Parameterliste müssen in Anzahl, Reihenfolge und Datentyp übereinstimmen.  
 
@@ -2197,7 +2197,7 @@ int scanSideA(void) // Funktion besitzt keine Formalparameter
 
 ## 17.3. Funktionsdeklaration  
 
-Innerhalb einer C Quellcodedatei können Funktionen beliebig angeordnet sein. Findet der Compiler einen Funktionsaufruf, so überprüft er dessen Richtigkeit. Ist die Funktion im Quellcode jedoch an einer späteren Stelle definiert, braucht es eine Vorwärtsdeklaration. 
+Innerhalb einer C Quellcodedatei können Funktionen beliebig angeordnet sein. Findet der Compiler einen Funktionsaufruf, so überprüft er dessen Richtigkeit. Ist die Funktion im Quellcode jedoch an einer späteren Stelle kodiert, braucht es eine Vorwärtsdeklaration. 
 
 Im folgenden Beispiel stehen zu Beginn die Vorwärtsdeklarationen. Im Hauptprogramm erfolgen die Funktionsaufrufe. Am Ende sind die Funktionen implementiert. 
 
@@ -2264,7 +2264,7 @@ Within function: 111
 333  
 ```  
 
-Wird die Laufvariable einer `for`-Schleife im Initialisierungsteil deklariert, so ist sie eine lokale Variable und auch nur im Codeabschnitt der Schleife definiert.  
+Wird die Laufvariable einer `for`-Schleife in ihrem Initialisierungsteil deklariert, so ist sie eine lokale Variable und steht auch nur innerhalb des Schleifen-Codes zur Verfügung.  
 
 ## 17.5. Parameterübergabe
 
