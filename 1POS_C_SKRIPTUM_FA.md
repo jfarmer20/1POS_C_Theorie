@@ -3,13 +3,13 @@
 - [1. Einführung](#1-einführung)
   - [1.1. Begriffe](#11-begriffe)
   - [1.2. Geschichtliches der Programmiersprache C](#12-geschichtliches-der-programmiersprache-c)
-- [2. Einrichten der Entwicklungsumgebung Visual Studio Code (VSC)](#2-einrichten-der-entwicklungsumgebung-visual-studio-code-vsc)
-  - [2.1. Installation auf *Windows 10* direkt](#21-installation-auf-windows-10-direkt)
-  - [2.2. Installation auf *Windows Subsystem for Linux (WSL)*](#22-installation-auf-windows-subsystem-for-linux-wsl)
+- [2. Entwicklungsumgebung installieren](#2-entwicklungsumgebung-installieren)
+  - [2.1. Installation 'Windows 10 direkt'](#21-installation-windows-10-direkt)
+  - [2.2. Installation 'Windows Subsystem for Linux (WSL)'](#22-installation-windows-subsystem-for-linux-wsl)
   - [2.3. Erstes Programm mit Visual Studio Code (VS Code)](#23-erstes-programm-mit-visual-studio-code-vs-code)
   - [2.4. `helloworld.c` kompilieren](#24-helloworldc-kompilieren)
   - [2.5. `helloworld.c` starten/debuggen](#25-helloworldc-startendebuggen)
-    - [2.5.1. Wichtige Tastenkombinationen](#251-wichtige-tastenkombinationen)
+    - [2.5.1. Wichtige Tastenkombinationen - 1. Einführung](#251-wichtige-tastenkombinationen---1-einführung)
     - [2.5.2. Zugriff Dateisystem Windows \<-\> WSL](#252-zugriff-dateisystem-windows---wsl)
   - [2.6. Einführungsbeispiel](#26-einführungsbeispiel)
 - [3. Mein erstes Programm mit Eingabe, Zuweisung und Ausgabe](#3-mein-erstes-programm-mit-eingabe-zuweisung-und-ausgabe)
@@ -129,14 +129,19 @@ C ist eine imperative und prozedurale Programmiersprache. C wurde 1972 entworfen
 
 Im Jahr 1999 erschien C99 mit Elementen der objekt-orientierten Programmiersprache C++. 
 
-# 2. Einrichten der Entwicklungsumgebung Visual Studio Code (VSC)
+# 2. Entwicklungsumgebung installieren
 
-Im folgenden Kapitel wird beschrieben, wie man Visual Studio Code (VSC) auf Windows 10 installiert (die einfache Installationsvariante).  
+Als Entwicklungsumgebung verwenden wir Visual Studio Code (VSC). VSC kann in zwei Varianten installiert werden:  
 
-Microsoft Windows 10 stellt auf seinem Betriebssystem mit dem "Windows Subsystem für Linux" (WSL) auch das Betriebssystem Linux zur Verfügung. Linux besitzt als fixe Bestandteile seines Betriebssystems bereits den C-Compiler `gcc` mit dem zugehörigen Debugger `gdb`. Aus diesem Grund wird im Anschluss auch beschrieben, 
-wie man VSC mit Linux und dem WSL nutzt (die aufwändige Installationsvariante). 
+1. Auf Windows 10 direkt 
+2. Im Windows Subsystem für Linux (WSL)
 
-## 2.1. Installation auf *Windows 10* direkt  
+Bei Variante 1 muss zusätzlich der C-Compiler `gcc` mit dem zugehörigen Debugger `gdb` installiert werden.  
+Bei Variante 2 ist das WSL zu konfigurieren. C-Compiler und Debugger sind dort bereits, als fixer Bestandteil des Linux-Betriebssystems, vorhanden.   
+
+Empfohlen wird Variante 1, da diese auch auf unseren Schulrechnern zur Verfügung gestellt wird.  
+
+## 2.1. Installation 'Windows 10 direkt'
 
 Windows 10 stellt keinen `C`-Compiler und -Debugger zur verfügung. Wir installierend daher zuerst MinGW (*Minimalist GNU for Windows*). MinGW ist eine Portierung der Entwicklerwerkzeuge GNU Compiler Collection (GCC) und GNU Debugger (GDB) auf Windows.  
 
@@ -177,7 +182,7 @@ Windows 10 stellt keinen `C`-Compiler und -Debugger zur verfügung. Wir installi
 
     ![C/C++ extension](./img/cpp-extension.png)  
 
-## 2.2. Installation auf *Windows Subsystem for Linux (WSL)*  
+## 2.2. Installation 'Windows Subsystem for Linux (WSL)'  
 
 1. Windows auf die neueste Version aktualisieren: 
 
@@ -245,20 +250,14 @@ Quelldatei “helloworld.c” erstellen:
 ![Screenshot Visual Studio Code Command Erstes Programm - Schritt 1](./img/Screenshot_New_File.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 1")
 
 ```c
-// #include bewirkt das Einfügen von Quellcode aus einer anderen  
-// Datei. Die Header-Datei stdio.h wird in das Programm eingefügt.  
-// Sie beinhaltet die Funktionen, die wir zur 
-// (Standard)-Ein/-Ausgabe benötigen 
-#include <stdio.h>                          
+#include <stdio.h>
 
-int main()         // Funktion main() definiert das Hauptprogramm
-{                  // definiert den Anfang der Funktion
-  printf("Hello World!\n");        // Aufruf der Funktion printf()
-  printf("Press a key to continue... ");
-  fflush(stdin);
-  getchar();
-  return 0;                    // Rückgabewert der Funktion main()
-}                              // definiert das Ende der Funktion
+int main(void)
+{
+    printf("Hello World\n");
+
+    return 0;
+}
 ```
 
 Datei speichern: Menü File -> Save 
@@ -353,6 +352,8 @@ Quelldatei helloworld.c auswählen
 
 und mit den Tasten `F5` (debuggen)  oder `Strg` + `F5` (nur ausführen) fortsetzen.  
 
+**Möglicherweise wird die Datei `launch.json` nur unvollständig erstellt. Dann kann die passende der nachfolgenden Konfigurationsdateien verwendet werden. Gegebenenfalls müssen Dateipfade und der Wert des Schlüssels `preLaunchTask` angepasst werden.**  
+
 **launch.json (WSL)**  
 
 ```JSON  
@@ -424,21 +425,92 @@ Will man das Programm debuggen, an geeigneter Stelle einen Breakpoint setzen und
 
 ![Screenshot Visual Studio Code Command Erstes Programm - Schritt 4](./img/Screenshot_VSC_4.PNG "Screenshot Visual Studio Code Command Erstes Programm - Schritt 4") 
 
-### 2.5.1. Wichtige Tastenkombinationen 
-
-- Strg + Shift + B: Programm kompilieren 
-- Strg + F5 / F5: Programm starten / debuggen  
-- Strg + Ö: Terminal anzeigen  
-
-- Quellcode formatieren: Shift + Alt + F 
-- Kommentar toggle/untoggle: Strg + #
-- Speichern / Speichern als: Strg + S / Strg + Shift + S
-- Drucken: F1 > 'PrintCode'
-- Schrift größer/kleiner: Strg + '+'/'-'
-- Light-/Dark-Modus umschalten: Strg+K + Str+T
-- Alles Auswählen: Strg + A
-- In Zwischenablage kopieren: Strg + C
-- Aus Zwischenablage einfügen: Strg + V  
+### 2.5.1. Wichtige Tastenkombinationen - [1. Einführung](#1-einführung)
+- [1. Einführung](#1-einführung)
+  - [1.1. Begriffe](#11-begriffe)
+  - [1.2. Geschichtliches der Programmiersprache C](#12-geschichtliches-der-programmiersprache-c)
+- [2. Entwicklungsumgebung installieren](#2-entwicklungsumgebung-installieren)
+  - [2.1. Installation 'Windows 10 direkt'](#21-installation-windows-10-direkt)
+  - [2.2. Installation 'Windows Subsystem for Linux (WSL)'](#22-installation-windows-subsystem-for-linux-wsl)
+  - [2.3. Erstes Programm mit Visual Studio Code (VS Code)](#23-erstes-programm-mit-visual-studio-code-vs-code)
+  - [2.4. `helloworld.c` kompilieren](#24-helloworldc-kompilieren)
+  - [2.5. `helloworld.c` starten/debuggen](#25-helloworldc-startendebuggen)
+    - [2.5.1. Wichtige Tastenkombinationen - 1. Einführung](#251-wichtige-tastenkombinationen---1-einführung)
+    - [2.5.2. Zugriff Dateisystem Windows \<-\> WSL](#252-zugriff-dateisystem-windows---wsl)
+  - [2.6. Einführungsbeispiel](#26-einführungsbeispiel)
+- [3. Mein erstes Programm mit Eingabe, Zuweisung und Ausgabe](#3-mein-erstes-programm-mit-eingabe-zuweisung-und-ausgabe)
+  - [3.1. `printf()`-Befehl: Steuerzeichen und Sonderzeichen](#31-printf-befehl-steuerzeichen-und-sonderzeichen)
+  - [3.2. Struktogramm](#32-struktogramm)
+- [4. Operatoren – 1. Teil](#4-operatoren--1-teil)
+  - [4.1. Zuweisungsoperator](#41-zuweisungsoperator)
+    - [4.1.1. Variablentausch mit Hilfsvariable](#411-variablentausch-mit-hilfsvariable)
+    - [4.1.2. Variablentausch ohne Hilfsvariable](#412-variablentausch-ohne-hilfsvariable)
+  - [4.2. Arithmetische Operatoren](#42-arithmetische-operatoren)
+    - [4.2.1. Vorzeichenoperatoren](#421-vorzeichenoperatoren)
+    - [4.2.2. Binäre arithmetische  Operatoren](#422-binäre-arithmetische--operatoren)
+- [5. Datentypen](#5-datentypen)
+- [6. `printf()`-Befehl: Formatierte Ausgabe](#6-printf-befehl-formatierte-ausgabe)
+- [7. Zufallszahlen](#7-zufallszahlen)
+- [8. Mathematische Funktionen – `<math.h>`](#8-mathematische-funktionen--mathh)
+- [9. Kommentare](#9-kommentare)
+- [10. Character- und Stringliterale](#10-character--und-stringliterale)
+  - [10.1. Characterliterale](#101-characterliterale)
+  - [10.2. Stringliterale](#102-stringliterale)
+- [11. Operatoren – 2. Teil](#11-operatoren--2-teil)
+  - [11.1. Arithmetische  Zuweisungsoperatoren](#111-arithmetische--zuweisungsoperatoren)
+  - [11.2. Inkrement- und Dekrementoperatoren `++` und `--`](#112-inkrement--und-dekrementoperatoren--und---)
+  - [11.3. Vergleichsoperatoren](#113-vergleichsoperatoren)
+  - [11.4. Logische Operatoren](#114-logische-operatoren)
+  - [11.5. Die Operatorenrangfolge](#115-die-operatorenrangfolge)
+- [12. Kontrollstrukturen – Entscheidung](#12-kontrollstrukturen--entscheidung)
+  - [12.1. Die bedingte Verzweigung `if-else`](#121-die-bedingte-verzweigung-if-else)
+  - [12.2. Die `switch-case` Anweisung](#122-die-switch-case-anweisung)
+- [13. Kontrollstrukturen – Schleifen](#13-kontrollstrukturen--schleifen)
+  - [13.1. Die `while`-Schleife](#131-die-while-schleife)
+  - [13.2. Die `do-while`-Schleife](#132-die-do-while-schleife)
+  - [13.3. Die `for`-Schleife](#133-die-for-schleife)
+  - [13.4. Gegenüberstellung `for`-, `while`- und `do-while`-Schleife](#134-gegenüberstellung-for--while--und-do-while-schleife)
+  - [13.5. Abbruch einer Schleife mit `break` oder `continue`](#135-abbruch-einer-schleife-mit-break-oder-continue)
+  - [13.6. Die `exit()`-Funktion](#136-die-exit-funktion)
+- [14. Zahlensysteme: Dezimal-, Binär-, und Hexadezimal-System](#14-zahlensysteme-dezimal--binär--und-hexadezimal-system)
+  - [14.1. Umwandlung Dezimal- ins Binärsystem](#141-umwandlung-dezimal--ins-binärsystem)
+  - [14.2. Umwandlung Binär- ins Dezimalsystem](#142-umwandlung-binär--ins-dezimalsystem)
+  - [14.3. Umwandlung Binär- ins Dezimalsystem (Horner-Schema)](#143-umwandlung-binär--ins-dezimalsystem-horner-schema)
+  - [14.4. Umwandlung Binär- ins Hexadezimalsystem und umgekehrt](#144-umwandlung-binär--ins-hexadezimalsystem-und-umgekehrt)
+  - [14.5. Das 2er-Komplement](#145-das-2er-komplement)
+- [15. Bitoperatoren](#15-bitoperatoren)
+  - [15.1. Shiftoperatoren](#151-shiftoperatoren)
+- [16. Arrays (Felder) - 1. Teil](#16-arrays-felder---1-teil)
+  - [16.1. Eindimensionale Arrays](#161-eindimensionale-arrays)
+  - [16.2. Initialisieren von Arrays](#162-initialisieren-von-arrays)
+- [17. Funktionen](#17-funktionen)
+  - [17.1. Syntax der Funktion](#171-syntax-der-funktion)
+  - [17.2. Eigenschaften von Funktionen](#172-eigenschaften-von-funktionen)
+  - [17.3. Funktionsdeklaration](#173-funktionsdeklaration)
+  - [17.4. Lokale Variablen](#174-lokale-variablen)
+  - [17.5. Parameterübergabe](#175-parameterübergabe)
+    - [17.5.1. *Call-by-value*](#1751-call-by-value)
+    - [17.5.2. *Call-by-reference*](#1752-call-by-reference)
+- [18. Rekursive Funktionen](#18-rekursive-funktionen)
+  - [18.1. Dezimal- nach Binär-Umwandlung - rekusiv](#181-dezimal--nach-binär-umwandlung---rekusiv)
+  - [18.2. Stack Diagramme](#182-stack-diagramme)
+  - [18.3. Die Fibonacci-Folge mit Hasenpaaren erklärt](#183-die-fibonacci-folge-mit-hasenpaaren-erklärt)
+- [19. Mehrere .c- und -.h-Dateien kompilieren](#19-mehrere-c--und--h-dateien-kompilieren)
+- [20. Arrays (Felder) - 2. Teil](#20-arrays-felder---2-teil)
+  - [20.1. Eindimensionale Arrays dynamisch erzeugen](#201-eindimensionale-arrays-dynamisch-erzeugen)
+  - [20.2. Mehrdimensionale Arrays](#202-mehrdimensionale-arrays)
+  - [20.3. Übergabe von mehrdimensionalen Arrays an Funktionen](#203-übergabe-von-mehrdimensionalen-arrays-an-funktionen)
+  - [20.4. Mehrdimensionale Arrays dynamisch erzeugen](#204-mehrdimensionale-arrays-dynamisch-erzeugen)
+- [21. Dateien lesen und schreiben](#21-dateien-lesen-und-schreiben)
+- [22. `scanf`, `sscanf`, `gets`, `fgets` und `fscanf`](#22-scanf-sscanf-gets-fgets-und-fscanf)
+- [23. Der Datentyp `enum` (Enumeration)](#23-der-datentyp-enum-enumeration)
+- [24. Strukturen](#24-strukturen)
+  - [24.1. Funktionsübergabe von Strukturen](#241-funktionsübergabe-von-strukturen)
+- [25. Anhang](#25-anhang)
+  - [25.1. Weitere Literatur](#251-weitere-literatur)
+  - [25.2. Übersicht des Unterrichtsstoffs](#252-übersicht-des-unterrichtsstoffs)
+  - [25.3. Code Style Rules](#253-code-style-rules)
+  - [25.4. .c-Dateivorlage in VSC](#254-c-dateivorlage-in-vsc)
 
 Drucken erfordert in VS Code die Extension [Print, PD Consulting](https://marketplace.visualstudio.com/items?itemName=pdconsec.vscode-print).  
 
