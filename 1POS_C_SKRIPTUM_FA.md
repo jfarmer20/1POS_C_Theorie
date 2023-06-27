@@ -2959,8 +2959,6 @@ case SPECIALIZED:
 }
 ```  
 
-
-
 # 24. Strukturen  
 
 Braucht man von einer Person, Name und Geburtsjahr, ...  
@@ -3025,7 +3023,7 @@ John Doe, born 1974
 
 ## 24.1. Funktionsübergabe von Strukturen
 
-Wird eine Struktur an eine Funktion call-by-reference übergeben, liegt die Strukturvariable innerhalb der Funktion als Referenzvariable (Pointer) vor. Ein Zugriff auf die Werte würde dann so aussehen:  
+Wird eine Struktur an eine Funktion *call-by-reference* übergeben, liegt die Strukturvariable innerhalb der Funktion als Referenzvariable (Pointer) vor. Ein Zugriff auf die Werte würde dann so aussehen:  
 
 ```C 
 void initPerson(SPerson *pPerson) // call-by-reference
@@ -3035,7 +3033,7 @@ void initPerson(SPerson *pPerson) // call-by-reference
 }
 ```  
 
-Um das lesbarer zu gestalten, wurde der "`>-`"-Operator eingeführt. Der Zugriff auf die Werte einer Struktur-Referenzvariable ist damit einfacher:  
+Um das lesbarer zu gestalten, wurde der "`->`"-Operator eingeführt. Der Zugriff auf die Werte einer Struktur-Referenzvariable ist damit einfacher:  
 
 ```C 
 void initPerson(SPerson *pPerson) // call-by-reference
@@ -3047,9 +3045,9 @@ void initPerson(SPerson *pPerson) // call-by-reference
 
 Die Funktionsübergabe einer Struktur ist sowohl *call-by-reference* als auch *call-by-value* möglich.  
 
-Folgendes Programm zeigt, dass bei *call-by-value*-Übergabe, eine Änderung der Strukturvariablen sich auch auf ihren Inhalt im Hauptgrogramm auswirkt (`initPerson1`, `firstPerson`).  
+Folgendes Programm zeigt, dass bei einer *call-by-reference*-Übergabe, eine Änderung der Strukturvariablen sich auch auf ihren Inhalt im Hauptgrogramm auswirkt (`initPerson1`, `firstPerson`).  
 
-Bei einer "call-by-value*-Übergabe wird in der Fuktion eine Kopie angelegt. Änderungen dieser wirken sich nicht aufs Hauptprogramm aus (`initPerson2`, `secondPerson`).  
+Bei einer *call-by-value*-Übergabe wird in der Fuktion eine Kopie angelegt. Änderungen dieser wirken sich nicht aufs Hauptprogramm aus (`initPerson2`, `secondPerson`).  
 Die veränderte Strukturvariable der Funktion `initPerson2` kann aber als Retourwert zurückgegeben werden. Dann steht die veränderte Kopie auch im Hauptprogramm zur Verfügung (`thirdPerson`). 
 
 ```C 
@@ -3107,11 +3105,7 @@ N.N., born 1900
 Sarah Doe, born 1984
 ```  
 
-Strukturvariablen können wie einfache Datentypen behandelt werden. Strukturvariablen lassen sich in Funktionen deklariert und als Retourwert ans Hauptprogramm übergeben.  
-
-
-
-
+Strukturvariablen können wie einfache Datentypen behandelt werden. Strukturvariablen lassen sich in Funktionen deklarieren und als Retourwert ans Hauptprogramm übergeben.  
 
 # 25. Anhang 
 
